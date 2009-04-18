@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_rockbandanalyzerlib" default="compile.module.rockbandanalyzerlib">
+  <dirname property="module.rockbandanalyzerlib.basedir" file="${ant.file.module_rockbandanalyzerlib}"/>
+  
+  <property name="module.jdk.home.rockbandanalyzerlib" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.rockbandanalyzerlib" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.rockbandanalyzerlib" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.rockbandanalyzerlib" value="${compiler.args}"/>
+  
+  <property name="rockbandanalyzerlib.output.dir" value="${module.rockbandanalyzerlib.basedir}/../out/production/RockBandAnalyzerLib"/>
+  <property name="rockbandanalyzerlib.testoutput.dir" value="${module.rockbandanalyzerlib.basedir}/../out/test/RockBandAnalyzerLib"/>
+  
+  <path id="rockbandanalyzerlib.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="rockbandanalyzerlib.module.classpath">
+    <path refid="${module.jdk.classpath.rockbandanalyzerlib}"/>
+  </path>
+  
+  <path id="rockbandanalyzerlib.runtime.module.classpath">
+    <pathelement location="${rockbandanalyzerlib.output.dir}"/>
+    <pathelement location="${rockbandanalyzerlib.testoutput.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.rockbandanalyzerlib">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.rockbandanalyzerlib">
+    <patternset refid="excluded.from.module.rockbandanalyzerlib"/>
+  </patternset>
+  
+  <path id="rockbandanalyzerlib.module.sourcepath">
+    <dirset dir="${module.rockbandanalyzerlib.basedir}/../RockBandAnalyzerLib">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.rockbandanalyzerlib" depends="compile.module.rockbandanalyzerlib.production,compile.module.rockbandanalyzerlib.tests" description="Compile module RockBandAnalyzerLib"/>
+  
+  <target name="compile.module.rockbandanalyzerlib.production" description="Compile module RockBandAnalyzerLib; production classes">
+    <mkdir dir="${rockbandanalyzerlib.output.dir}"/>
+    <javac2 destdir="${rockbandanalyzerlib.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.rockbandanalyzerlib}/javac">
+      <compilerarg line="${compiler.args.rockbandanalyzerlib}"/>
+      <bootclasspath refid="rockbandanalyzerlib.module.bootclasspath"/>
+      <classpath refid="rockbandanalyzerlib.module.classpath"/>
+      <src refid="rockbandanalyzerlib.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.rockbandanalyzerlib"/>
+    </javac2>
+    
+    <copy todir="${rockbandanalyzerlib.output.dir}">
+      <fileset dir="${module.rockbandanalyzerlib.basedir}/../RockBandAnalyzerLib/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.rockbandanalyzerlib.tests" depends="compile.module.rockbandanalyzerlib.production" description="compile module RockBandAnalyzerLib; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.rockbandanalyzerlib" description="cleanup module">
+    <delete dir="${rockbandanalyzerlib.output.dir}"/>
+    <delete dir="${rockbandanalyzerlib.testoutput.dir}"/>
+  </target>
+</project>

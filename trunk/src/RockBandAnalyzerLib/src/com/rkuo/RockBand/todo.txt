@@ -1,0 +1,34 @@
+Major unknowns
++ Log squeezes with each path.
+- Timestamp each activation + squeeze.
++ how to determine the delay before a drum fill is displayed...currently hardcoded
+++ Welcome Home and Enter Sandman have sections where hitting an OD phrase early or late can affect where the next fill shows up.
+++ I may be able to look at these songs to determine how the timing of the fill display delay works.
+++ Don't see a consistent pattern
+++ Determined by community effort and hardcoded in as constants
+- I'm not accounting for OD phrases that are split into two sections by a fill ...I assume this can't happen
+- I can handle backend squeezes of notes or OD phrases by either checking for slop or extending the overdrive meter slightly.
+Not sure which approach to use.
+- Add decision tree on backend squeezes of OD phrases?
+- Incorporate overhit paths into the search.
++ Optimize recursive search
+++ Done by breadth first search and discarding non optimal paths at fill activation points. A path is non optimal compared
+to another path if both paths do not have overdrive activated, have the same amount of OD, but one path has a lower score.
++ Accounting for OD phrases partially overlapped by a fill
++ running down the OD meter using the BEAT events...done, but there may be rounding issues.
++ Handle Big Rock Endings...Current thinking is to figure which fill it is by looking at the guitar track.
+++ Seems to work but according to another thread just adding the notes to each track didn't add the BRE. So there may
+be something else going on here.
+++ Looking at the guitar track. I don't see any other way to figure it out.
+++ Refactored depth and breadth searches to use the same logic with a callback function for the search dependent logic.
+- generate structured data that can be imported into any db/program
++ Add recursive parsing of .mid files when a directory is specified.
+- account for possible multiple front end squeezes
+
+Fill delay notes
+- Next to you - T58320 to T61440/T63360 (7 to 11 beats) - 3360 ticks, 2.38 seconds, Should not appear, (340000 us, 175 bpm)
+- Main Offender - T114960 to T117120/T119038 (4.5 to 8.5 beats) - Right on the edge of displaying - 2160 ticks, 1.9575 seconds, 133 bpm
+- Enter Sandman - T37920 to T40320/T42240 (5 to 9 beats) - Right on the edge of displaying, 2400 ticks, 2.45 seconds, 124 bpm
+-- Must hit early to get fill, happens often.
+- I think I'm paranoid - (4.5 beats to 8.5 beats) - Right on the edge of displaying, 2160 ticks, 2.36 seconds, (526314 us, 114 bpm)
+- Time we Had - T113119 to T115200 - 4.33 beats - late to avoid fill - 2081 ticks (555000 us), 2.4 seconds

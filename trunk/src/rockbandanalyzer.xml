@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="rockbandanalyzer" default="all">
+  
+  
+  <property file="rockbandanalyzer.properties"/>
+
+  <property name="project_name" value="RockBandAnalyzer"/>
+
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- The task requires the following libraries from IntelliJ IDEA distribution: -->
+  <!--   javac2.jar; jdom.jar; asm.jar; asm-commons.jar -->
+  <!--
+  <taskdef name="javac2" classname="com.intellij.ant.Javac2"/>
+   -->
+
+  <path id="javac2.classpath">
+    <fileset dir="${idea.home}/lib">
+      <include name="javac2.jar" />
+      <include name="jdom.jar" />
+      <include name="asm.jar" />
+      <include name="asm-commons.jar" />
+    </fileset>
+  </path>
+    
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.sbas/**"/>
+    <exclude name="**/.IJI.*/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/RockBandAnalyzerLib/module_rockbandanalyzerlib.xml"/>
+  
+  <import file="${basedir}/RockBandAnalyzerExe/module_rockbandanalyzerexe.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.rockbandanalyzerlib, clean.module.rockbandanalyzerexe" description="cleanup all"/>
+  
+  <target name="all" depends="init, clean, compile.module.rockbandanalyzerlib, compile.module.rockbandanalyzerexe" description="build all"/>
+    
+    <target name="jar-bin" description="create runtime jar">
+      <delete file="${basedir}/${project_name}.jar"/>
+      <jar destfile="${basedir}/${project_name}.jar">
+          <fileset dir="${basedir}/out/production/"/>
+      </jar>
+    </target>
+
+    <target name="jar-src" description="create source jar">
+        <delete file="${basedir}/${project_name}-src.jar"/>
+      <jar destfile="${basedir}/${project_name}-src.jar">
+          <fileset dir="${basedir}/src"/>
+      </jar>
+    </target>
+
+    <target name="jar-doc" description="create docs jar">
+        <delete file="${basedir}/${project_name}-doc.jar"/>
+      <jar destfile="${basedir}/${project_name}-doc.jar">
+          <fileset dir="${basedir}/docs"/>
+      </jar>
+    </target>
+
+    <target name="jar" depends="jar-bin, jar-src, jar-doc" description="create all jars"/>
+</project>
