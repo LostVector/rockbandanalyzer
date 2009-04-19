@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="rockbandanalyzer" default="all">
   
-  
   <property file="rockbandanalyzer.properties"/>
 
   <property name="project_name" value="RockBandAnalyzer"/>
+
+  <property name="sdk.dir" location="../../../appengine-java-sdk-1.2.0" />
+
+  <import file="${sdk.dir}/config/user/ant-macros.xml" />
 
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
@@ -124,4 +127,15 @@
     </target>
 
     <target name="jar" depends="jar-bin, jar-src, jar-doc" description="create all jars"/>
+<!--
+  <target name="runserver" depends="datanucleusenhance" description="Starts the development server.">
+  -->
+    <target name="runserver" description="Starts the development server.">
+      <dev_appserver war="${basedir}/out/exploded/RockBandAnalyzerWar" port="8080" >
+        <options>
+          <arg value="--jvm_flag=-Xdebug"/>
+          <arg value="--jvm_flag=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9999"/>
+        </options>
+      </dev_appserver>
+    </target>
 </project>
