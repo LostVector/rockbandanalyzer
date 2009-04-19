@@ -9,6 +9,8 @@
       <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties />
+      <executeOn event="beforeRun" target="runserver" />
+      <executeOn event="beforeRun" target="runserver" runConfigurationType="Remote" runConfigurationName="DebugWarRemote" />
     </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
@@ -262,6 +264,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerExe/RockBandAnalyzerExe.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerExe/RockBandAnalyzerExe.iml" />
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerLib/RockBandAnalyzerLib.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerLib/RockBandAnalyzerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWar/RockBandAnalyzerWar.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWar/RockBandAnalyzerWar.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
@@ -338,5 +341,30 @@
     </GetOptions>
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="JSF 1.2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/RockBandAnalyzerWar/lib/jsf-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/RockBandAnalyzerWar/lib/jsf-impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/RockBandAnalyzerWar/lib/jstl.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="appengine-java-sdk">
+      <CLASSES>
+        <root url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib" />
+        <root url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/user" />
+        <root url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/shared" />
+        <root url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/tools/orm" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib" recursive="false" />
+      <jarDirectory url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/shared" recursive="false" />
+      <jarDirectory url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/tools/orm" recursive="false" />
+      <jarDirectory url="file://C:/Users/rkuo.GOOGLE/dev/appengine-java-sdk-1.2.0/lib/user" recursive="false" />
+    </library>
+  </component>
 </project>
 
