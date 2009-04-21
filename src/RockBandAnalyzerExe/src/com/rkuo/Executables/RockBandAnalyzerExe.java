@@ -1,16 +1,8 @@
 package com.rkuo.Executables;
 
 import com.rkuo.RockBand.*;
-import com.rkuo.RockBand.Primitives.Chord;
-import com.rkuo.RockBand.Primitives.Note;
-import com.rkuo.RockBand.Primitives.DrumChart;
-import com.rkuo.RockBand.Simulators.DrumsSimulator;
-import com.rkuo.RockBand.Simulators.DrumsSimulatorParameters;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
 
-import javax.sound.midi.*;
 import java.io.*;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -109,90 +101,21 @@ public class RockBandAnalyzerExe {
 
     private static boolean ProcessFile( File fIn, RockBandAnalyzerParams rbap ) {
 
-        String      fileName;
-        Sequence    s;
-        DrumChart   dc;
-
-        fileName = fIn.getName();
-
-        System.out.format( "Processing %s.\n", fIn.getAbsolutePath() );
+        FileInputStream fis;
 
         try {
-            s = MidiSystem.getSequence( fIn );
-        }
-        catch( InvalidMidiDataException imde ) {
-            System.out.format( "InvalidMidiDataException\n" );
-            System.out.format( "The file %s may not be a valid MIDI file.\n", fileName );
-            s = null;
-        }
-        catch( IOException ie ) {
-            System.out.format( "IOException\n" );
-            System.out.format( "The file %s could not be opened. Are you sure it's there?\n", fileName );
-            s = null;
-        }
-        catch( Exception e ) {
-            System.out.format( "Exception\n" );
-            s = null;
-        }
+            fis = new FileInputStream( fIn );
 
-        if( s == null ) {
-            System.out.format( "The file %s could not be opened. Exiting.\n", fileName );
+            System.out.format( "Processing %s.\n", fIn.getAbsolutePath() );
+            RockBandAnalyzer.AnalyzeStream( new PrintWriter(System.out, true), fis, rbap );
+        }
+        catch( FileNotFoundException fnfex ) {
+            System.out.format( "Could not open %s.\n", fIn.getName() );
             return false;
         }
-
-//        RockBandMidi.DumpSequence( s );
-//        RockBandMidi.DumpTempoTrack( s );
-
-        System.out.format( "Opened %s successfully.\n", fileName );
-
-        dc = Convert.ToDrumChart( RockBandDifficulty.Expert, s );
-        if( dc == null ) {
-            System.out.format( "Convert.ToDrumChart returned null.\n");
-            return false;
-        }
-
-        // Print stats
-        if( rbap.PrintChart == true ) {
-            RockBandPrint.PrintDrumChart( dc );
-        }
-
-        DrumsSimulator dg;
-        DrumsSimulatorParameters    dsp;
-        DrumsBaselineData           dbd;
-        ArrayList<RockBandPath>     paths;
-        int[]                       skipPath;
-
-        dg = new DrumsSimulator();
-        dsp = new DrumsSimulatorParameters();
-        dsp.FillDelay = RockBandConstants.FillDelayRB2Expert;
-
-        RockBandPrint.PrintDrumsSimulatorParameters( dsp );
-
-        dbd = dg.GenerateBaselineData( dc );
-        RockBandPrint.PrintDrumsBaselineData( dbd );
-
-        skipPath = new int[5];
-        skipPath[0] = 0;
-        skipPath[1] = 0;
-        skipPath[2] = 2;
-        skipPath[3] = 0;
-        skipPath[4] = 0;
-
-        if( rbap.PathingAlgorithm == RockBandPathingAlgorithm.Predefined ) {
-            paths = dg.GenerateScoreFromPath( dsp, dc, rbap.Path.toArray( new Integer[rbap.Path.size()]) );
-        }
-        else if( rbap.PathingAlgorithm == RockBandPathingAlgorithm.Optimal ) {
-            paths = dg.GenerateOptimalPaths( dsp, dc );
-        }
-        else {
-            paths = dg.GenerateAllPaths( dsp, dc );
-        }
-
-        RockBandPrint.PrintPaths( paths );
 
         return true;
     }
-
     private static RockBandAnalyzerParams GetRockBandAnalyzerParams( CommandLineParser clp ) {
 
         RockBandAnalyzerParams  rbap;

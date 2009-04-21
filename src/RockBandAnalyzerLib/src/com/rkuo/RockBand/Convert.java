@@ -4,8 +4,8 @@ import com.rkuo.RockBand.Primitives.Chord;
 import com.rkuo.RockBand.Primitives.Note;
 import com.rkuo.RockBand.Primitives.TickRange;
 import com.rkuo.RockBand.Primitives.DrumChart;
+import com.rkuo.Midi.*;
 
-import javax.sound.midi.*;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
@@ -113,6 +113,8 @@ public class Convert {
         if( br == false ) {
             return null;
         }
+
+        dc.setSongTitle( RockBandMidi.GetTrackName( tempoTrack ) );
 
         // We always need to load the BEAT track for OD duration calculations
         beatTrack = RockBandMidi.GetTrack( s, RockBandMidi.TrackNameBeat );
@@ -695,6 +697,10 @@ public class Convert {
                 lastChord = c;
             }
 
+            if( lastChord == null ) {
+                break;
+            }
+
             // Gotta check the last chord too...this'll never happen, but still...
             if( lastChord.LastNoteInSoloPhrase == false ) {
                 Chord   c;
@@ -767,6 +773,10 @@ public class Convert {
                 lastChord = c;
             }
 
+            if( lastChord == null ) {
+                break;
+            }
+            
             // Gotta check the last chord too...this'll never happen, but still...
             if( lastChord.LastNoteInOverdrivePhrase == false ) {
                 Chord   c;
@@ -855,6 +865,20 @@ public class Convert {
         return;
     }
 
+    public static int ToShort( byte[] b ) {
+        return ToShort( b, 0 );
+    }
+
+    public static short ToShort( byte[] b, int offset ) {
+        short value = 0;
+        for (int i = 0; i < 2; i++) {
+            int shift = (2 - 1 - i) * 8;
+            value += (b[i + offset] & 0x000000FF) << shift;
+        }
+
+        return value;
+    }
+
     /**
      * Convert the byte array to an int.
      *
@@ -862,7 +886,7 @@ public class Convert {
      * @return The integer
      */
     public static int ToInt( byte[] b ) {
-        return byteArrayToInt( b, 0 );
+        return ToInt( b, 0 );
     }
 
     /**
@@ -872,7 +896,7 @@ public class Convert {
      * @param offset The array offset
      * @return The integer
      */
-    public static int byteArrayToInt( byte[] b, int offset ) {
+    public static int ToInt( byte[] b, int offset ) {
         int value = 0;
         for (int i = 0; i < 4; i++) {
             int shift = (4 - 1 - i) * 8;

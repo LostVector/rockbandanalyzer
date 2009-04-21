@@ -42,6 +42,8 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
 
         lastChord = null;
 
+        dbd.SongTitle = dc.getSongTitle();
+        
         chords = dc.getChords();
         for( Chord c : chords ) {
 

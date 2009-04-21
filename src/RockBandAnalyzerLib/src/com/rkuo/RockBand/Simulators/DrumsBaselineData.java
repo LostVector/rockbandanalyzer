@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class DrumsBaselineData {
+
+    public String       SongTitle;
     public long         Notes;
     public long         Chords;
 
@@ -42,6 +44,7 @@ public class DrumsBaselineData {
     public long         StarCutoffGoldOld;
 
     public DrumsBaselineData() {
+        SongTitle = "";
         Notes = 0;
         Chords = 0;
         Solos = 0;

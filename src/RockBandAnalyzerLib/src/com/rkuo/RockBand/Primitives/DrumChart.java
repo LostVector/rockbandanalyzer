@@ -16,6 +16,7 @@ import java.util.TreeMap;
  */
 public class DrumChart {
 
+    private String                  _songTitle;
     private long _resolution;
     private TreeMap<Long, Long>     _tempo;
     private ArrayList<Chord>        _chords;
@@ -29,6 +30,7 @@ public class DrumChart {
     public ArrayList<Chord>        ChordsAndActivations;
 
     public DrumChart() {
+        _songTitle = "";
         _tempo = new TreeMap<Long, Long>();
         _chords = new ArrayList<Chord>();
         _beats = new ArrayList<Chord>();
@@ -115,6 +117,15 @@ public class DrumChart {
 
     public TickRange getBigRockEnding() {
         return _range;
+    }
+
+    public String getSongTitle() {
+        return _songTitle;
+    }
+
+    public void setSongTitle( String songTitle ) {
+        _songTitle = songTitle;
+        return;
     }
 
     public long GetOverdriveEnd( long overdriveStart, long overdriveBeats ) {

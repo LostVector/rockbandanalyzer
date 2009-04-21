@@ -1,6 +1,4 @@
-package com.rkuo.Executables;
-
-import com.rkuo.RockBand.RockBandPathingAlgorithm;
+package com.rkuo.RockBand;
 
 import java.util.ArrayList;
 
@@ -15,13 +13,15 @@ public class RockBandAnalyzerParams {
 
     public String   Source;
     public boolean  PrintChart;
+    public RockBandDifficulty       Difficulty;
     public RockBandPathingAlgorithm PathingAlgorithm;
-    public ArrayList<Integer>   Path;
+    public ArrayList<Integer> Path;
 
     public RockBandAnalyzerParams() {
 
         Source = "";
         PrintChart = false;
+        Difficulty = RockBandDifficulty.Expert;
         PathingAlgorithm = RockBandPathingAlgorithm.Optimal;
         Path = new ArrayList<Integer>();
         return;
