@@ -1,32 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://rockbandanalyzer.appspot.com/jsfcomponents" prefix="x" %>
 
 <html>
-  <body>
-
-<%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user != null) {
-%>
-<p>Hello, <%= user.getNickname() %>! (You can
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-<%
-    } else {
-%>
-<p>Hello!
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
-<%
-    }
-%>
-
-<form action="/sign" method="post">
-    <div><textarea name="content" rows="3" cols="60" /></div>
-    <div><input type="submit" value="Post Greeting" /></div>
-  </form>
-  
-  </body>
+<body>
+<f:view>
+    <x:loginHeader/>
+    <x:navHeader/>
+</f:view>
+</body>
 </html>

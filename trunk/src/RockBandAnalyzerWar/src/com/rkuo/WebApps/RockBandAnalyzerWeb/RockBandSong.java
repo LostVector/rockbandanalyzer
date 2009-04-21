@@ -1,6 +1,8 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb;
 
 import java.util.Date;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -15,13 +17,7 @@ public class RockBandSong {
     private Long id;
 
     @Persistent
-    private User author;
-
-    @Persistent
-    private String content;
-
-    @Persistent
-    private Date date;
+    private User    _uploader;
 
     @Persistent
     private String _artist;
@@ -29,43 +25,127 @@ public class RockBandSong {
     @Persistent
     private String _title;
 
+    // when the song was released (in traditional channels)
     @Persistent
     private Date _dateReleased;
 
+    // when the song was released on Rock Band
     @Persistent
     private Date _datePublished;
 
-    public RockBandSong(User author, String content, Date date) {
-        this.author = author;
-        this.content = content;
-        this.date = date;
+    @Persistent
+    private String  _originalFileName;
+
+    @Persistent
+    private byte[]  _file;
+
+    @Persistent
+    private byte[]  _md5;
+
+    public RockBandSong(User uploader, String originalFileName, byte[] file) {
+        _uploader = uploader;
+        _originalFileName = originalFileName;
+        _file = file.clone();
+        _md5 = GetMD5( _file );
+/*
+        _artist = artist;
+        _title = title;
+        _dateReleased = dateReleased;
+        _dateReleased = datePublished;
+ */
+        return;
     }
 
     public Long getId() {
         return id;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getUploader() {
+        return _uploader;
     }
 
-    public String getContent() {
-        return content;
+    public String getArtist() {
+        return _artist;
     }
 
-    public Date getDate() {
-        return date;
+    public String getTitle() {
+        return _title;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public Date getDateReleased() {
+        return _dateReleased;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public Date getDatePublished() {
+        return _datePublished;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public String getOriginalFileName() {
+        return _originalFileName;
+    }
+
+    public byte[] getFile() {
+        return _file;
+    }
+
+    public byte[] getMD5() {
+        return _md5;
+    }
+
+    public void setUploader(User uploader) {
+        _uploader = uploader;
+        return;
+    }
+
+    public void setArtist( String artist ) {
+        _artist = artist;
+        return;
+    }
+
+    public void setTitle( String title ) {
+        _title = title;
+        return;
+    }
+
+    public void setDateReleased( Date dateReleased ) {
+        _dateReleased = dateReleased;
+        return;
+    }
+
+    public void setDatePublished( Date datePublished ) {
+        _datePublished = datePublished;
+        return;
+    }
+
+    public void setOriginalFileName( String originalFileName ) {
+        _originalFileName = originalFileName;
+        return;
+    }
+
+    public void setFile( byte[] file ) {
+        _file = file.clone();
+        _md5 = GetMD5( _file );
+        return;
+    }
+
+    private static byte[] GetMD5( byte[] file ) {
+
+        byte[] md5hash;
+
+        md5hash = new byte[32];
+
+        try {
+            MessageDigest md;
+
+            md = MessageDigest.getInstance("MD5");
+            md.update( file );
+
+            md5hash = md.digest();
+        }
+        catch( NoSuchAlgorithmException nsaex ) {
+            // do nothing
+        }
+
+        return md5hash;
     }
 }

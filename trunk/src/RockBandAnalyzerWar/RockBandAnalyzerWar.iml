@@ -29,6 +29,14 @@
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>
+          <containerElement type="library" name="JSF 1.1" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="com.oreilly.servlet" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
         </packaging>
       </configuration>
       <facet type="jsf" name="JSF">
@@ -53,8 +61,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="RockBandAnalyzerLib" exported="" />
-    <orderEntry type="library" exported="" name="appengine-tools-api" level="project" />
     <orderEntry type="library" name="appengine-java-sdk" level="project" />
+    <orderEntry type="library" name="JSF 1.1" level="project" />
+    <orderEntry type="library" name="com.oreilly.servlet" level="project" />
   </component>
 </module>
 

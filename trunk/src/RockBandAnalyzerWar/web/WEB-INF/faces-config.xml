@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+    <component>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.LoginHeader</component-type>
+        <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.LoginHeaderComponent</component-class>
+    </component>
+    <component>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.NavigationHeader</component-type>
+        <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.NavigationHeaderComponent</component-class>
+    </component>
+  <navigation-rule>
+   <from-view-id>/upload.jsp</from-view-id>
+    <navigation-case>
+     <from-outcome>complete</from-outcome>
+     <to-view-id>/upload_complete.jsp</to-view-id>
+   </navigation-case>
+  </navigation-rule>
+<!--
+  <managed-bean>
+    <managed-bean-name>personBean</managed-bean-name>
+    <managed-bean-class>jsfks.PersonBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  -->
+</faces-config>
+        

@@ -1,9 +1,10 @@
 package com.rkuo.RockBand;
 
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Track;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiMessage;
+import com.rkuo.Midi.*;
+//import javax.sound.midi.Sequence;
+//import javax.sound.midi.Track;
+//import javax.sound.midi.MidiEvent;
+//import javax.sound.midi.MidiMessage;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -436,9 +437,7 @@ public class RockBandMidi {
         return returnTrack;
     }
 
-    private static String GetTrackName( Track t ) {
-
-        String  trackName;
+    public static String GetTrackName( Track t ) {
 
         for( int x=0; x < t.size(); x++ ) {
             MidiEvent   me;
