@@ -180,7 +180,7 @@ public class RockBandPrint {
         psOut.format( "===== Baseline data STARTS =====\n" );
 
         psOut.format( "Song title (extracted from MIDI stream): %s\n", dbd.SongTitle );
-
+        psOut.format( "Duration: %s (%d microseconds)\n", MicrosecondsToString(dbd.Microseconds), dbd.Microseconds );
         psOut.format( "Number of chords: %d\n", dbd.Chords );
         psOut.format( "Number of notes: %d\n", dbd.Notes );
         psOut.format( "Number of solos: %d\n", dbd.Solos );
@@ -211,7 +211,7 @@ public class RockBandPrint {
 //        psOut.format( "1 star: %d\n", multiplierCounter );
 //        psOut.format( "2 star: %d\n", multiplierCounter );
 //        psOut.format( "3 star: %d\n", multiplierCounter );
-        psOut.format( "4 star: %d\n", dbd.StarCutoffFour );
+        psOut.format( "4 stars: %d\n", dbd.StarCutoffFour );
         psOut.format( "5 stars: %d\n", dbd.StarCutoffFive );
         psOut.format( "Gold stars: %d\n", dbd.StarCutoffGold );
         psOut.format( "Gold stars (pre-patch): %d\n", dbd.StarCutoffGoldOld );
@@ -337,5 +337,16 @@ public class RockBandPrint {
 
         psOut.format( " - %d\n", currentScore );
         return;
+    }
+
+    public static String MicrosecondsToString( long microseconds ) {
+        String  output;
+        long    seconds;
+        long    minutes;
+
+        minutes = microseconds / (60 * 1000000);
+        seconds = (microseconds % (60 * 1000000)) / 1000000;
+        output = String.format( "%d min, %d sec", minutes, seconds );
+        return output;
     }
 }

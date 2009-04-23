@@ -18,6 +18,8 @@ public class RockBandMidi {
 
     public final static String  TrackNameGuitar = "PART GUITAR";
     public final static String  TrackNameBass = "PART BASS";
+    // I've unfortunately seen tracks named as PART DRUM and PART DRUMS ... need to check for both
+    public final static String  TrackNameDrum = "PART DRUM";
     public final static String  TrackNameDrums = "PART DRUMS";
     public final static String  TrackNameVocals = "PART VOCALS";
     public final static String  TrackNameBeat = "BEAT";

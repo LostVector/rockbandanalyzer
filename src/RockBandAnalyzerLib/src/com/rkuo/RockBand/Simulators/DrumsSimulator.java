@@ -86,6 +86,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
 
         dbd.UnmultipliedScore = noteStreak * RockBandConstants.BaseNoteScore;
         dbd.UnmultipliedScoreWithBRENotes = noteStreakWithBRE * RockBandConstants.BaseNoteScore;
+        dbd.Microseconds = dc.getMicroseconds();
         dbd.Notes = noteStreak;
         dbd.Chords = chordStreak;
         dbd.Solos = dc.getSoloPhrases().size();
@@ -129,7 +130,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
             return null;
         }
 
-        System.out.format( "===== Pathed score: " );
+        System.out.format( "===== Generating score from path: " );
         for( int x : skipNotation ) {
             System.out.format( "%d ", x );
         }
@@ -180,8 +181,6 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
     public ArrayList<RockBandPath> GenerateOptimalPaths( DrumsSimulatorParameters dsp, DrumChart dc ) {
         ArrayList<RockBandPlayerState>  returnStates;
         ArrayList<RockBandPath>        optimalPaths;
-
-        System.out.format( "===== Generating optimal paths =====\n" );
 
         returnStates = SimulateBreadth( dsp, dc );
         optimalPaths = Convert.BreadthToRockBandPaths( returnStates );

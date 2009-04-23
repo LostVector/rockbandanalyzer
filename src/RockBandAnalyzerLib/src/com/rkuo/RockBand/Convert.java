@@ -101,6 +101,7 @@ public class Convert {
         dc = new DrumChart();
 
         dc.setResolution( s.getResolution() );
+        dc.setMicroseconds( s.getMicrosecondLength() );
 
 //        DumpTrack( s.getTracks()[3] );
 
@@ -126,22 +127,18 @@ public class Convert {
             System.out.format( "Warning: Couldn't find \"BEAT\" track.\n" );
             return null;
         }
-
-        br = LoadBeatTrack( dc, beatTrack );
-        if( br == false ) {
-            return null;
+        else {
+            br = LoadBeatTrack( dc, beatTrack );
+            if( br == false ) {
+                return null;
+            }
         }
 
         // We need to search all the tracks to find the one for our chosen instrument
         // I've seen this named as PART DRUM and PART DRUMS...so gonna stop looking by track name
         drumTrack = RockBandMidi.GetTrack( s, RockBandMidi.TrackNameDrums );
         if( drumTrack == null ) {
-            System.out.format( "Warning: Couldn't find \"PART DRUMS\" track. Attempting to load by index.\n" );
-            drumTrack = s.getTracks()[RockBandMidi.TrackDrums];
-        }
-
-        if( drumTrack == null ) {
-            System.out.format( "Couldn't find drums track.\n" );
+            System.out.format( "Warning: Couldn't find \"PART DRUMS\" track.\n" );
             return null;
         }
 
@@ -152,8 +149,9 @@ public class Convert {
         }
 
         // We need to parse the guitar track to figure out if there's a big rock ending
-        guitarTrack = s.getTracks()[RockBandMidi.TrackGuitar];
+        guitarTrack = RockBandMidi.GetTrack( s, RockBandMidi.TrackNameGuitar );
         if( guitarTrack == null ) {
+            System.out.format( "Warning: Couldn't find \"PART GUITAR\" track.\n" );
             return null;
         }
 
@@ -162,6 +160,7 @@ public class Convert {
 
         TickRange   bigRockEnding;
 
+ //       DumpTrack( guitarTrack );
         bigRockEnding = GetBigRockEnding( guitarTrack );
 
         // Set up the fill data we need to track throughout the song
@@ -352,7 +351,73 @@ public class Convert {
 
         return true;
     }
+/*
+    private static boolean GenerateBeatTrack( DrumChart dc, long totalTicks ) {
 
+            Chord   lastChord;
+
+            lastChord = null;
+
+            for( int x=0; x < beatTrack.size(); x++ ) {
+                MidiEvent   me;
+                MidiMessage mm;
+                long        currentTick;
+                byte[]      rawMessage;
+                short       statusMessage;
+//            String      sMessage;
+
+                me = beatTrack.get( x );
+                currentTick = me.getTick();
+                mm = me.getMessage();
+                rawMessage = mm.getMessage();
+
+                statusMessage = (short) (rawMessage[0] & 0xf0);
+
+                if( statusMessage == RockBandMidi.NoteOff ) {
+                    // do nothing for now
+                }
+
+                if( statusMessage == RockBandMidi.NoteOn ) {
+
+                    Note    n;
+
+                    int nNote;
+                    int nVelocity;
+
+                    // If this note isn't interesting to us, continue the loop
+//                nNote = FilterNote( rawMessage[1] );
+//                if( nNote == 0 ) {
+//                    continue;
+//                }
+
+                    nNote = (int)rawMessage[1];
+                    n = new Note( nNote );
+
+                    nVelocity = (int)rawMessage[2];
+                    if( nVelocity > 0 ) {
+
+//                    System.out.format( "BEAT %d, %d, %d, %d\n", currentTick, statusMessage, nNote, nVelocity );
+
+                        if( (lastChord != null) && (lastChord.getTick() == currentTick) ) {
+                            lastChord.AddNote( n );
+                        }
+                        else {
+                            Chord   c;
+
+                            c = new Chord( currentTick );
+                            c.AddNote( n );
+                            dc.AddBeat( c );
+                            lastChord = c;
+                        }
+
+//                    RockBandMidi.PrintMidiMessage( currentTick, rawMessage );
+                    }
+                }
+            }
+
+            return true;
+        }
+  */
     private static boolean LoadBeatTrack( DrumChart dc, Track beatTrack ) {
 
         Chord   lastChord;
