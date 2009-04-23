@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class DrumsBaselineData {
 
     public String       SongTitle;
+    public long         Microseconds;
+
     public long         Notes;
     public long         Chords;
 
@@ -45,6 +47,8 @@ public class DrumsBaselineData {
 
     public DrumsBaselineData() {
         SongTitle = "";
+        Microseconds = 0;
+
         Notes = 0;
         Chords = 0;
         Solos = 0;

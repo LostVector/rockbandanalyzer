@@ -17,7 +17,8 @@ import java.util.TreeMap;
 public class DrumChart {
 
     private String                  _songTitle;
-    private long _resolution;
+    private long                    _microseconds;
+    private long                    _resolution;
     private TreeMap<Long, Long>     _tempo;
     private ArrayList<Chord>        _chords;
     private ArrayList<Chord>        _beats;
@@ -31,6 +32,7 @@ public class DrumChart {
 
     public DrumChart() {
         _songTitle = "";
+        _microseconds = 0;
         _tempo = new TreeMap<Long, Long>();
         _chords = new ArrayList<Chord>();
         _beats = new ArrayList<Chord>();
@@ -44,6 +46,15 @@ public class DrumChart {
         _range.End = 0;
 
         ChordsAndActivations = new ArrayList<Chord>();
+        return;
+    }
+
+    public long getMicroseconds() {
+        return _microseconds;
+    }
+
+    public void setMicroseconds( long microseconds ) {
+        _microseconds = microseconds;
         return;
     }
 
