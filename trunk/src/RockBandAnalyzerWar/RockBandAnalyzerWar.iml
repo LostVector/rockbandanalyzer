@@ -25,15 +25,15 @@
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/classes" />
           </containerElement>
-          <containerElement type="library" name="appengine-java-sdk" level="project">
-            <attribute name="method" value="1" />
-            <attribute name="URI" value="/WEB-INF/lib" />
-          </containerElement>
           <containerElement type="library" name="JSF 1.1" level="project">
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>
           <containerElement type="library" name="com.oreilly.servlet" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="appengine-java-sdk" level="project">
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>

@@ -2,6 +2,8 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb;
 
 import java.io.*;
 import java.util.logging.Logger;
+import java.util.zip.ZipOutputStream;
+import java.util.zip.GZIPOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.*;
@@ -83,6 +85,15 @@ public class UploadServlet extends HttpServlet {
 
                     rbap = new RockBandAnalyzerParams();
                     RockBandAnalyzer.AnalyzeStream( response.getWriter(), new ByteArrayInputStream(outputStream.toByteArray()), rbap );
+
+                    ByteArrayOutputStream   baOut;
+                    GZIPOutputStream gzOut;
+
+                    baOut = new ByteArrayOutputStream();
+                    gzOut = new GZIPOutputStream( baOut );
+                    gzOut.write( outputStream.toByteArray() );
+                    gzOut.finish();
+
 /*
 
                     PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -100,7 +111,7 @@ public class UploadServlet extends HttpServlet {
                         pm.close();
                     }
  */
-                    log.info( String.format("Filename: %s, Size: %d", currentFilePart.getFileName(), outputStream.size()) );
+                    log.info( String.format("Filename: %s, Size: %d, Compressed size: %d", currentFilePart.getFileName(), outputStream.size(), baOut.size()) );
                     break;
                 }
             }
