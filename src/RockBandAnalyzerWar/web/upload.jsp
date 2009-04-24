@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>enter your name page</title>
+    <title>Rock Band Analyzer - Upload a song</title>
 </head>
 <body>
 <f:view>

@@ -208,9 +208,9 @@ public class RockBandPrint {
 
         psOut.format( "Maximum multiplier not reached warning: %s\n", sWarning );
 
-//        psOut.format( "1 star: %d\n", multiplierCounter );
-//        psOut.format( "2 star: %d\n", multiplierCounter );
-//        psOut.format( "3 star: %d\n", multiplierCounter );
+        psOut.format( "1 star: %d\n", dbd.StarCutoffOne );
+        psOut.format( "2 stars: %d\n", dbd.StarCutoffTwo );
+        psOut.format( "3 stars: %d\n", dbd.StarCutoffThree );
         psOut.format( "4 stars: %d\n", dbd.StarCutoffFour );
         psOut.format( "5 stars: %d\n", dbd.StarCutoffFive );
         psOut.format( "Gold stars: %d\n", dbd.StarCutoffGold );

@@ -33,9 +33,10 @@ public class RockBandConstants {
 
     // These multipliers are applied to the baseline score to determine the
     // score above which the specified stars can be obtained.
-    public static final double    DrumsStarMultiplierOne = 1;
-    public static final double    DrumsStarMultiplierTwo = 1;
-    public static final double    DrumsStarMultiplierThree = 1;
+    // See http://wiki.scorehero.com/CutoffFormulas
+    public static final double    DrumsStarMultiplierOne = 0.21;
+    public static final double    DrumsStarMultiplierTwo = 0.46;
+    public static final double    DrumsStarMultiplierThree = 0.77;
     public static final double    DrumsStarMultiplierFour = 1.85;
     public static final double    DrumsStarMultiplierFive = 3.079;
     public static final double    DrumsStarMultiplierGold = 4.29;
