@@ -195,7 +195,7 @@ public class RockBandAnalyzer {
 
         for( short x=0; x < wNumberOfTracks; x++ ) {
 
-            System.out.format( "Reading track %d.\n", x );
+//            System.out.format( "Reading track %d.\n", x );
 
             try {
                 result = input.read( header, 0, 8 );
@@ -262,7 +262,7 @@ public class RockBandAnalyzer {
                 tick = mev.getTick();
             }
 
-            System.out.format( "Finished reading track %d.\n", x );
+//            System.out.format( "Finished reading track %d.\n", x );
         }
 
         return s;
