@@ -9,9 +9,7 @@
   <body>
      <f:view>
         <x:loginHeader />
-         <!--
-        <jsp:include page="header.jsp" />
-         -->
+        <x:navHeader />
         <table>
             <tr>
                 <td>Difficulty</td>

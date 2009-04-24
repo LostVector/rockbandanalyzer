@@ -106,6 +106,9 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         dblUnmultipliedScore = (double)(dbd.UnmultipliedScore);
         dblUnmultipliedScoreWithBRENotes = (double)(dbd.UnmultipliedScoreWithBRENotes);
 
+        dbd.StarCutoffOne = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierOne);
+        dbd.StarCutoffTwo = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierTwo);
+        dbd.StarCutoffThree = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierThree);
         dbd.StarCutoffFour = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierFour);
         dbd.StarCutoffFive = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierFive);
         dbd.StarCutoffGold = (long)(dblUnmultipliedScore * RockBandConstants.DrumsStarMultiplierGold);

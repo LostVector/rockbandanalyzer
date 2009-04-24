@@ -7,6 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head><title>Simple jsp page</title></head>
-  <body>Place your content here</body>
+  <head><title>Rock Band Analyzer - Source code</title></head>
+  <body>
+  Rock Band Analyzer is hosted as a <a href="http://code.google.com/p/rockbandanalyzer">Google Code project</a>.
+
+  You can obtain a read only copy of the current source
+  <code>
+      svn checkout http://rockbandanalyzer.googlecode.com/svn/trunk/ rockbandanalyzer-read-only
+  </code>
+  The main library for Rock Band Analyzer and the command line executable wrapping the library
+  are both written in Java using the 1.6 JDK.
+  The web frontend to the library was developed with Java Server Faces 1.1 as the UI framework.  In addition,
+  other components of the web frontend rely on Google App Engine for Java SDK, since this application is hosted
+  and run on Google App Engine.
+  The project was developed with IntelliJ IDEA.
+  </body>
 </html>
