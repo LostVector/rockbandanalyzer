@@ -54,4 +54,39 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>Footer</name>
+        <tag-class>com.rkuo.WebApps.RockBandAnalyzerWeb.FooterTag</tag-class>
+
+        <attribute>
+            <name>binding</name>
+            <description>A value binding that points to a bean property</description>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <description>The client id of this component</description>
+        </attribute>
+        <attribute>
+            <name>rendered</name>
+            <description>Is this component rendered?</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>SongTable</name>
+        <tag-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SongTableTag</tag-class>
+
+        <attribute>
+            <name>binding</name>
+            <description>A value binding that points to a bean property</description>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <description>The client id of this component</description>
+        </attribute>
+        <attribute>
+            <name>rendered</name>
+            <description>Is this component rendered?</description>
+        </attribute>
+    </tag>
 </taglib>

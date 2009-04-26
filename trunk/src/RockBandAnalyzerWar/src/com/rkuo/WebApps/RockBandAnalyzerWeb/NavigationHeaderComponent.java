@@ -1,9 +1,5 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-import com.google.appengine.api.users.User;
-
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.component.UIComponentBase;
@@ -20,10 +16,10 @@ import java.io.IOException;
 public class NavigationHeaderComponent extends UIComponentBase {
     public void encodeBegin(FacesContext context) throws IOException {
         ResponseWriter writer;
-        HttpServletRequest request;
+//        HttpServletRequest request;
 
         writer = context.getResponseWriter();
-        request = (HttpServletRequest) context.getExternalContext().getRequest();
+//        request = (HttpServletRequest) context.getExternalContext().getRequest();
 
         writer.startElement( "table", this );
         writer.writeAttribute( "width", "960px", null );
@@ -40,7 +36,7 @@ public class NavigationHeaderComponent extends UIComponentBase {
         writer.startElement( "td", this );
         writer.writeAttribute( "align", "center", null );
         writer.startElement( "a", null );
-        writer.writeAttribute( "href", "/faces/browse.jsp", null );
+        writer.writeAttribute( "href", "/browse.jsf", null );
         writer.writeText( "Browse songs", null );
         writer.endElement( "a" );
         writer.endElement( "td" );
@@ -48,22 +44,31 @@ public class NavigationHeaderComponent extends UIComponentBase {
         writer.startElement( "td", this );
         writer.writeAttribute( "align", "center", null );
         writer.startElement( "a", null );
-        writer.writeAttribute( "href", "/faces/upload.jsp", null );
-        writer.writeText( "Upload a song", null );
+        writer.writeAttribute( "href", "/submit.jsf", null );
+        writer.writeText( "Submit a new song", null );
         writer.endElement( "a" );
         writer.endElement( "td" );
 
         writer.startElement( "td", this );
         writer.writeAttribute( "align", "center", null );
         writer.startElement( "a", null );
-        writer.writeAttribute( "href", "/faces/source.jsp", null );
+        writer.writeAttribute( "href", "/source.jsf", null );
         writer.writeText( "Source code", null );
         writer.endElement( "a" );
+        writer.endElement( "td" );
+
+        writer.startElement( "td", this );
+        writer.writeAttribute( "align", "center", null );
+        writer.startElement( "input", null );
+        writer.writeAttribute( "type", "text", null );
+        writer.endElement( "input" );
         writer.endElement( "td" );
 
         writer.endElement( "tr" );
         writer.endElement( "table" );
 
+        writer.startElement( "hr", this );
+        writer.endElement( "hr" );
         return;
     }
 

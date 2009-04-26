@@ -37,19 +37,30 @@ public class LoginHeaderComponent extends UIComponentBase {
 
         writer.startElement( "td", this );
         writer.writeAttribute( "align", "right", null );
-        UserService userService = UserServiceFactory.getUserService();
-        User user = userService.getCurrentUser();
+
+        String  realUri;
+
+        realUri = request.getRequestURL().toString();
+        if( realUri.endsWith(".jsp") == true ) {
+            realUri = realUri.replace( ".jsp", ".jsf" );
+        }
+
+        UserService userService;
+        User user;
+
+        userService = UserServiceFactory.getUserService();
+        user = userService.getCurrentUser();
         if( user != null ) {
             writer.writeText( "Hello, " + user.getNickname() + "! | ", null );
             writer.startElement( "a", null );
-            writer.writeAttribute( "href", userService.createLogoutURL(request.getRequestURL().toString()), null );
+            writer.writeAttribute( "href", userService.createLogoutURL(realUri), null );
             writer.writeText( "Sign out", null );
             writer.endElement( "a" );
         }
         else {
             writer.writeText( "Hello! | ", null );
             writer.startElement( "a", null );
-            writer.writeAttribute( "href", userService.createLoginURL(request.getRequestURL().toString()), null );
+            writer.writeAttribute( "href", userService.createLoginURL(realUri), null );
             writer.writeText( "Sign in", null );
             writer.endElement( "a" );
         }

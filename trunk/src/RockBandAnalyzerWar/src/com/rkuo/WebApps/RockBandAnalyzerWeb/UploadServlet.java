@@ -4,11 +4,13 @@ import java.io.*;
 import java.util.logging.Logger;
 import java.util.zip.ZipOutputStream;
 import java.util.zip.GZIPOutputStream;
+import java.util.List;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.*;
 import javax.servlet.ServletException;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -18,6 +20,7 @@ import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.Part;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandAnalyzerParams;
+import com.rkuo.RockBand.Simulators.DrumsBaselineData;
 
 public class UploadServlet extends HttpServlet {
 
@@ -80,38 +83,38 @@ public class UploadServlet extends HttpServlet {
 //                    portraitImage.setOriginalFileName(currFilePart.getFileName());
 
                     RockBandAnalyzerParams  rbap;
+                    DrumsBaselineData       dbd;
+                    boolean                 br;
 
                     response.setContentType("text/plain");
 
                     rbap = new RockBandAnalyzerParams();
-                    RockBandAnalyzer.AnalyzeStream( response.getWriter(), new ByteArrayInputStream(outputStream.toByteArray()), rbap );
+                    dbd = RockBandAnalyzer.AnalyzeStream( response.getWriter(), new ByteArrayInputStream(outputStream.toByteArray()), rbap );
+                    if( dbd == null ) {
+                        response.getWriter().format( "AnalyzeStream failed. The file you submitted may not be a valid Rock Band MIDI file.\n" );
+                        break;
+                    }
 
-                    ByteArrayOutputStream   baOut;
-                    GZIPOutputStream gzOut;
+                    UserService userService;
+                    User user;
+                    RockBandSong song;
 
-                    baOut = new ByteArrayOutputStream();
-                    gzOut = new GZIPOutputStream( baOut );
-                    gzOut.write( outputStream.toByteArray() );
-                    gzOut.finish();
+                    userService = UserServiceFactory.getUserService();
+                    user = userService.getCurrentUser();
 
-/*
-
-                    PersistenceManager pm = PMF.get().getPersistenceManager();
-
-                    RockBandSong song = new RockBandSong();
+                    song = new RockBandSong( user, dbd.SongTitle, currentFilePart.getFileName(), outputStream.toByteArray() );
 
                     song.setOriginalFileName( currentFilePart.getFileName() );
                     song.setFile( outputStream.toByteArray() );
-                    song.setMD5();
-                    song.setUploader( );
 
-                    try {
-                        pm.makePersistent(e);
-                    } finally {
-                        pm.close();
+                    br = DataAccess.SongExists( song.getMD5() );
+                    if( br == false ) {
+                        DataAccess.SongWrite( song );
+                        break;
                     }
- */
-                    log.info( String.format("Filename: %s, Size: %d, Compressed size: %d", currentFilePart.getFileName(), outputStream.size(), baOut.size()) );
+
+                    response.getWriter().format( "The song you just submitted already exists in our database.\n" );
+//                    log.info( String.format("Filename: %s, Size: %d, Compressed size: %d", currentFilePart.getFileName(), outputStream.size(), baOut.size()) );
                     break;
                 }
             }
@@ -123,4 +126,6 @@ public class UploadServlet extends HttpServlet {
 //        response.sendRedirect( "/faces/upload_complete.jsp" );
         return;
     } // doPost
+
+
 }
