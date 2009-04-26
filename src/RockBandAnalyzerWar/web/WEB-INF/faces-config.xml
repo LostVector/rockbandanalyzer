@@ -5,6 +5,10 @@
 
 <faces-config>
     <component>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.SongTable</component-type>
+        <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SongTableComponent</component-class>
+    </component>
+    <component>
         <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.LoginHeader</component-type>
         <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.LoginHeaderComponent</component-class>
     </component>
@@ -12,11 +16,15 @@
         <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.NavigationHeader</component-type>
         <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.NavigationHeaderComponent</component-class>
     </component>
+    <component>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.Footer</component-type>
+        <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.FooterComponent</component-class>
+    </component>
   <navigation-rule>
-   <from-view-id>/upload.jsp</from-view-id>
+   <from-view-id>/submit.jsp</from-view-id>
     <navigation-case>
      <from-outcome>complete</from-outcome>
-     <to-view-id>/upload_complete.jsp</to-view-id>
+     <to-view-id>/samples/upload_complete.jsp</to-view-id>
    </navigation-case>
   </navigation-rule>
 <!--

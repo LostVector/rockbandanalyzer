@@ -25,7 +25,7 @@ import java.util.Arrays;
  */
 public class RockBandAnalyzer {
 
-    public static boolean AnalyzeStream( PrintWriter psOut, InputStream inStream, RockBandAnalyzerParams rbap ) {
+    public static DrumsBaselineData AnalyzeStream( PrintWriter psOut, InputStream inStream, RockBandAnalyzerParams rbap ) {
 
         Sequence s;
         DrumChart dc;
@@ -48,7 +48,7 @@ public class RockBandAnalyzer {
 
         if( s == null ) {
             psOut.format( "The stream could not be opened.\n");
-            return false;
+            return null;
         }
 
         RockBandMidi.DumpSequence( s );
@@ -60,7 +60,7 @@ public class RockBandAnalyzer {
 //        dc = null;
         if( dc == null ) {
             psOut.format( "Convert.ToDrumChart returned null.\n");
-            return false;
+            return null;
         }
 
         // Print stats
@@ -80,6 +80,10 @@ public class RockBandAnalyzer {
         RockBandPrint.PrintDrumsSimulatorParameters( psOut, dsp );
 
         dbd = dg.GenerateBaselineData( dc );
+        if( dbd == null ) {
+            return null;
+        }
+        
         RockBandPrint.PrintDrumsBaselineData( psOut, dbd );
 
         Integer[]   zeroPath;
@@ -104,7 +108,7 @@ public class RockBandAnalyzer {
 
         RockBandPrint.PrintPaths( psOut, paths );
 
-        return true;
+        return dbd;
     }
 
     private static Sequence getSequence( InputStream input ) {

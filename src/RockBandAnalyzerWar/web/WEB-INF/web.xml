@@ -13,31 +13,23 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
+
+<!--
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.faces</url-pattern>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-
+  -->
     <!-- The main mapping declarations -->
-    <servlet>
-        <servlet-name>main</servlet-name>
-        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.MainServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/main</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>sign</servlet-name>
-        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SignServlet</servlet-class>
-    </servlet>
+<!--
     <servlet-mapping>
-        <servlet-name>sign</servlet-name>
-        <url-pattern>/sign</url-pattern>
+       <servlet-name>default</servlet-name>
+       <url-pattern>*.css</url-pattern>
     </servlet-mapping>
+  -->
 
     <servlet>
         <servlet-name>api_upload</servlet-name>
@@ -48,7 +40,14 @@
         <url-pattern>/api/upload</url-pattern>
     </servlet-mapping>
 
+<!--
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+-->
+
     <welcome-file-list>
-        <welcome-file>faces/index.jsp</welcome-file>
+        <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
 </web-app>
