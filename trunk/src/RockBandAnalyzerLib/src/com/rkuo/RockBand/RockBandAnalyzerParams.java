@@ -13,7 +13,7 @@ public class RockBandAnalyzerParams {
 
     public String   Source;
     public boolean  PrintChart;
-    public RockBandDifficulty       Difficulty;
+    public RockBandChartDifficulty chartDifficulty;
     public RockBandPathingAlgorithm PathingAlgorithm;
     public ArrayList<Integer> Path;
 
@@ -21,7 +21,7 @@ public class RockBandAnalyzerParams {
 
         Source = "";
         PrintChart = false;
-        Difficulty = RockBandDifficulty.Expert;
+        chartDifficulty = RockBandChartDifficulty.Expert;
         PathingAlgorithm = RockBandPathingAlgorithm.Optimal;
         Path = new ArrayList<Integer>();
         return;

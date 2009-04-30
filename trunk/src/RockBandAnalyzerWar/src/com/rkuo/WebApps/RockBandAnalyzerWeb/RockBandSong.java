@@ -14,6 +14,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.datastore.Blob;
+import com.rkuo.RockBand.RockBandLocation;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class RockBandSong {
@@ -37,16 +38,8 @@ public class RockBandSong {
     @Persistent
     private Date _dateReleased;
 
-    public Long getLocation() {
-        return _location;
-    }
-
-    public void setLocation(Long Location) {
-        _location = Location;
-    }
-
     @Persistent
-    private Long _location;
+    private Integer _location;
 
     // when the song was released on Rock Band
     @Persistent
@@ -108,6 +101,10 @@ public class RockBandSong {
         return _dateReleased;
     }
 
+    public RockBandLocation getLocation() {
+        return RockBandLocation.values()[_location];
+    }
+
     public Date getDatePublished() {
         return _datePublished;
     }
@@ -145,6 +142,11 @@ public class RockBandSong {
 
     public void setDateReleased( Date dateReleased ) {
         _dateReleased = dateReleased;
+        return;
+    }
+
+    public void setLocation(RockBandLocation location) {
+        _location = location.ordinal();
         return;
     }
 

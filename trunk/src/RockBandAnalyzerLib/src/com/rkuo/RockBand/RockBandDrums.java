@@ -8,7 +8,7 @@ package com.rkuo.RockBand;
  * To change this template use File | Settings | File Templates.
  */
 public class RockBandDrums {
-    public static long GetFillDelay( RockBandGame rbGame, RockBandDifficulty rbDifficulty, boolean breakNeckSpeed ) {
+    public static long GetFillDelay( RockBandGame rbGame, RockBandChartDifficulty rbChartDifficulty, boolean breakNeckSpeed ) {
 
         long    fillDelay;
 
@@ -18,16 +18,16 @@ public class RockBandDrums {
             fillDelay = RockBandConstants.FillDelayRB1;
         }
         else if( rbGame == RockBandGame.RockBandTwo ) {
-            if( rbDifficulty == RockBandDifficulty.Expert ) {
+            if( rbChartDifficulty == RockBandChartDifficulty.Expert ) {
                 fillDelay = RockBandConstants.FillDelayRB2Expert;
             }
-            else if( rbDifficulty == RockBandDifficulty.Hard ) {
+            else if( rbChartDifficulty == RockBandChartDifficulty.Hard ) {
 
             }
-            else if( rbDifficulty == RockBandDifficulty.Medium ) {
+            else if( rbChartDifficulty == RockBandChartDifficulty.Medium ) {
 
             }
-            else if( rbDifficulty == RockBandDifficulty.Easy ) {
+            else if( rbChartDifficulty == RockBandChartDifficulty.Easy ) {
 
             }
             else {

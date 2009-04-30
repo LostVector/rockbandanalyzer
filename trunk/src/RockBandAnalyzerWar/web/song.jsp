@@ -1,12 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rkuo
-  Date: Apr 18, 2009
-  Time: 8:57:16 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://rockbandanalyzer.appspot.com/jsfcomponents" prefix="x" %>
+
 <html>
-  <head><title>Simple jsp page</title></head>
-  <body>Place your content here</body>
+<body>
+<f:view>
+    <x:loginHeader />
+    <x:navHeader />
+    <x:SongDetail />
+    <x:Footer />
+</f:view>
+</body>
 </html>

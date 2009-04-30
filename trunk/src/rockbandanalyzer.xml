@@ -135,12 +135,26 @@
     <target name="runserver" description="Starts the development server.">
       <dev_appserver war="${basedir}/${war_dir}" port="8080" >
         <options>
+          <arg value="--jvm_flag=-showversion"/>
           <arg value="--jvm_flag=-Xdebug"/>
           <arg value="--jvm_flag=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9999"/>
         </options>
       </dev_appserver>
     </target>
 
+    <target name="debugserver" description="Starts the development server.">
+      <java classname="com.google.appengine.tools.KickStart"
+            classpath="${sdk.dir}/lib/appengine-tools-api.jar;${basedir}/${war_dir}/WEB_INF/classes"
+            fork="true">
+        <arg value="com.google.appengine.tools.development.DevAppServerMain"/>
+        <arg value="--port=8080"/>
+        <arg value="--address=localhost"/>
+        <arg value="--jvm_flag=-Xdebug"/>
+        <arg value="--jvm_flag=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9999"/>
+        <arg value="${war_dir}"/>
+      </java>
+    </target>
+      
     <path id="project.classpath">
       <pathelement path="${basedir}/${war_dir}/WEB-INF/classes" />
       <fileset dir="${basedir}/${war_dir}/WEB-INF/lib">

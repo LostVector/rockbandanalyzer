@@ -5,6 +5,10 @@
 
 <faces-config>
     <component>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.SongDetail</component-type>
+        <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SongDetailComponent</component-class>
+    </component>
+    <component>
         <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.SongTable</component-type>
         <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SongTableComponent</component-class>
     </component>

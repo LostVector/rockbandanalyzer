@@ -6,7 +6,6 @@ import com.rkuo.RockBand.Primitives.TickRange;
 import com.rkuo.RockBand.Primitives.DrumChart;
 import com.rkuo.Midi.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -89,7 +88,7 @@ public class Convert {
         return path;
     }
 
-    public static DrumChart ToDrumChart( RockBandDifficulty rbd, Sequence s ) {
+    public static DrumChart ToDrumChart( RockBandChartDifficulty rbd, Sequence s ) {
 
         DrumChart dc;
         Track       tempoTrack;
@@ -229,13 +228,13 @@ public class Convert {
 
     // It seems like fill sections are demarcated by five simultaneous drum fill notes.
     // Currently, I only look at DrumsFillRed since i don't see a reason to check the other fill notes.
-    private static int FilterNote( RockBandDifficulty rbd, byte rawNote ) {
+    private static int FilterNote( RockBandChartDifficulty rbd, byte rawNote ) {
 
         int nNote;
 
         nNote = (int)rawNote;
 
-        if( rbd == RockBandDifficulty.Easy ) {
+        if( rbd == RockBandChartDifficulty.Easy ) {
             if( (nNote == com.rkuo.RockBand.RockBandMidi.DrumsEasyRed) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsEasyYellow) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsEasyBlue) ||
@@ -247,7 +246,7 @@ public class Convert {
             }
         }
 
-        if( rbd == RockBandDifficulty.Medium ) {
+        if( rbd == RockBandChartDifficulty.Medium ) {
             if( (nNote == com.rkuo.RockBand.RockBandMidi.DrumsMediumRed) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsMediumYellow) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsMediumBlue) ||
@@ -259,7 +258,7 @@ public class Convert {
             }
         }
 
-        if( rbd == RockBandDifficulty.Hard ) {
+        if( rbd == RockBandChartDifficulty.Hard ) {
             if( (nNote == com.rkuo.RockBand.RockBandMidi.DrumsHardRed) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsHardYellow) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsHardBlue) ||
@@ -271,7 +270,7 @@ public class Convert {
             }
         }
 
-        if( rbd == RockBandDifficulty.Expert ) {
+        if( rbd == RockBandChartDifficulty.Expert ) {
             if( (nNote == com.rkuo.RockBand.RockBandMidi.DrumsExpertRed) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsExpertYellow) ||
                     (nNote == com.rkuo.RockBand.RockBandMidi.DrumsExpertBlue) ||
@@ -484,7 +483,7 @@ public class Convert {
         return true;
     }
 
-    private static boolean LoadDrumTrack( DrumChart dc, Track drumTrack, RockBandDifficulty rbd ) {
+    private static boolean LoadDrumTrack( DrumChart dc, Track drumTrack, RockBandChartDifficulty rbd ) {
 
         Chord   lastChord;
         long    overdriveStartTick;

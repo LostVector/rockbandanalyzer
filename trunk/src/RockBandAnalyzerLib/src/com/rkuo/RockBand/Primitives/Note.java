@@ -1,7 +1,7 @@
 package com.rkuo.RockBand.Primitives;
 
 import com.rkuo.RockBand.RockBandMidi;
-import com.rkuo.RockBand.RockBandDifficulty;
+import com.rkuo.RockBand.RockBandChartDifficulty;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,18 +26,18 @@ public class Note {
         return _number;
     }
 
-    public boolean isSoloMarker( RockBandDifficulty d ) {
+    public boolean isSoloMarker( RockBandChartDifficulty d ) {
 
         int marker;
 
         marker = RockBandMidi.DrumsExpertSoloMarker;
-        if( d == RockBandDifficulty.Easy ) {
+        if( d == RockBandChartDifficulty.Easy ) {
             marker = RockBandMidi.DrumsEasySoloMarker;
         }
-        else if( d == RockBandDifficulty.Medium ) {
+        else if( d == RockBandChartDifficulty.Medium ) {
             marker = RockBandMidi.DrumsMediumSoloMarker;
         }
-        else if( d == RockBandDifficulty.Hard ) {
+        else if( d == RockBandChartDifficulty.Hard ) {
             marker = RockBandMidi.DrumsHardSoloMarker;
         }
         else {

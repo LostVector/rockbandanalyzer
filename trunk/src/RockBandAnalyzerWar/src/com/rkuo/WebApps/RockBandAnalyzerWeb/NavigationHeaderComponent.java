@@ -59,8 +59,12 @@ public class NavigationHeaderComponent extends UIComponentBase {
 
         writer.startElement( "td", this );
         writer.writeAttribute( "align", "center", null );
+        writer.writeText( "Search", null );
         writer.startElement( "input", null );
+        writer.writeAttribute( "id", "searchInputText", null );
         writer.writeAttribute( "type", "text", null );
+        writer.writeAttribute( "value", "Search...", null );
+        writer.writeAttribute( "onselect", "onSearchSelect()", null );
         writer.endElement( "input" );
         writer.endElement( "td" );
 
