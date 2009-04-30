@@ -6,15 +6,12 @@ import com.rkuo.RockBand.Simulators.DrumsSimulatorParameters;
 import com.rkuo.RockBand.Simulators.DrumsBaselineData;
 import com.rkuo.Midi.*;
 //import javax.sound.midi.*;
-import com.sun.media.sound.JDK13Services;
 
 //import javax.sound.midi.Sequence;
 //import javax.sound.midi.MidiSystem;
 //import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.spi.MidiFileReader;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,6 +26,10 @@ public class RockBandAnalyzer {
 
         Sequence s;
         DrumChart dc;
+
+        if( psOut == null ) {
+            psOut = new PrintWriter( new StringWriter() );
+        }
         
         RockBandPrint.PrintAnalyzerParameters( psOut, rbap );
 
@@ -56,7 +57,7 @@ public class RockBandAnalyzer {
 
         psOut.format( "Opened the stream successfully.\n" );
 
-        dc = Convert.ToDrumChart( RockBandDifficulty.Expert, s );
+        dc = Convert.ToDrumChart( RockBandChartDifficulty.Expert, s );
 //        dc = null;
         if( dc == null ) {
             psOut.format( "Convert.ToDrumChart returned null.\n");

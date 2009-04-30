@@ -64,6 +64,7 @@
     <orderEntry type="library" name="appengine-java-sdk" level="project" />
     <orderEntry type="library" name="JSF 1.1" level="project" />
     <orderEntry type="library" name="com.oreilly.servlet" level="project" />
+    <orderEntry type="library" name="apache-wicket-1.4-rc2" level="project" />
   </component>
 </module>
 

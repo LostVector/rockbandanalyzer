@@ -9,8 +9,8 @@
       <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties />
+      <executeOn event="beforeRun" target="datanucleusenhance" runConfigurationType="Remote" runConfigurationName="DebugWarRemote" />
       <executeOn event="beforeRun" target="runserver" />
-      <executeOn event="beforeRun" target="runserver" runConfigurationType="Remote" runConfigurationName="DebugWarRemote" />
     </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
@@ -331,6 +331,13 @@
     <library name="com.oreilly.servlet">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/com.oreilly.servlet/cos.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="apache-wicket-1.4-rc2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-1.4-rc2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

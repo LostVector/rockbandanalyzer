@@ -34,10 +34,7 @@ public class FooterComponent extends UIComponentBase {
         writer.startElement( "td", this );
         writer.writeAttribute( "colspan", "2", null );
         writer.writeAttribute( "align", "center", null );
-        writer.startElement( "a", null );
-        writer.writeAttribute( "href", "/", null );
         writer.writeText( "Copyright 2009 rkuo.com", null );
-        writer.endElement( "a" );
         writer.endElement( "td" );
         writer.endElement( "tr" );
 

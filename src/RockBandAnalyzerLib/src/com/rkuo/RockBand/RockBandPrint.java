@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.Map;
 import java.util.Set;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
@@ -90,20 +89,20 @@ public class RockBandPrint {
     public static void PrintAnalyzerParameters( PrintWriter psOut, RockBandAnalyzerParams rbap ) {
 
         psOut.format( "===== Analyzer Parameters begins =====\n" );
-        if( rbap.Difficulty == RockBandDifficulty.Easy ) {
-            psOut.format( "RockBandDifficulty: Easy\n");
+        if( rbap.chartDifficulty == RockBandChartDifficulty.Easy ) {
+            psOut.format( "RockBandChartDifficulty: Easy\n");
         }
-        else if( rbap.Difficulty == RockBandDifficulty.Medium ) {
-            psOut.format( "RockBandDifficulty: Medium\n");
+        else if( rbap.chartDifficulty == RockBandChartDifficulty.Medium ) {
+            psOut.format( "RockBandChartDifficulty: Medium\n");
         }
-        else if( rbap.Difficulty == RockBandDifficulty.Hard ) {
-            psOut.format( "RockBandDifficulty: Hard\n");
+        else if( rbap.chartDifficulty == RockBandChartDifficulty.Hard ) {
+            psOut.format( "RockBandChartDifficulty: Hard\n");
         }
-        else if( rbap.Difficulty == RockBandDifficulty.Expert ) {
-            psOut.format( "RockBandDifficulty: Expert\n");
+        else if( rbap.chartDifficulty == RockBandChartDifficulty.Expert ) {
+            psOut.format( "RockBandChartDifficulty: Expert\n");
         }
         else {
-            psOut.format( "RockBandDifficulty: Unknown\n");
+            psOut.format( "RockBandChartDifficulty: Unknown\n");
         }
 
         if( rbap.PathingAlgorithm == RockBandPathingAlgorithm.Predefined ) {
@@ -132,7 +131,7 @@ public class RockBandPrint {
             fillDelayDescription = "Rock Band 1";
         }
         else if( dsp.FillDelay == RockBandConstants.FillDelayRB2Expert ) {
-            fillDelayDescription = "Rock Band 2, Expert Difficulty";
+            fillDelayDescription = "Rock Band 2, Expert chartDifficulty";
         }
         else {
             // do nothing
