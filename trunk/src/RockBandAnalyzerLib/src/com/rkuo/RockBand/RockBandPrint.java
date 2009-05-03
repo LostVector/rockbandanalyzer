@@ -131,17 +131,17 @@ public class RockBandPrint {
             fillDelayDescription = "Rock Band 1";
         }
         else if( dsp.FillDelay == RockBandConstants.FillDelayRB2Expert ) {
-            fillDelayDescription = "Rock Band 2, Expert chartDifficulty";
+            fillDelayDescription = "Rock Band 2, Expert Difficulty";
         }
         else {
             // do nothing
         }
 
         if( fillDelayDescription.length() == 0 ) {
-            psOut.format( "Fill delay = %d.\n", dsp.FillDelay );
+            psOut.format( "Fill delay = %d ms.\n", dsp.FillDelay );
         }
         else {
-            psOut.format( "Fill delay = %d. (We appear to be using the delay for %s)\n", dsp.FillDelay, fillDelayDescription);
+            psOut.format( "Fill delay = %d ms. (We appear to be using the delay for %s)\n", dsp.FillDelay, fillDelayDescription);
         }
 
         if( dsp.OverhitOverdrivePhrases == true ) {
