@@ -5,7 +5,7 @@
 
   <property name="project_name" value="RockBandAnalyzer"/>
 
-  <property name="war_dir" value="out/exploded/RockBandAnalyzerWar"/>
+  <property name="war_dir" value="out/exploded/RockBandAnalyzerWeb"/>
 
   <property name="sdk.dir" location="lib/appengine-java-sdk-1.2.0" />
 
