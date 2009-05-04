@@ -22,7 +22,35 @@
   </component>
   <component name="CodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
-      <value />
+      <value>
+        <ADDITIONAL_INDENT_OPTIONS fileType="java">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="jsp">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="xml">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+      </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="false" />
   </component>
@@ -304,7 +332,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
   </component>
-  <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="WebServicesPlugin" addRequiredLibraries="true">
+    <context />
+  </component>
   <component name="libraryTable">
     <library name="appengine-java-sdk">
       <CLASSES>
@@ -350,6 +380,16 @@
         <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/slf4j-log4j12-1.5.6.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.5.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="jax-ws">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxws-rt.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxb-impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/streambuffer.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/stax-ex.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

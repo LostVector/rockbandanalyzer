@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
@@ -75,7 +74,7 @@ public class SongDetailComponent extends UIComponentBase {
         w.startElement( "td", this );
         w.writeAttribute( "colspan", "2", null );
         w.writeAttribute( "align", "center", null );
-        w.writeText( dbd.SongTitle, null );
+        w.writeText( dbd.MidiTitle, null );
         w.endElement( "td" );
         w.endElement( "tr" );
 

@@ -2,15 +2,8 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb;
 
 import java.io.*;
 import java.util.logging.Logger;
-import java.util.zip.ZipOutputStream;
-import java.util.zip.GZIPOutputStream;
-import java.util.List;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.*;
 import javax.servlet.ServletException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -102,7 +95,7 @@ public class UploadServlet extends HttpServlet {
                     userService = UserServiceFactory.getUserService();
                     user = userService.getCurrentUser();
 
-                    song = new RockBandSong( user, dbd.SongTitle, currentFilePart.getFileName(), outputStream.toByteArray() );
+                    song = new RockBandSong( user, dbd.MidiTitle, currentFilePart.getFileName(), outputStream.toByteArray() );
 
                     song.setOriginalFileName( currentFilePart.getFileName() );
                     song.setFile( outputStream.toByteArray() );
