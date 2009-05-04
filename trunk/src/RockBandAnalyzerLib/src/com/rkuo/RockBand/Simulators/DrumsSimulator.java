@@ -42,7 +42,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
 
         lastChord = null;
 
-        dbd.SongTitle = dc.getSongTitle();
+        dbd.MidiTitle = dc.getSongTitle();
         
         chords = dc.getChords();
         for( Chord c : chords ) {
@@ -132,14 +132,14 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         if( skipNotation == null ) {
             return null;
         }
-
+/*
         System.out.format( "===== Generating score from path: " );
         for( int x : skipNotation ) {
             System.out.format( "%d ", x );
         }
 
         System.out.format( "=====\n" );
-
+ */
         for( Integer x : skipNotation ) {
             if( x < 0 ) {
                 return null;

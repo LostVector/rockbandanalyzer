@@ -178,7 +178,7 @@ public class RockBandPrint {
 
         psOut.format( "===== Baseline data STARTS =====\n" );
 
-        psOut.format( "Song title (extracted from MIDI stream): %s\n", dbd.SongTitle );
+        psOut.format( "Song title (extracted from MIDI stream): %s\n", dbd.MidiTitle);
         psOut.format( "Duration: %s (%d microseconds)\n", MicrosecondsToString(dbd.Microseconds), dbd.Microseconds );
         psOut.format( "Number of chords: %d\n", dbd.Chords );
         psOut.format( "Number of notes: %d\n", dbd.Notes );

@@ -1,6 +1,5 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.PageParameters;
@@ -8,8 +7,9 @@ import com.rkuo.RockBand.Simulators.DrumsBaselineData;
 import com.rkuo.RockBand.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandPrint;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
 
 import java.util.zip.GZIPInputStream;
 import java.io.ByteArrayInputStream;
@@ -25,7 +25,12 @@ import java.io.IOException;
  */
 public class SongPage extends BasePage {
 
-    protected Label               lblMidiTitle;
+    protected Label               lblSongTitle;
+
+    protected Label               lblArtist;
+    protected Label               lblAlbum;
+    protected Label               lblGenre;
+
     protected Label               lblDurationValue;
     protected Label               lblNotesValue;
     protected Label               lblChordsValue;
@@ -47,10 +52,16 @@ public class SongPage extends BasePage {
         
 //        add(new Label("lblHelloWorld", new Model("Hello, World")));
 
-        lblMidiTitle = new Label("lblMidiTitle","");
+        lblSongTitle = new Label("lblSongTitle","");
+
+        lblArtist = new Label("lblArtist", "");
+        lblAlbum = new Label("lblAlbum", "");
+        lblGenre = new Label("lblGenre", "");
+
         lblDurationValue = new Label("lblDurationValue", "");
         lblNotesValue = new Label("lblNotesValue", "");
         lblChordsValue = new Label("lblChordsValue", "");
+
         lblOneStarValue = new Label("lblOneStarValue", "");
         lblTwoStarValue = new Label("lblTwoStarValue", "");
         lblThreeStarValue = new Label("lblThreeStarValue", "");
@@ -59,7 +70,12 @@ public class SongPage extends BasePage {
         lblGoldStarValue = new Label("lblGoldStarValue", "");
         lblGoldStarOldValue = new Label("lblGoldStarOldValue", "");
 
-        add( lblMidiTitle );
+        add( lblSongTitle );
+
+        add( lblArtist );
+        add( lblAlbum );
+        add( lblGenre );
+
         add( lblDurationValue );
         add( lblNotesValue );
         add( lblChordsValue );
@@ -74,6 +90,21 @@ public class SongPage extends BasePage {
 
         id = params.getLong( "id" );
 
+        String  sValue;
+        RockBandSongRaw rawSong;
+        RockBandSongEmbedded    embedded;
+
+        embedded = DataAccess.GetEmbeddedSongById( id );
+
+        sValue = embedded.getTitle();
+        lblSongTitle.setDefaultModel( new Model<String>(sValue) );
+        sValue = embedded.getArtist();
+        lblArtist.setDefaultModel( new Model<String>(sValue) );
+        sValue = embedded.getAlbum();
+        lblAlbum.setDefaultModel( new Model<String>(sValue) );
+        sValue = embedded.getGenre();
+        lblGenre.setDefaultModel( new Model<String>(sValue) );
+
         dbd = GetDBDById( id );
 
         SetDBDValues( dbd );
@@ -84,15 +115,11 @@ public class SongPage extends BasePage {
 
         String  sValue;
 
-        sValue = dbd.SongTitle;
-        lblMidiTitle.setDefaultModel( new Model<String>(sValue) );
 
         sValue = RockBandPrint.MicrosecondsToString( dbd.Microseconds );
         lblDurationValue.setDefaultModel( new Model<String>(sValue) );
-
         sValue = String.format("%d", dbd.Notes );
         lblNotesValue.setDefaultModel( new Model<String>(sValue) );
-
         sValue = String.format("%d", dbd.Chords );
         lblChordsValue.setDefaultModel( new Model<String>(sValue) );
 
@@ -120,10 +147,10 @@ public class SongPage extends BasePage {
         GZIPInputStream gzIn;
         ByteArrayInputStream baIn;
         ByteArrayOutputStream baOut;
-        RockBandSong rbSong;
+        RockBandSongRaw rbSong;
         DrumsBaselineData       dbd;
 
-        rbSong = DataAccess.GetSongById( id );
+        rbSong = DataAccess.GetRawSongById( id );
 
         baIn = new ByteArrayInputStream( rbSong.getFile() );
         baOut = new ByteArrayOutputStream();

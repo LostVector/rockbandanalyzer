@@ -15,6 +15,7 @@ public enum RockBandSort {
     DifficultyBand,
     Song,
     Band,
+    Genre,
     Decade,
     Location
 }

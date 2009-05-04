@@ -1,9 +1,7 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Key;
 import com.rkuo.RockBand.RockBandLocation;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.PMF;
 
 import javax.jdo.PersistenceManager;
@@ -19,21 +17,21 @@ import java.util.List;
  */
 public class DataAccess {
 
-    public static List<RockBandSong> GetSongs() {
+    public static List<RockBandSongEmbedded> GetSongs() {
 
         Query               query;
-        List<RockBandSong>  songs;
+        List<RockBandSongEmbedded>  songs;
 
         PersistenceManager pm;
 
         songs = null;
         pm = PMF.get().getPersistenceManager();
 
-        query = pm.newQuery(RockBandSong.class);
-        query.setOrdering("_midiTitle asc");
+        query = pm.newQuery(RockBandSongEmbedded.class);
+        query.setOrdering("_title asc");
 
         try {
-            songs = (List<RockBandSong>) query.execute();
+            songs = (List<RockBandSongEmbedded>) query.execute();
         }
         finally {
             query.closeAll();
@@ -42,21 +40,21 @@ public class DataAccess {
         return songs;
     }
 
-    public static List<RockBandSong> GetSongsByDecade( int decade ) {
+    public static List<RockBandSongRaw> GetSongsByDecade( int decade ) {
 
         Query               query;
-        List<RockBandSong>  songs;
+        List<RockBandSongRaw>  songs;
 
         PersistenceManager pm;
 
         songs = null;
         pm = PMF.get().getPersistenceManager();
 
-        query = pm.newQuery(RockBandSong.class);
+        query = pm.newQuery(RockBandSongRaw.class);
         query.setOrdering("_midiTitle asc");
 
         try {
-            songs = (List<RockBandSong>) query.execute();
+            songs = (List<RockBandSongRaw>) query.execute();
         }
         finally {
             query.closeAll();
@@ -65,21 +63,19 @@ public class DataAccess {
         return songs;
     }
 
-    public static List<RockBandSong> GetSongsByDifficulty( int decade ) {
+    public static List<RockBandSongRaw> GetSongsByDifficulty( int decade ) {
 
+        PersistenceManager pm = PMF.get().getPersistenceManager();
         Query               query;
-        List<RockBandSong>  songs;
-
-        PersistenceManager pm;
+        List<RockBandSongRaw>  songs;
 
         songs = null;
-        pm = PMF.get().getPersistenceManager();
 
-        query = pm.newQuery(RockBandSong.class);
+        query = pm.newQuery(RockBandSongRaw.class);
         query.setOrdering("_midiTitle asc");
 
         try {
-            songs = (List<RockBandSong>) query.execute();
+            songs = (List<RockBandSongRaw>) query.execute();
         }
         finally {
             query.closeAll();
@@ -88,23 +84,22 @@ public class DataAccess {
         return songs;
     }
 
-    public static List<RockBandSong> GetSongsByLocation( RockBandLocation location ) {
+    public static List<RockBandSongRaw> GetSongsByLocation( RockBandLocation location ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
 
         Query               query;
-        List<RockBandSong>  songs;
-
-        PersistenceManager pm;
+        List<RockBandSongRaw>  songs;
 
         songs = null;
-        pm = PMF.get().getPersistenceManager();
 
-        query = pm.newQuery(RockBandSong.class);
+        query = pm.newQuery(RockBandSongRaw.class);
         query.setOrdering("_midiTitle asc");
         query.setFilter("_location == LocationParam");
         query.declareParameters("String LocationParam");
 
         try {
-            songs = (List<RockBandSong>) query.execute( location.ordinal() );
+            songs = (List<RockBandSongRaw>) query.execute( location.ordinal() );
         }
         finally {
             query.closeAll();
@@ -115,23 +110,20 @@ public class DataAccess {
 
     public static boolean SongExists( String md5 ) {
 
+        PersistenceManager pm = PMF.get().getPersistenceManager();
         Query query;
-        RockBandSong  rbSong;
+        RockBandSongRaw rbSong;
 
         rbSong = null;
 
-        PersistenceManager pm;
-
-        pm = PMF.get().getPersistenceManager();
-
-        query = pm.newQuery(RockBandSong.class);
+        query = pm.newQuery(RockBandSongRaw.class);
         query.setFilter("_md5 == MD5Param");
         query.declareParameters("String MD5Param");
         query.setUnique( true );
 //        query.setResult( "_md5" );
 
         try {
-            rbSong = (RockBandSong) query.execute( md5 );
+            rbSong = (RockBandSongRaw) query.execute( md5 );
         }
         finally {
             query.closeAll();
@@ -144,27 +136,67 @@ public class DataAccess {
         return true;
     }
 
-    public static void SongWrite( RockBandSong rbs ) {
+    public static Long WriteRaw( RockBandSongRaw rbSong ) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
 
         try {
-            pm.makePersistent( rbs );
+            pm.makePersistent(rbSong);
         } finally {
             pm.close();
         }
 
-        return;
+        return rbSong.getId();
     }
 
-    public static RockBandSong GetSongById( long id ) {
+    public static Long WriteEmbedded( RockBandSongEmbedded rbSong ) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
-        RockBandSong  rbSong;
-        Key k;
 
-        k = KeyFactory.createKey(RockBandSong.class.getSimpleName(), id);
-        rbSong = (RockBandSong)pm.getObjectById( RockBandSong.class, id );
+        try {
+            pm.makePersistent(rbSong);
+        } finally {
+            pm.close();
+        }
+
+        return rbSong.getId();
+    }
+
+    public static Long WriteGenerated( RockBandSongGenerated rbSong ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+
+        try {
+            pm.makePersistent(rbSong);
+        } finally {
+            pm.close();
+        }
+
+        return rbSong.getId();
+    }
+
+    public static RockBandSongRaw GetRawSongById( long id ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        RockBandSongRaw rbSong;
+//      Key k;
+
+//      k = KeyFactory.createKey(RockBandSongRaw.class.getSimpleName(), id);
+        rbSong = (RockBandSongRaw)pm.getObjectById( RockBandSongRaw.class, id );
+
+        return rbSong;
+    }
+
+    public static RockBandSongEmbedded GetEmbeddedSongById( long id ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        String  stringId;
+        RockBandSongEmbedded rbSong;
+        stringId = String.format( "rbe%d", id );
+        rbSong = (RockBandSongEmbedded)pm.getObjectById( RockBandSongEmbedded.class, stringId );
+
+//      Key k;
+//      k = KeyFactory.createKey(RockBandSongRaw.class.getSimpleName(), id);
 
         return rbSong;
     }

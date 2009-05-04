@@ -19,4 +19,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <servlet>
+        <servlet-name>api_upload</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_upload</servlet-name>
+        <url-pattern>/api/upload</url-pattern>
+    </servlet-mapping>    
 </web-app>

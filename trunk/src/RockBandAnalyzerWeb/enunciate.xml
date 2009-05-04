@@ -19,9 +19,9 @@
            xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.8.xsd">
 
   <api-classes>
-    <include pattern="org.apache.wicket.spring.common.Contact"/>
-    <include pattern="org.apache.wicket.spring.common.ContactDao"/>
-    <include pattern="org.apache.wicket.spring.common.ContactDaoImpl"/>
+    <include pattern="com.rkuo.WebApps.RockBandAnalyzerWeb."/>
+    <include pattern="com.rkuo.WebApps.RockBandAnalyzerWeb.SongUploadService"/>
+    <include pattern="com.rkuo.WebApps.RockBandAnalyzerWeb.SongUploadServiceImpl"/>
   </api-classes>
 
   <modules>

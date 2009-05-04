@@ -1,18 +1,14 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.ExternalLink;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.RepeatingView;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.AttributeModifier;
 
 import java.util.List;
 
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,7 +44,7 @@ public class BrowsePage extends BasePage {
         add( elDecade );
         add( elLocation );
 
-        List<RockBandSong> songs;
+        List<RockBandSongEmbedded> songs;
         RepeatingView      rptvSongs;
 
         rptvSongs = new RepeatingView("rptvSongs");
@@ -58,7 +54,7 @@ public class BrowsePage extends BasePage {
             return;
         }
 
-        for( RockBandSong s : songs ) {
+        for( RockBandSongEmbedded s : songs ) {
             WebMarkupContainer  item;
             ExternalLink        elMidiName;
 
@@ -67,7 +63,7 @@ public class BrowsePage extends BasePage {
 
 //            item.add( new Label("midiName", s.getMidiTitle()) );
 
-            elMidiName = new ExternalLink( "elMidiName", "/song?id=" + s.getId().toString(), s.getMidiTitle() );
+            elMidiName = new ExternalLink( "elMidiName", "/song?id=" + s.getId(), s.getTitle() );
             item.add( elMidiName );
         }
 

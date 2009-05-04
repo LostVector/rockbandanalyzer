@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DrumsBaselineData {
 
-    public String       SongTitle;
+    public String       MidiTitle;
     public long         Microseconds;
 
     public long         Notes;
@@ -46,7 +46,7 @@ public class DrumsBaselineData {
     public long         StarCutoffGoldOld;
 
     public DrumsBaselineData() {
-        SongTitle = "";
+        MidiTitle = "";
         Microseconds = 0;
 
         Notes = 0;

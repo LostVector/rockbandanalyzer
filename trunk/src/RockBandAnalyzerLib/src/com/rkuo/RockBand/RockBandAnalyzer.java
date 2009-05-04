@@ -52,7 +52,7 @@ public class RockBandAnalyzer {
             return null;
         }
 
-        RockBandMidi.DumpSequence( s );
+//        RockBandMidi.DumpSequence( s );
 //        RockBandMidi.DumpTempoTrack( s );
 
         psOut.format( "Opened the stream successfully.\n" );

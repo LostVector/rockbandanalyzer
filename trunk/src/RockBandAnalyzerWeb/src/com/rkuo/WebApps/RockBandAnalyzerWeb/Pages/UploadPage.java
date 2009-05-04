@@ -17,11 +17,12 @@ import org.apache.wicket.markup.html.basic.Label;
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Date;
 
 import com.rkuo.RockBand.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.Simulators.DrumsBaselineData;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.User;
@@ -104,7 +105,7 @@ public class UploadPage extends BasePage {
             DrumsBaselineData dbd;
             UserService userService;
             User user;
-            RockBandSong song;
+            RockBandSongRaw song;
 
             StringWriter    sWriter;
             PrintWriter printWriter;
@@ -154,11 +155,11 @@ public class UploadPage extends BasePage {
                 return;
             }
 
-            song = new RockBandSong( user, dbd.SongTitle, upload.getClientFileName(), baOut.toByteArray() );
+            song = new RockBandSongRaw( user, new Date(), upload.getClientFileName(), baOut.toByteArray() );
 
             br = DataAccess.SongExists( song.getMD5() );
             if( br == false ) {
-                DataAccess.SongWrite( song );
+                DataAccess.WriteRaw( song );
                 printWriter.format( "Saving the song to our database.\n" );
                 message = sWriter.toString();
                 return;
