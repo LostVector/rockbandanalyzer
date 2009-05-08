@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class Convert {
 
-    public static ArrayList<RockBandPath> DepthToRockBandPaths( RockBandPlayerState state ) {
+    public static ArrayList<RockBandPath> DepthToRockBandPaths( RockBandPlayerState state, long fillDelay ) {
 
         ArrayList<RockBandPath> paths;
         ArrayList<RockBandPlayerState>  terminalStates;
@@ -32,7 +32,7 @@ public class Convert {
         for( RockBandPlayerState terminalState : terminalStates ) {
             RockBandPath    path;
 
-            path = Convert.ToRockBandPath( terminalState );
+            path = Convert.ToRockBandPath( terminalState, fillDelay );
             paths.add( path );
         }
 
@@ -57,7 +57,7 @@ public class Convert {
         return;
     }
 
-    public static ArrayList<RockBandPath> BreadthToRockBandPaths( ArrayList<RockBandPlayerState> uniqueStates ) {
+    public static ArrayList<RockBandPath> BreadthToRockBandPaths( ArrayList<RockBandPlayerState> uniqueStates, long fillDelay ) {
 
         ArrayList<RockBandPath> paths;
 
@@ -68,14 +68,14 @@ public class Convert {
         for( RockBandPlayerState terminalState : uniqueStates ) {
             RockBandPath    path;
 
-            path = Convert.ToRockBandPath( terminalState );
+            path = Convert.ToRockBandPath( terminalState, fillDelay );
             paths.add( path );
         }
 
         return paths;
     }
 
-    public static RockBandPath ToRockBandPath( RockBandPlayerState rbps ) {
+    public static RockBandPath ToRockBandPath( RockBandPlayerState rbps, long fillDelay ) {
 
         RockBandPath    path;
 
@@ -84,6 +84,7 @@ public class Convert {
         path.Path = rbps.CurrentPath;
         path.NoteStreak = rbps.NoteStreak;
         path.Score = rbps.Score;
+        path.FillDelay = fillDelay;
 
         return path;
     }

@@ -3,8 +3,165 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head></head>
+<head>
+    <link rel="STYLESHEET" type="text/css" href="/main.css" media="screen"/>
+    <title>Rock Band Analyzer</title>
+</head>
 <body>
+
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">
+            <h1><a href="#">Rock Band Analyzer</a></h1>
+            <div id="login">
+                <span wicket:id="lhpHeader"></span>
+            </div>
+
+            <p>Finding stuff out about Rock Band that you can't.</p>
+        </div>
+    </div>
+    <!-- end #header -->
+    <div id="menu">
+        <span wicket:id="nhpHeader"></span>
+        <div id="search">
+            <form wicket:id="form" method="get" action="">
+                <fieldset>
+                <input wicket:id="ac" type="text" name="s" id="search-text" size="15" />
+                <input type="submit" id="search-submit" value="Search" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <!-- end #menu -->
+    <div id="page">
+        <div id="page-bgtop">
+            <div id="page-bgbtm">
+                <div id="content">
+                    <wicket:child/>
+<!--
+                    <div class="post">
+                        <div class="post-bgtop">
+                            <div class="post-bgbtm">
+                                <h2 class="title"><a href="#">Welcome to Frankincense</a></h2>
+
+                                <p class="meta">Posted by <a href="#">Someone</a> on March 10, 2008
+                                    &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;
+                                    <a href="#" class="permalink">Full article</a></p>
+
+                                <div class="entry">
+                                    <p>This is <strong>Frankincense </strong>, a free, fully standards-compliant CSS
+                                        template designed by FreeCssTemplates<a
+                                                href="http://www.nodethirtythree.com/"></a> for <a
+                                                href="http://www.freecsstemplates.org/">Free CSS Templates</a>. This
+                                        free template is released under a <a
+                                                href="http://creativecommons.org/licenses/by/2.5/">Creative Commons
+                                            Attributions 2.5</a> license, so you’re pretty much free to do whatever you
+                                        want with it (even use it commercially) provided you keep the links in the
+                                        footer intact. Aside from that, have fun with it :)</p>
+
+                                    <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla
+                                        tortor, elementum ipsum. Proin imperdiet est. Phasellus dapibus semper urna.
+                                        Pellentesque ornare, orci in felis. Donec ut ante. In id eros. Suspendisse lacus
+                                        turpis, cursus egestas at sem.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="post-bgtop">
+                            <div class="post-bgbtm">
+                                <h2 class="title"><a href="#">Lorem ipsum sed aliquam</a></h2>
+
+                                <p class="meta">Posted by <a href="#">Someone</a> on March 8, 2008
+                                    &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;
+                                    <a href="#" class="permalink">Full article</a></p>
+
+                                <div class="entry">
+                                    <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla
+                                        tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus
+                                        placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus <a href="#">dapibus
+                                            semper urna</a>. Pellentesque ornare, orci in consectetuer hendrerit, urna
+                                        elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec
+                                        ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Phasellus
+                                        pellentesque. Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>
+
+                                    <p>Praesent ac lectus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                        Vivamus augue. Fusce eget tellus ultrices ligula volutpat adipiscing. Aenean
+                                        ligula lectus, vehicula in, dictum a, fermentum nec, felis. Nunc ac turpis in
+                                        leo posuere imperdiet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="post-bgtop">
+                            <div class="post-bgbtm">
+                                <h2 class="title"><a href="#">Phasellus pellentesque turpis </a></h2>
+
+                                <p class="meta">Posted by <a href="#">Someone</a> on March 8, 2008
+                                    &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;
+                                    <a href="#" class="permalink">Full article</a></p>
+
+                                <div class="entry">
+                                    <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla
+                                        tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus
+                                        placerat consectetuer. Donec ipsum. Proin imperdiet est. Pellentesque ornare,
+                                        orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl
+                                        felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus
+                                        turpis, cursus egestas at sem. Phasellus pellentesque. Mauris quam enim molestie
+                                        rhoncus lobortis a, est.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                    <div style="clear: both;">&nbsp;</div>
+                </div>
+                <!-- end #content -->
+                <div id="sidebar">
+                    <ul>
+                        <li>
+                            <h2>Aliquam tempus</h2>
+
+                            <p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna ornare
+                                consectetuer hendrerit.</p>
+                        </li>
+                        <li>
+                            <h2>Categories</h2>
+                            <ul>
+                                <li><a href="#">Uncategorized</a> (3)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Lorem Ipsum</a> (42)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Urna Congue Rutrum</a> (28)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Vivamus Fermentum</a> (13)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2>Blogroll</h2>
+                            <ul>
+                                <li><a href="#">Phasellus Pellentesque</a><span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Consectetuer Adipiscing</a><span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Urna Congue Rutrum</a><span>Lorem Ipsum Dolor Sit Amit</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2>Archives</h2>
+                            <ul>
+                                <li><a href="#">December 2009</a>&nbsp;(29)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">November 2009</a>&nbsp;(30)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">October 2009</a>&nbsp;(31)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end #sidebar -->
+                <div style="clear: both;">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <!-- end #page -->
+</div>
+<!--
 <div id="header">
     <span wicket:id="lhpHeader"></span>
     <span wicket:id="nhpHeader"></span>
@@ -12,6 +169,7 @@
 <div id="body">
     <wicket:child/>
 </div>
+ -->
 <div id="footer">
     <span wicket:id="fpFooter"></span>
 </div>

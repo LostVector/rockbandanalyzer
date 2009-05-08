@@ -21,9 +21,12 @@ import java.util.Date;
 
 import com.rkuo.RockBand.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandAnalyzer;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongGenerated;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -98,74 +101,43 @@ public class UploadPage extends BasePage {
          */
         @Override
         protected void onSubmit() {
-            final FileUpload upload;
-            InputStream fileIn;
-
-            RockBandAnalyzerParams rbap;
-            DrumsBaselineData dbd;
-            UserService userService;
-            User user;
-            RockBandSongRaw song;
+            RockBandSongRaw raw;
+            RockBandSongEmbedded    embedded;
+            RockBandSongGenerated   generated;
 
             StringWriter    sWriter;
             PrintWriter printWriter;
-
-            ByteArrayOutputStream   baOut;
-
+            RockBandAnalyzerParams  rbap;
+            DrumsFullAnalysis dfa;
             boolean                 br;
 
             sWriter = new StringWriter();
             printWriter = new PrintWriter( sWriter );
-            baOut = new ByteArrayOutputStream();
             rbap = new RockBandAnalyzerParams();
-
-            userService = UserServiceFactory.getUserService();
-            user = userService.getCurrentUser();
-
-            upload = fileUploadField.getFileUpload();
-            if( upload == null ) {
+            raw = getRawSong( printWriter );
+            if( raw == null ) {
                 return;
             }
 
-            try {
-                fileIn = upload.getInputStream();
-            }
-            catch( IOException ioex ) {
+            dfa = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(raw.getFile()), rbap);
+            if( dfa == null ) {
                 return;
             }
 
-            dbd = RockBandAnalyzer.AnalyzeStream( printWriter, fileIn, rbap );
-            if( dbd == null ) {
-                printWriter.format( "AnalyzeStream failed. The file you submitted may not be a valid Rock Band MIDI file.\n" );
-                message = sWriter.toString();
-                return;
-            }
+            embedded = new RockBandSongEmbedded();
+            embedded.setMidiTitle( dfa.dba.MidiTitle );
 
-            try {
-                fileIn.reset();
-                for( int c = fileIn.read(); c != -1; c = fileIn.read() ) {
-                    baOut.write( c );
-                }
+            generated = new RockBandSongGenerated();
+            generated.setMicroseconds( dfa.dba.Microseconds );
 
-                baOut.close();
-            }
-            catch( IOException ioex ) {
-                printWriter.format( "IOException while reading submitted file.\n" );
-                message = sWriter.toString();
-                return;
-            }
-
-            song = new RockBandSongRaw( user, new Date(), upload.getClientFileName(), baOut.toByteArray() );
-
-            br = DataAccess.SongExists( song.getMD5() );
+            br = DataAccess.TryWritingSong( raw, embedded, generated );
             if( br == false ) {
-                DataAccess.WriteRaw( song );
-                printWriter.format( "Saving the song to our database.\n" );
+                printWriter.format("%s already exists in the database.", raw.getOriginalFileName());
                 message = sWriter.toString();
                 return;
             }
 
-            printWriter.format( "The song you just submitted already exists in our database.\n" );
+            printWriter.format("%s has been added to the database.", raw.getOriginalFileName());
             message = sWriter.toString();
             return;
         }
@@ -251,6 +223,52 @@ public class UploadPage extends BasePage {
          */
         public void setMessage(String message) {
             this.message = message;
+        }
+
+        protected RockBandSongRaw getRawSong( PrintWriter printWriter ) {
+
+            RockBandSongRaw raw;
+            final FileUpload upload;
+            InputStream fileIn;
+
+            UserService userService;
+            User user;
+
+            ByteArrayOutputStream   baOut;
+
+            baOut = new ByteArrayOutputStream();
+
+            userService = UserServiceFactory.getUserService();
+            user = userService.getCurrentUser();
+
+            upload = fileUploadField.getFileUpload();
+            if( upload == null ) {
+                return null;
+            }
+
+            try {
+                fileIn = upload.getInputStream();
+            }
+            catch( IOException ioex ) {
+                return null;
+            }
+
+            try {
+                fileIn.reset();
+                for( int c = fileIn.read(); c != -1; c = fileIn.read() ) {
+                    baOut.write( c );
+                }
+
+                baOut.close();
+            }
+            catch( IOException ioex ) {
+                printWriter.format( "IOException while reading submitted file.\n" );
+                return null;
+            }
+
+            raw = new RockBandSongRaw( user, new Date(), upload.getClientFileName(), baOut.toByteArray() );
+
+            return raw;
         }
     }
 }

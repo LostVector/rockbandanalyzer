@@ -1,4 +1,4 @@
-package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
+package com.rkuo.WebApps.RockBandAnalyzerWeb.Components;
 
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;

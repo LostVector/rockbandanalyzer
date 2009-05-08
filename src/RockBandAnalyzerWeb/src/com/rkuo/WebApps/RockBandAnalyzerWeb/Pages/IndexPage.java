@@ -14,7 +14,6 @@ import org.apache.wicket.model.Model;
 public class IndexPage extends BasePage {
 
     public IndexPage() {
-        add(new Label("lblHelloWorld", new Model("Hello, World")));
         return;
     }
 }

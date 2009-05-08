@@ -312,7 +312,7 @@
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWeb/RockBandAnalyzerWeb.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWeb/RockBandAnalyzerWeb.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
@@ -371,6 +371,7 @@
     <library name="apache-wicket-1.4-rc2">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-1.4-rc2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-extensions-1.4-rc2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

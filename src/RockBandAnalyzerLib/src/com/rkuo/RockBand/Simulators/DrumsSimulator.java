@@ -19,7 +19,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         return;
     }
 
-    public DrumsBaselineData GenerateBaselineData( DrumChart dc ) {
+    public DrumsBaselineAnalysis GenerateBaselineData( DrumChart dc ) {
 
         ArrayList<Chord>        chords;
         Chord                   lastChord;
@@ -30,9 +30,9 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         int                     noteStreakWithBRE;
         int                     chordStreakWithBRE;
 
-        DrumsBaselineData       dbd;
+        DrumsBaselineAnalysis dbd;
 
-        dbd = new DrumsBaselineData();
+        dbd = new DrumsBaselineAnalysis();
 
         noteStreak = 0;
         chordStreak = 0;
@@ -153,7 +153,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         state.SkipCounter = state.SuggestedPath.get( state.SkipIndex );
 
         SimulateDepth( dsp, dc, 0, state );
-        paths = Convert.DepthToRockBandPaths( state );
+        paths = Convert.DepthToRockBandPaths( state, dsp.FillDelay );
 
 //      System.out.format( "Pathed score: %d, Note Streak = %d\n", state.Score, state.NoteStreak );
         return paths;
@@ -173,7 +173,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
 
         SimulateDepth( dsp, dc, 0, state );
 
-        paths = Convert.DepthToRockBandPaths( state );
+        paths = Convert.DepthToRockBandPaths( state, dsp.FillDelay );
 //        PrintActivationPathsDepth( state );
 
         // Fix this later
@@ -186,7 +186,7 @@ public class DrumsSimulator extends BaseInstrumentSimulator {
         ArrayList<RockBandPath>        optimalPaths;
 
         returnStates = SimulateBreadth( dsp, dc );
-        optimalPaths = Convert.BreadthToRockBandPaths( returnStates );
+        optimalPaths = Convert.BreadthToRockBandPaths( returnStates, dsp.FillDelay );
 
         return optimalPaths;
     }

@@ -1,14 +1,13 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
 import java.util.Date;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.*;
 
 import com.google.appengine.api.datastore.Key;
 import com.rkuo.RockBand.RockBandLocation;
+import com.rkuo.RockBand.RockBandInstrument;
+import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
+import com.rkuo.RockBand.RockBandInstrumentDifficulty;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class RockBandSongEmbedded {
@@ -54,8 +53,9 @@ public class RockBandSongEmbedded {
     @Persistent
     private int     _bandDifficulty;
 
-    @Persistent
-    private boolean     _isCover;
+//    @Persistent
+    @NotPersistent
+    private int     _isCover;
 
     // when the song was released (in traditional channels)
     @Persistent
@@ -78,7 +78,7 @@ public class RockBandSongEmbedded {
         _drumsDifficulty = -1;
         _vocalsDifficulty = -1;
         _bandDifficulty = -1;
-        _isCover = false;
+        _isCover = 0;
         return;
     }
 
@@ -142,28 +142,49 @@ public class RockBandSongEmbedded {
         return _datePublished;
     }
 
-    public int getGuitarDifficulty() {
-        return _guitarDifficulty;
-    }
+    public int getDifficulty( RockBandInstrumentDifficultyCategory rbidc ) {
+        if( rbidc == RockBandInstrumentDifficultyCategory.Guitar ) {
+            return _guitarDifficulty;
+        }
+        else if( rbidc == RockBandInstrumentDifficultyCategory.Bass ) {
+            return _bassDifficulty;
+        }
+        else if( rbidc == RockBandInstrumentDifficultyCategory.Drums ) {
+            return _drumsDifficulty;
+        }
+        else if( rbidc == RockBandInstrumentDifficultyCategory.Vocals ) {
+            return _vocalsDifficulty;
+        }
 
-    public int getBassDifficulty() {
-        return _bassDifficulty;
-    }
-
-    public int getDrumsDifficulty() {
-        return _drumsDifficulty;
-    }
-
-    public int getVocalsDifficulty() {
-        return _vocalsDifficulty;
-    }
-
-    public int getBandDifficulty() {
         return _bandDifficulty;
     }
 
+    public RockBandInstrumentDifficulty getGuitarDifficulty() {
+        return RockBandInstrumentDifficulty.values()[_guitarDifficulty];
+    }
+
+    public RockBandInstrumentDifficulty getBassDifficulty() {
+        return RockBandInstrumentDifficulty.values()[_bassDifficulty];
+    }
+
+    public RockBandInstrumentDifficulty getDrumsDifficulty() {
+        return RockBandInstrumentDifficulty.values()[_drumsDifficulty];
+    }
+
+    public RockBandInstrumentDifficulty getVocalsDifficulty() {
+        return RockBandInstrumentDifficulty.values()[_vocalsDifficulty];
+    }
+
+    public RockBandInstrumentDifficulty getBandDifficulty() {
+        return RockBandInstrumentDifficulty.values()[_bandDifficulty];
+    }
+
     public boolean getCover() {
-        return _isCover;
+        if( _isCover == 0 ) {
+            return false;
+        }
+
+        return true;
     }
 
     public void setMidiTitle(String midiTitle) {
@@ -205,28 +226,34 @@ public class RockBandSongEmbedded {
         return;
     }
 
-    public void setGuitarDifficulty(int guitarDifficulty) {
-        _guitarDifficulty = guitarDifficulty;
+    public void setGuitarDifficulty(RockBandInstrumentDifficulty guitarDifficulty) {
+        _guitarDifficulty = guitarDifficulty.ordinal();
     }
 
-    public void setBassDifficulty(int bassDifficulty) {
-        _bassDifficulty = bassDifficulty;
+    public void setBassDifficulty(RockBandInstrumentDifficulty bassDifficulty) {
+        _bassDifficulty = bassDifficulty.ordinal();
     }
 
-    public void setDrumsDifficulty(int drumsDifficulty) {
-        _drumsDifficulty = drumsDifficulty;
+    public void setDrumsDifficulty(RockBandInstrumentDifficulty drumsDifficulty) {
+        _drumsDifficulty = drumsDifficulty.ordinal();
     }
 
-    public void setVocalsDifficulty(int vocalsDifficulty) {
-        _vocalsDifficulty = vocalsDifficulty;
+    public void setVocalsDifficulty(RockBandInstrumentDifficulty vocalsDifficulty) {
+        _vocalsDifficulty = vocalsDifficulty.ordinal();
     }
 
-    public void setBandDifficulty(int bandDifficulty) {
-        _bandDifficulty = bandDifficulty;
+    public void setBandDifficulty(RockBandInstrumentDifficulty bandDifficulty) {
+        _bandDifficulty = bandDifficulty.ordinal();
     }
 
     public void setCover(boolean isCover) {
-        _isCover = isCover;
+
+        _isCover = 0;
+        if( isCover == true ) {
+            _isCover = 1;
+        }
+
+        return;
     }
 
     protected boolean IsValidDifficulty( int difficulty ) {

@@ -98,72 +98,59 @@
     <favorites_list name="RockBandAnalyzer" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.594964">
+    <splitter split-orientation="horizontal" split-proportion="0.5560195">
       <split-first>
         <leaf>
           <file leaf-file-name="UploadServlet.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/UploadServlet.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="115" column="44" selection-start="3817" selection-end="3825" vertical-scroll-proportion="-37.4">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SongUpload.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/SongUpload.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="3" column="13" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
+                <state line="56" column="31" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SongPage.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/SongPage.java">
+          <file leaf-file-name="readme.txt" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/readme.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="39" column="52" selection-start="1415" selection-end="1415" vertical-scroll-proportion="0.0">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DataAccess.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="DataAccess.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/DataAccess.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="167" column="0" selection-start="4073" selection-end="4073" vertical-scroll-proportion="0.0">
+                <state line="250" column="29" selection-start="7303" selection-end="7303" vertical-scroll-proportion="0.2155309">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DrumsSimulator.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/Simulators/DrumsSimulator.java">
+          <file leaf-file-name="UploadService.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/UploadService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="134" column="2" selection-start="4448" selection-end="4448" vertical-scroll-proportion="0.0">
+                <state line="9" column="13" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Convert.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/Convert.java">
+          <file leaf-file-name="GetSongIdsServlet.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/GetSongIdsServlet.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="17" column="13" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+                <state line="51" column="36" selection-start="2007" selection-end="2007" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RockBandAnalyzerExe.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerExe/src/com/rkuo/Executables/RockBandAnalyzerExe.java">
+          <file leaf-file-name="AnalyzeServlet.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/AnalyzeServlet.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="84" column="13" selection-start="2234" selection-end="2234" vertical-scroll-proportion="-15.24">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state line="52" column="0" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.0">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -171,25 +158,27 @@
           <file leaf-file-name="BrowsePage.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="30" column="57" selection-start="930" selection-end="930" vertical-scroll-proportion="0.0">
+                <state line="70" column="26" selection-start="2868" selection-end="2868" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RockBandSongFilter.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongFilter.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="9" column="12" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RockBandSongEmbedded.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongEmbedded.java">
+          <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/web/main.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="224" column="41" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.5320417">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="UploadPage.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/UploadPage.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="165" column="13" selection-start="5331" selection-end="5331" vertical-scroll-proportion="0.0">
+                <state line="420" column="34" selection-start="5349" selection-end="5349" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -199,82 +188,91 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="NavigationHeaderPanel.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Components/NavigationHeaderPanel.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BasePage.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BasePage.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="27" column="26" selection-start="900" selection-end="900" vertical-scroll-proportion="25.916666">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="IndexPage.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/IndexPage.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="33" column="0" selection-start="397" selection-end="1582" vertical-scroll-proportion="-23.375">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="source.jsp" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWar/web/source.jsp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="33" column="0" selection-start="1209" selection-end="1209" vertical-scroll-proportion="-16.416666">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RockBandSongEmbedded.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongEmbedded.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="12" column="13" selection-start="441" selection-end="441" vertical-scroll-proportion="0.13843648">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BrowsePage.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="22" column="53" selection-start="990" selection-end="990" vertical-scroll-proportion="-15.583333">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="RockBandSongGenerated.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongGenerated.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="92" column="5" selection-start="2186" selection-end="2186" vertical-scroll-proportion="0.0">
+                <state line="15" column="13" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DrumsBaselineData.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/Simulators/DrumsBaselineData.java">
+          <file leaf-file-name="BasePage.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BasePage.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="15" column="24" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
+                <state line="81" column="43" selection-start="2864" selection-end="2864" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SongPage.html" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/SongPage.html">
+          <file leaf-file-name="AboutPage.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/AboutPage.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="25" column="41" selection-start="818" selection-end="826" vertical-scroll-proportion="-15.583333">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RockBandPath.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/RockBandPath.java">
+          <file leaf-file-name="AjaxFormSubmitBehavior.class" pinned="false" current="false" current-in-tab="false">
+            <entry file="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-1.4-rc2.jar!/org/apache/wicket/ajax/form/AjaxFormSubmitBehavior.class">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="11" column="13" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="web.xml" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/web/WEB-INF/web.xml">
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-                <state />
-              </provider>
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-                <state />
-              </provider>
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-                <state />
-              </provider>
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="23" column="69" selection-start="923" selection-end="923" vertical-scroll-proportion="-20.578947">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="UploadServlet.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWar/src/com/rkuo/WebApps/RockBandAnalyzerWeb/UploadServlet.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="102" column="25" selection-start="4212" selection-end="4212" vertical-scroll-proportion="0.81707317">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="web.xml" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWar/web/WEB-INF/web.xml">
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-                <state />
-              </provider>
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-                <state />
-              </provider>
-              <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-                <state />
-              </provider>
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="33" column="0" selection-start="1011" selection-end="1318" vertical-scroll-proportion="-10.157895">
+                <state line="11" column="11" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -380,7 +378,7 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="WEB-INF" />
+          <option name="myItemId" value="js" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -399,28 +397,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWeb" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWeb" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="META-INF" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -486,6 +462,28 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="Components" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="RockBandAnalyzer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="RockBandAnalyzerWeb" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="RockBandAnalyzerWeb" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="AppEngine" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
@@ -506,178 +504,8 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="web" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWar" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerWeb" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
           <option name="myItemId" value="RockBandAnalyzerLib" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Tests" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Simulators" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBandAnalyzerLib" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="RockBand" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -746,13 +574,13 @@
     </navigator>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
+    <property name="options.lastSelected" value="preferences.sourceCode" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -773,7 +601,7 @@
       <recent name="com.rkuo.WebApps.RockBandAnalyzerWeb" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DebugExe">
+  <component name="RunManager" selected="Remote.DebugWarRemote">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -872,7 +700,7 @@
     <configuration default="false" name="DebugExe" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
       <option name="MAIN_CLASS_NAME" value="com.rkuo.Executables.RockBandAnalyzerExe" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="/source:&quot;C:\Downloads\RockBand&quot; /upload:true /uploadUrl:&quot;http://rockbandanalyzer.appspot.com/api/upload&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="/source:&quot;C:\Downloads\RockBand&quot; /upload:true /uploadUrl:&quot;http://localhost:8080/api/upload&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -993,11 +821,11 @@
     <frame x="1672" y="-8" width="1936" height="1200" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.81453156" order="3" side_tool="false" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17537314" sideWeight="0.81070745" order="1" side_tool="false" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18164437" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17537314" sideWeight="0.81453156" order="1" side_tool="false" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1787763" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31070745" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
@@ -1006,9 +834,9 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20267686" sideWeight="0.0" order="8" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288719" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6644359" order="1" side_tool="false" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553305" sideWeight="0.6826004" order="0" side_tool="false" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978677" sideWeight="0.81453156" order="0" side_tool="false" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.81453156" order="3" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23027718" sideWeight="0.6826004" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
@@ -1151,118 +979,109 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="34" selection-start="1019" selection-end="1019" vertical-scroll-proportion="-17.708334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-1.4-rc2.jar!/org/apache/wicket/session/DefaultPageFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="41" selection-start="997" selection-end="997" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/SongPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="818" selection-end="826" vertical-scroll-proportion="-15.583333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongRaw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="1610" selection-end="1662" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/SongUpload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/UploadPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="13" selection-start="5331" selection-end="5331" vertical-scroll-proportion="0.0">
+        <state line="40" column="13" selection-start="1649" selection-end="1649" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/DataAccess.java">
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/web/robots.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="0" selection-start="4073" selection-end="4073" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/Simulators/DrumsSimulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="2" selection-start="4448" selection-end="4448" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerLib/src/com/rkuo/RockBand/Convert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongGenerated.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="5" selection-start="2186" selection-end="2186" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWar/src/com/rkuo/WebApps/RockBandAnalyzerWeb/UploadServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="25" selection-start="4212" selection-end="4212" vertical-scroll-proportion="0.81707317">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/SongPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="52" selection-start="1415" selection-end="1415" vertical-scroll-proportion="0.0">
+        <state line="113" column="36" selection-start="4048" selection-end="4048" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.java">
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/web/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="57" selection-start="930" selection-end="930" vertical-scroll-proportion="0.0">
+        <state line="420" column="34" selection-start="5349" selection-end="5349" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="53" selection-start="990" selection-end="990" vertical-scroll-proportion="-15.583333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/UploadService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/GetSongIdsServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="36" selection-start="2007" selection-end="2007" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/AnalyzeServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Services/UploadServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="44" selection-start="3817" selection-end="3825" vertical-scroll-proportion="-37.4">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="56" column="31" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerExe/src/com/rkuo/Executables/RockBandAnalyzerExe.java">
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongGenerated.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="13" selection-start="2234" selection-end="2234" vertical-scroll-proportion="-15.24">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="15" column="13" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongEmbedded.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="41" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.5320417">
+        <state line="12" column="13" selection-start="441" selection-end="441" vertical-scroll-proportion="0.13843648">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="12" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/Pages/BrowsePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="26" selection-start="2868" selection-end="2868" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RockBandAnalyzerWeb/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/DataAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="250" column="29" selection-start="7303" selection-end="7303" vertical-scroll-proportion="0.2155309">
           <folding />
         </state>
       </provider>

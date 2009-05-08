@@ -9,23 +9,33 @@
 </head>
 <body>
 <wicket:extend>
-    <table cellspacing="0" class="dataview">
-        <tr>
-            <td><a href="#" wicket:id="elDifficulty">[Difficulty]</a></td>
-            <td><a href="#" wicket:id="elSong">[Song]</a></td>
-            <td><a href="#" wicket:id="elBand">[Band]</a></td>
-            <td><a href="#" wicket:id="elGenre">[Genre]</a></td>
-            <td><a href="#" wicket:id="elDecade">[Decade]</a></td>
-            <td><a href="#" wicket:id="elLocation">[Location]</a></td>
-        </tr>
-    </table>
-    <table cellspacing="0" class="dataview">
+    <a href="#" wicket:id="elDifficulty">[Difficulty]</a> |
+    <a href="#" wicket:id="elSong">[Song]</a> |
+    <a href="#" wicket:id="elBand">[Band]</a> |
+    <a href="#" wicket:id="elGenre">[Genre]</a> |
+    <a href="#" wicket:id="elDecade">[Decade]</a> |
+    <a href="#" wicket:id="elLocation">[Location]</a> |
+    <a href="#" wicket:id="elDuration">[Duration]</a> |
+    <a href="#" wicket:id="elNotes">[Notes]</a> |
+    <a href="#" wicket:id="elMaxScore">[MaxScore]</a>
+    <br/>
+    <a href="#" wicket:id="elGlitched">[Glitched]</a> |
+    <a href="#" wicket:id="elBigRockEnding">[BigRockEnding]</a> |
+    <a href="#" wicket:id="elSolos">[Solos]</a> |
+    <a href="#" wicket:id="elBreakneckOptimal">[BreakneckOptimal]</a> |
+    <a href="#" wicket:id="elGoldImpossible">[GoldImpossible]</a>
+    <table id="box-table-a" cellspacing="0">
+        <thead>
         <tr>
             <th>Title</th>
         </tr>
+        </thead>
+        <tbody>
+
         <tr wicket:id="rptvSongs">
-            <td><a href="#" wicket:id="elMidiName">[midiName]</a></td>
+            <td wicket:id="tdItem" class="item"><span wicket:id="lblCategory"></span><a href="#" wicket:id="elMidiName">[midiName]</a></td>
         </tr>
+        </tbody>
     </table>
 </wicket:extend>
 </body>

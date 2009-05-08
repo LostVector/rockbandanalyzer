@@ -4,7 +4,8 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandPrint;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 
 import javax.faces.component.UIComponentBase;
 import javax.faces.context.ResponseWriter;
@@ -27,7 +28,7 @@ public class SongDetailComponent extends UIComponentBase {
     public void encodeBegin(FacesContext context) throws IOException {
         ResponseWriter writer;
         HttpServletRequest req;
-        DrumsBaselineData dbd;
+        DrumsFullAnalysis dfa;
 
         writer = context.getResponseWriter();
         req = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -56,13 +57,13 @@ public class SongDetailComponent extends UIComponentBase {
         baOut.close();
 
         rbap = new RockBandAnalyzerParams();
-        dbd = RockBandAnalyzer.AnalyzeStream( null, new ByteArrayInputStream(baOut.toByteArray()), rbap );
+        dfa = RockBandAnalyzer.AnalyzeStream( null, new ByteArrayInputStream(baOut.toByteArray()), rbap );
 
-        WriteSongDetail( writer, dbd );
+        WriteSongDetail( writer, dfa );
         return;
     }
 
-    private  void WriteSongDetail( ResponseWriter w, DrumsBaselineData dbd ) throws IOException {
+    private  void WriteSongDetail( ResponseWriter w, DrumsFullAnalysis dfa ) throws IOException {
 
         String  outText;
 
@@ -74,38 +75,38 @@ public class SongDetailComponent extends UIComponentBase {
         w.startElement( "td", this );
         w.writeAttribute( "colspan", "2", null );
         w.writeAttribute( "align", "center", null );
-        w.writeText( dbd.MidiTitle, null );
+        w.writeText( dfa.dba.MidiTitle, null );
         w.endElement( "td" );
         w.endElement( "tr" );
 
         w.startElement( "tr", this );
 
         // Duration
-        outText = RockBandPrint.MicrosecondsToString( dbd.Microseconds );
+        outText = RockBandPrint.MicrosecondsToString( dfa.dba.Microseconds );
         WriteRow( w, "Duration", outText );
 
         // Notes
-        outText = String.format( "%d", dbd.Notes );
+        outText = String.format( "%d", dfa.dba.Notes );
         WriteRow( w, "Notes", outText );
 
         // Notes
-        outText = String.format( "%d", dbd.Chords );
+        outText = String.format( "%d", dfa.dba.Chords );
         WriteRow( w, "Chords", outText );
 
         // Stars
-        outText = String.format( "%d", dbd.StarCutoffOne );
+        outText = String.format( "%d", dfa.dba.StarCutoffOne );
         WriteRow( w, "1 star", outText );
-        outText = String.format( "%d", dbd.StarCutoffTwo );
+        outText = String.format( "%d", dfa.dba.StarCutoffTwo );
         WriteRow( w, "2 stars", outText );
-        outText = String.format( "%d", dbd.StarCutoffThree );
+        outText = String.format( "%d", dfa.dba.StarCutoffThree );
         WriteRow( w, "3 stars", outText );
-        outText = String.format( "%d", dbd.StarCutoffFour );
+        outText = String.format( "%d", dfa.dba.StarCutoffFour );
         WriteRow( w, "4 stars", outText );
-        outText = String.format( "%d", dbd.StarCutoffFive );
+        outText = String.format( "%d", dfa.dba.StarCutoffFive );
         WriteRow( w, "5 stars", outText );
-        outText = String.format( "%d", dbd.StarCutoffGold );
+        outText = String.format( "%d", dfa.dba.StarCutoffGold );
         WriteRow( w, "Gold stars", outText );
-        outText = String.format( "%d", dbd.StarCutoffGoldOld );
+        outText = String.format( "%d", dfa.dba.StarCutoffGoldOld );
         WriteRow( w, "Gold stars (pre-patch)", outText );
 
         w.endElement( "tr" );

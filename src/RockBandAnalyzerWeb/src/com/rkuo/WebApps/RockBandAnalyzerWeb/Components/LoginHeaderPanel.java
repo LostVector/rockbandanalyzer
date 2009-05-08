@@ -46,8 +46,8 @@ public class LoginHeaderPanel extends Panel {
             loginCaption = "Login";
         }
 
-        add(new Label("lblUsername", new Model(greeting)));
-        add(new ExternalLink("lnkLogin", loginURL, loginCaption));
+        add( new Label("lblUsername", greeting) );
+        add( new ExternalLink("lnkLogin", loginURL, loginCaption) );
         return;
     }
 }
