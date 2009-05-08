@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+<body>
+<wicket:extend>
+    <div class="post">
+        <div class="post-bgtop">
+            <div class="post-bgbtm">
+                <h2 class="title"><a href="#">Source code</a></h2>
+
+                <p class="meta">Posted by <a href="#">rkuo</a> on May 4, 2009
+                    &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (0)</a> &nbsp;&bull;&nbsp;
+                    <a href="#" class="permalink">Full article</a></p>
+
+                <div class="entry">
+                    <p>Rock Band Analyzer is hosted as a <a href="http://code.google.com/p/rockbandanalyzer">Google Code
+                        project</a>.</p>
+
+                    <p>
+                        You can obtain a read only copy of the current source
+                        <code>
+                            svn checkout http://rockbandanalyzer.googlecode.com/svn/trunk/ rockbandanalyzer-read-only
+                        </code>
+                    </p>
+
+                    <p>
+                        The main library for Rock Band Analyzer and the command line executable wrapping the library
+                        are both written in Java using the 1.6 JDK.
+                    </p>
+
+                    <p>
+                        The web frontend to the library was developed with Java Server Faces 1.1 as the UI framework. In
+                        addition,
+                        other components of the web frontend rely on the Google App Engine for Java SDK, since this
+                        application is hosted
+                        and run on <a href="http://code.google.com/appengine/">Google App Engine</a>.
+                    </p>
+
+                    <p>
+                        The project was developed with <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span wicket:id="lblHelloWorld"></span>
+</wicket:extend>
+</body>
+</html>

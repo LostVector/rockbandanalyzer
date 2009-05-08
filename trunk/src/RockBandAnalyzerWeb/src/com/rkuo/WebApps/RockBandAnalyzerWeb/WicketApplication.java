@@ -5,10 +5,7 @@ import org.apache.wicket.protocol.http.HttpSessionStore;
 import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.Application;
 import org.apache.wicket.Page;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.IndexPage;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.BrowsePage;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.UploadPage;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.SongPage;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +14,7 @@ import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.SongPage;
  * Time: 10:55:50 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RockBandAnalyzerWebApplication extends WebApplication {
+public class WicketApplication extends WebApplication {
 
     public Class<? extends Page> getHomePage() {
         return IndexPage.class;
@@ -29,6 +26,10 @@ public class RockBandAnalyzerWebApplication extends WebApplication {
         mountBookmarkablePage("/browse", BrowsePage.class);
         mountBookmarkablePage("/upload", UploadPage.class);
         mountBookmarkablePage("/song", SongPage.class);
+        mountBookmarkablePage("/about", AboutPage.class);
+        mountBookmarkablePage("/stats", StatsPage.class);
+        mountBookmarkablePage("/terms", TermsPage.class);
+        mountBookmarkablePage("/source", SourcePage.class);
 
         getResourceSettings().setResourcePollFrequency(null);
         return;

@@ -13,7 +13,8 @@ import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.Part;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandAnalyzerParams;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 
 public class UploadServlet extends HttpServlet {
 
@@ -76,14 +77,14 @@ public class UploadServlet extends HttpServlet {
 //                    portraitImage.setOriginalFileName(currFilePart.getFileName());
 
                     RockBandAnalyzerParams  rbap;
-                    DrumsBaselineData       dbd;
+                    DrumsFullAnalysis dfa;
                     boolean                 br;
 
                     response.setContentType("text/plain");
 
                     rbap = new RockBandAnalyzerParams();
-                    dbd = RockBandAnalyzer.AnalyzeStream( response.getWriter(), new ByteArrayInputStream(outputStream.toByteArray()), rbap );
-                    if( dbd == null ) {
+                    dfa = RockBandAnalyzer.AnalyzeStream( response.getWriter(), new ByteArrayInputStream(outputStream.toByteArray()), rbap );
+                    if( dfa == null ) {
                         response.getWriter().format( "AnalyzeStream failed. The file you submitted may not be a valid Rock Band MIDI file.\n" );
                         break;
                     }
@@ -95,7 +96,7 @@ public class UploadServlet extends HttpServlet {
                     userService = UserServiceFactory.getUserService();
                     user = userService.getCurrentUser();
 
-                    song = new RockBandSong( user, dbd.MidiTitle, currentFilePart.getFileName(), outputStream.toByteArray() );
+                    song = new RockBandSong( user, dfa.dba.MidiTitle, currentFilePart.getFileName(), outputStream.toByteArray() );
 
                     song.setOriginalFileName( currentFilePart.getFileName() );
                     song.setFile( outputStream.toByteArray() );

@@ -21,7 +21,7 @@
         <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.NavigationHeaderComponent</component-class>
     </component>
     <component>
-        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.FooterPanel</component-type>
+        <component-type>com.rkuo.WebApps.RockBandAnalyzerWeb.Components.FooterPanel</component-type>
         <component-class>com.rkuo.WebApps.RockBandAnalyzerWeb.FooterComponent</component-class>
     </component>
   <navigation-rule>

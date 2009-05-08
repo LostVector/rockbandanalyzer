@@ -14,5 +14,33 @@ public enum RockBandInstrumentDifficulty {
     Moderate,
     Challenging,
     Nightmare,
-    Impossible
+    Impossible,
+    Unknown;
+
+    public static RockBandInstrumentDifficulty ToEnum( Long value ) {
+
+        if( value == 0 ) {
+            return Warmup;
+        }
+        else if( value == 1 ) {
+            return Apprentice;
+        }
+        else if( value == 2 ) {
+            return Solid;
+        }
+        else if( value == 3 ) {
+            return Moderate;
+        }
+        else if( value == 4 ) {
+            return Challenging;
+        }
+        else if( value == 5 ) {
+            return Nightmare;
+        }
+        else if( value == 6 ) {
+            return Impossible;
+        }
+
+        return Unknown;
+    }
 }

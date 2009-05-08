@@ -18,11 +18,9 @@ import javax.xml.transform.TransformerException;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.rkuo.RockBand.RockBandAnalyzer;
-import com.rkuo.RockBand.RockBandAnalyzerParams;
-import com.rkuo.RockBand.Base64;
-import com.rkuo.RockBand.RockBandLocation;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.*;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
@@ -43,91 +41,66 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Document doc;
-        DocumentBuilder db;
-        DocumentBuilderFactory dbf;
-        byte[] fileBytes;
+        RockBandSongRaw rawSong;
+        RockBandSongEmbedded    embedded;
+        RockBandSongGenerated   generated;
+        boolean br;
 
         response.setContentType("text/plain");
 
-        dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            db = dbf.newDocumentBuilder();
-        }
-        catch( ParserConfigurationException pcex ) {
+        doc = getXml( request );
+        if( doc == null ) {
             return;
         }
 
-        try {
-            doc = db.parse(request.getInputStream());
-        }
-        catch( SAXException saxex ) {
+        rawSong = getRawSong( doc );
+        if( rawSong == null ) {
             return;
         }
-
-        NodeList nodeList;
-        Element e;
-
-        String originalFileName;
-        String b64FileData;
-
-        nodeList = doc.getElementsByTagName("OriginalFileName");
-        e = (Element)nodeList.item(0);
-        originalFileName = e.getFirstChild().getNodeValue();
-
-        nodeList = doc.getElementsByTagName("FileData");
-        e = (Element)nodeList.item(0);
-        b64FileData = e.getFirstChild().getNodeValue();
-
-        fileBytes = Base64.decode(b64FileData);
 
         RockBandAnalyzerParams rbap;
-        DrumsBaselineData dbd;
+        DrumsFullAnalysis dfa;
 
         rbap = new RockBandAnalyzerParams();
-        dbd = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(fileBytes), rbap);
-        if( dbd == null ) {
+        dfa = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(rawSong.getFile()), rbap);
+        if( dfa == null ) {
             return;
         }
-
-        UserService userService;
-        User user;
-        RockBandSongRaw song;
-        boolean br;
-
-        userService = UserServiceFactory.getUserService();
-        user = userService.getCurrentUser();
-
-        song = new RockBandSongRaw(user, new Date(), originalFileName, fileBytes);
-
-        RockBandSongEmbedded    embedded;
-        RockBandSongGenerated   generated;
 
         embedded = new RockBandSongEmbedded();
-
         ReadEmbeddedData(doc, embedded);
-        embedded.setMidiTitle( dbd.MidiTitle );
+        embedded.setMidiTitle( dfa.dba.MidiTitle );
 
         generated = new RockBandSongGenerated();
-        generated.setMicroseconds( dbd.Microseconds );
+        generated.setMicroseconds( dfa.dba.Microseconds );
+        generated.setNotes( dfa.dba.Notes );
+        generated.setSolos( dfa.dba.Solos );
+        generated.setBigRockEnding( dfa.dba.BigRockEnding );
 
-        br = DataAccess.SongExists(song.getMD5());
-        if( br == false ) {
-            response.getWriter().format("%s has been added to the database.", originalFileName);
-
-            Long    id;
-
-            id = DataAccess.WriteRaw(song);
-
-            embedded.setId( id );
-            DataAccess.WriteEmbedded( embedded );
-
-            generated.setId( id );
-            DataAccess.WriteGenerated( generated );
-            return;
+        generated.setGlitched( false );
+        if( dfa.dba.GlitchedChords.size() > 0 ) {
+            generated.setGlitched( true );
         }
 
-        response.getWriter().format("%s already exists in the database.", originalFileName);
+        generated.setBreakneckOptimal( false );
+        if( dfa.RB2PathOverallOptimal.FillDelay != RockBandConstants.FillDelayRB2Expert ) {
+            generated.setBreakneckOptimal( true );
+        }
+
+        generated.setGoldStarrable( true );
+        if( dfa.RB2PathOverallOptimal.Score < dfa.dba.StarCutoffGold ) {
+            generated.setGoldStarrable( false );
+        }
+
+        generated.setMaxScore( dfa.RB2PathOverallOptimal.Score );
+
+        br = DataAccess.TryWritingSong( rawSong, embedded, generated );
+        if( br == false ) {
+            response.getWriter().format("%s already exists in the database.", rawSong.getOriginalFileName());
+            return;
+        }
+        
+        response.getWriter().format("%s has been added to the database.", rawSong.getOriginalFileName());
         return;
     } // doPost
 
@@ -184,27 +157,42 @@ public class UploadServlet extends HttpServlet {
 
         sValue = TryReadingEmbeddedValue(doc, "GuitarDifficulty");
         if( sValue != null ) {
-            embedded.setGuitarDifficulty(Integer.parseInt(sValue));
+            RockBandInstrumentDifficulty    rbid;
+
+            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
+            embedded.setGuitarDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "BassDifficulty");
         if( sValue != null ) {
-            embedded.setBassDifficulty(Integer.parseInt(sValue));
+            RockBandInstrumentDifficulty    rbid;
+
+            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
+            embedded.setBassDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "DrumsDifficulty");
         if( sValue != null ) {
-            embedded.setDrumsDifficulty(Integer.parseInt(sValue));
+            RockBandInstrumentDifficulty    rbid;
+
+            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
+            embedded.setDrumsDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "VocalsDifficulty");
         if( sValue != null ) {
-            embedded.setVocalsDifficulty(Integer.parseInt(sValue));
+            RockBandInstrumentDifficulty    rbid;
+
+            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
+            embedded.setVocalsDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "BandDifficulty");
         if( sValue != null ) {
-            embedded.setBandDifficulty(Integer.parseInt(sValue));
+            RockBandInstrumentDifficulty    rbid;
+
+            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
+            embedded.setBandDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Location");
@@ -237,5 +225,70 @@ public class UploadServlet extends HttpServlet {
         }
 
         return sValue;
+    }
+
+    protected Document getXml( HttpServletRequest req ) {
+
+        Document    doc;
+        DocumentBuilder db;
+        DocumentBuilderFactory dbf;
+
+        dbf = DocumentBuilderFactory.newInstance();
+
+        try {
+            db = dbf.newDocumentBuilder();
+        }
+        catch( ParserConfigurationException pcex ) {
+            return null;
+        }
+
+        try {
+            doc = db.parse(req.getInputStream());
+        }
+        catch( SAXException saxex ) {
+            return null;
+        }
+        catch( IOException ioex ) {
+            return null;
+        }
+
+        return doc;
+    }
+
+    protected RockBandSongRaw getRawSong( Document doc ) {
+
+        RockBandSongRaw rawSong;
+        byte[] fileBytes;
+
+        NodeList nodeList;
+        Element e;
+
+        String originalFileName;
+        String b64FileData;
+
+        nodeList = doc.getElementsByTagName("OriginalFileName");
+        e = (Element)nodeList.item(0);
+        originalFileName = e.getFirstChild().getNodeValue();
+
+        nodeList = doc.getElementsByTagName("FileData");
+        e = (Element)nodeList.item(0);
+        b64FileData = e.getFirstChild().getNodeValue();
+
+        try {
+         fileBytes = Base64.decode(b64FileData);
+        }
+        catch( IOException ioex ) {
+            return null;
+        }
+
+        UserService userService;
+        User user;
+
+        userService = UserServiceFactory.getUserService();
+        user = userService.getCurrentUser();
+
+        rawSong = new RockBandSongRaw(user, new Date(), originalFileName, fileBytes);
+
+        return rawSong;
     }
 }

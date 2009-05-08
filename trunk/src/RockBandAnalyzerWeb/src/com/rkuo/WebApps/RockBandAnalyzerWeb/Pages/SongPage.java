@@ -3,15 +3,21 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.PageParameters;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 import com.rkuo.RockBand.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandPrint;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizLineChartPanel;
 
 import java.util.zip.GZIPInputStream;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -42,12 +48,19 @@ public class SongPage extends BasePage {
     protected Label               lblFiveStarValue;
     protected Label               lblGoldStarValue;
     protected Label               lblGoldStarOldValue;
+    protected Label               lblMaxScore;
+
+    protected Label               lblRB2ImmediatePath;
+    protected Label               lblRB2NormalOptimalPath;
+    protected Label               lblRB2BreakneckOptimalPath;
+
+    protected GVizLineChartPanel  lcStars;
 
     public SongPage( PageParameters params ) {
 
         super();
 
-        DrumsBaselineData   dbd;
+        DrumsFullAnalysis dfa;
         long                id;
         
 //        add(new Label("lblHelloWorld", new Model("Hello, World")));
@@ -69,6 +82,11 @@ public class SongPage extends BasePage {
         lblFiveStarValue = new Label("lblFiveStarValue", "");
         lblGoldStarValue = new Label("lblGoldStarValue", "");
         lblGoldStarOldValue = new Label("lblGoldStarOldValue", "");
+        lblMaxScore = new Label("lblMaxScore", "");
+
+        lblRB2ImmediatePath = new Label("lblRB2ImmediatePath", "");
+        lblRB2NormalOptimalPath = new Label("lblRB2NormalOptimalPath", "");
+        lblRB2BreakneckOptimalPath = new Label("lblRB2BreakneckOptimalPath", "");
 
         add( lblSongTitle );
 
@@ -87,6 +105,11 @@ public class SongPage extends BasePage {
         add( lblFiveStarValue );
         add( lblGoldStarValue );
         add( lblGoldStarOldValue );
+        add( lblMaxScore );
+
+        add( lblRB2ImmediatePath );
+        add( lblRB2NormalOptimalPath );
+        add( lblRB2BreakneckOptimalPath );
 
         id = params.getLong( "id" );
 
@@ -105,72 +128,104 @@ public class SongPage extends BasePage {
         sValue = embedded.getGenre();
         lblGenre.setDefaultModel( new Model<String>(sValue) );
 
-        dbd = GetDBDById( id );
+        lcStars = new GVizLineChartPanel("gvlcpStars");
+        add( lcStars );
 
-        SetDBDValues( dbd );
+        dfa = GetDFAById( id );
+
+        SetDFAValues( dfa );
         return;
     }
 
-    protected void SetDBDValues( DrumsBaselineData dbd ) {
+    protected void SetDFAValues( DrumsFullAnalysis dfa ) {
 
         String  sValue;
 
-
-        sValue = RockBandPrint.MicrosecondsToString( dbd.Microseconds );
+        sValue = RockBandPrint.MicrosecondsToString( dfa.dba.Microseconds );
         lblDurationValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.Notes );
+        sValue = String.format("%d", dfa.dba.Notes );
         lblNotesValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.Chords );
+        sValue = String.format("%d", dfa.dba.Chords );
         lblChordsValue.setDefaultModel( new Model<String>(sValue) );
 
-        sValue = String.format("%d", dbd.StarCutoffOne );
+        sValue = String.format("%d", dfa.dba.StarCutoffOne );
         lblOneStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffTwo );
+        sValue = String.format("%d", dfa.dba.StarCutoffTwo );
         lblTwoStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffThree );
+        sValue = String.format("%d", dfa.dba.StarCutoffThree );
         lblThreeStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffFour );
+        sValue = String.format("%d", dfa.dba.StarCutoffFour );
         lblFourStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffFive );
+        sValue = String.format("%d", dfa.dba.StarCutoffFive );
         lblFiveStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffGold );
+        sValue = String.format("%d", dfa.dba.StarCutoffGold );
         lblGoldStarValue.setDefaultModel( new Model<String>(sValue) );
-        sValue = String.format("%d", dbd.StarCutoffGoldOld );
+        sValue = String.format("%d", dfa.dba.StarCutoffGoldOld );
         lblGoldStarOldValue.setDefaultModel( new Model<String>(sValue) );
+        sValue = String.format("%d", dfa.RB2PathNormalOptimal.Score );
+        lblMaxScore.setDefaultModel( new Model<String>(sValue) );
 
+        sValue = dfa.RB2PathImmediate.toString();
+        lblRB2ImmediatePath.setDefaultModel( new Model<String>(sValue) );
+        sValue = dfa.RB2PathNormalOptimal.toString();
+        lblRB2NormalOptimalPath.setDefaultModel( new Model<String>(sValue) );
+        sValue = dfa.RB2PathBreakneckOptimal.toString();
+        lblRB2BreakneckOptimalPath.setDefaultModel( new Model<String>(sValue) );
+
+        lcStars.setCategory( "Stars" );
+
+        List<String>    lineLabels;
+        List<String>    columnLabels;
+        List<Long>      data;
+        Map<String,String> options;
+
+        lineLabels = new ArrayList<String>();
+        lineLabels.add( "Score" );
+        lcStars.setLineLabels( lineLabels );
+
+        columnLabels = new ArrayList<String>();
+        columnLabels.add( "0" );
+        columnLabels.add( "1" );
+        columnLabels.add( "2" );
+        columnLabels.add( "3" );
+        columnLabels.add( "4" );
+        columnLabels.add( "5" );
+        columnLabels.add( "Gold" );
+        columnLabels.add( "Gold (old)" );
+        columnLabels.add( "Max" );
+        lcStars.setColumnLabels( columnLabels );
+
+        options = new HashMap<String,String>();
+        options.put( "width", "533" );
+        options.put( "height", "300" );
+        options.put( "lineSize", "3" );
+        options.put( "pointSize", "5" );
+        lcStars.setOptions( options );
+        
+        data = new ArrayList<Long>();
+        data.add( 0L );
+        data.add( dfa.dba.StarCutoffOne );
+        data.add( dfa.dba.StarCutoffTwo );
+        data.add( dfa.dba.StarCutoffThree );
+        data.add( dfa.dba.StarCutoffFour );
+        data.add( dfa.dba.StarCutoffFive );
+        data.add( dfa.dba.StarCutoffGold );
+        data.add( dfa.dba.StarCutoffGoldOld );
+        data.add( dfa.RB2PathNormalOptimal.Score );
+        lcStars.setData( data );
         return;
     }
 
-    protected DrumsBaselineData GetDBDById( long id ) {
+    protected DrumsFullAnalysis GetDFAById( long id ) {
         RockBandAnalyzerParams rbap;
-        String                  sId;
-        GZIPInputStream gzIn;
-        ByteArrayInputStream baIn;
-        ByteArrayOutputStream baOut;
         RockBandSongRaw rbSong;
-        DrumsBaselineData       dbd;
+        DrumsFullAnalysis dfa;
 
         rbSong = DataAccess.GetRawSongById( id );
 
-        baIn = new ByteArrayInputStream( rbSong.getFile() );
-        baOut = new ByteArrayOutputStream();
-
-        try {
-            gzIn = new GZIPInputStream( baIn );
-
-            for( int c = gzIn.read(); c != -1; c = gzIn.read() ) {
-                baOut.write( c );
-            }
-
-            baOut.close();
-        }
-        catch( IOException ioex ) {
-            return null;
-        }
-
         rbap = new RockBandAnalyzerParams();
-        dbd = RockBandAnalyzer.AnalyzeStream( null, new ByteArrayInputStream(baOut.toByteArray()), rbap );
+        dfa = RockBandAnalyzer.AnalyzeStream( null, new ByteArrayInputStream(rbSong.getFile()), rbap );
 
-        return dbd;
+        return dfa;
     }
 }

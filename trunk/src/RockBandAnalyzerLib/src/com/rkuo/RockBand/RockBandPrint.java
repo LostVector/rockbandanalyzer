@@ -4,7 +4,7 @@ import com.rkuo.RockBand.Primitives.DrumChart;
 import com.rkuo.RockBand.Primitives.Chord;
 import com.rkuo.RockBand.Primitives.Note;
 import com.rkuo.RockBand.Simulators.DrumsSimulatorParameters;
-import com.rkuo.RockBand.Simulators.DrumsBaselineData;
+import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
 
 import java.util.ArrayList;
 import java.util.SortedMap;
@@ -169,7 +169,7 @@ public class RockBandPrint {
         return;
     }
 
-    public static void PrintDrumsBaselineData( PrintWriter psOut, DrumsBaselineData dbd ) {
+    public static void PrintDrumsBaselineData( PrintWriter psOut, DrumsBaselineAnalysis dbd ) {
 
         String  sWarning;
         String  sBRE;
@@ -271,7 +271,7 @@ public class RockBandPrint {
         return;
     }
 
-    private static String FormatChordShort( Chord c ) {
+    public static String FormatChordShort( Chord c ) {
 
         String  chordString;
 

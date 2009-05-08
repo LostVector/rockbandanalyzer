@@ -2,11 +2,13 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
 import java.util.Date;
 import java.util.zip.GZIPOutputStream;
+import java.util.zip.GZIPInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -14,6 +16,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.datastore.Blob;
+import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -75,7 +78,28 @@ public class RockBandSongRaw {
     }
 
     public byte[] getFile() {
-        return _file.getBytes();
+
+        GZIPInputStream gzIn;
+        ByteArrayInputStream baIn;
+        ByteArrayOutputStream baOut;
+
+        baIn = new ByteArrayInputStream( _file.getBytes() );
+        baOut = new ByteArrayOutputStream();
+
+        try {
+            gzIn = new GZIPInputStream( baIn );
+
+            for( int c = gzIn.read(); c != -1; c = gzIn.read() ) {
+                baOut.write( c );
+            }
+
+            baOut.close();
+        }
+        catch( IOException ioex ) {
+            return null;
+        }
+
+        return baOut.toByteArray();
     }
 
     public String getMD5() {
