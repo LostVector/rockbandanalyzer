@@ -8,9 +8,12 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
  * To change this template use File | Settings | File Templates.
  */
 public enum RockBandSongFilter {
+    NormalOptimal,
     BreakneckOptimal,
     Glitched,
     GoldImpossible,
     BigRockEnding,
-    Solos
+    Solos,
+    Cover,
+    RecentlyReleased
 }

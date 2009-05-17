@@ -9,7 +9,7 @@
       <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties />
-      <executeOn event="beforeRun" target="datanucleusenhance" runConfigurationType="Remote" runConfigurationName="DebugWarRemote" />
+      <executeOn event="beforeRun" target="datanucleusenhance" runConfigurationType="Remote" runConfigurationName="DebugWebRemote" />
       <executeOn event="beforeRun" target="runserver" />
     </buildFile>
   </component>
@@ -109,6 +109,11 @@
               <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/web.xml" />
             </files>
           </module>
+          <module name="GAETest">
+            <files>
+              <file url="file://$PROJECT_DIR$/GAETest/web/WEB-INF/web.xml" />
+            </files>
+          </module>
         </modules>
       </facet-type>
       <facet-type id="jsf">
@@ -116,6 +121,15 @@
           <module name="junk">
             <files>
               <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/faces-config.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="google-app-engine">
+        <modules>
+          <module name="GAETest">
+            <files>
+              <file url="file://$PROJECT_DIR$/GAETest/web/WEB-INF/appengine-web.xml" />
             </files>
           </module>
         </modules>
@@ -310,6 +324,7 @@
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerLib/RockBandAnalyzerLib.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerLib/RockBandAnalyzerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWar/RockBandAnalyzerWar.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWar/RockBandAnalyzerWar.iml" />
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWeb/RockBandAnalyzerWeb.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWeb/RockBandAnalyzerWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
@@ -336,18 +351,6 @@
     <context />
   </component>
   <component name="libraryTable">
-    <library name="appengine-java-sdk">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib" />
-        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib/user" />
-        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib/user/orm" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib/user" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.0/lib/user/orm" recursive="false" />
-    </library>
     <library name="JSF 1.1">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/jsf-api.jar!/" />
@@ -394,6 +397,56 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="opencsv-1.8">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/opencsv-1.8/opencsv-1.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="cobra-0.98.4">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/cobra-0.98.4/cobra.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="htmlcleaner">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/htmlcleaner/htmlcleaner2_1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="tagsoup">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/tagsoup/tagsoup-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="jtidy">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/jtidy/Tidy.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="AppEngine API">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/appengine-api-1.0-sdk-1.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="AppEngine ORM">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/orm" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/orm" recursive="false" />
     </library>
   </component>
 </project>

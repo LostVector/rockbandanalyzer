@@ -1,4 +1,4 @@
-package com.rkuo.RockBand;
+package com.rkuo.util;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

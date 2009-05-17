@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/secure/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 
     <filter>
         <filter-name>WicketFilter</filter-name>
@@ -18,7 +26,8 @@
         <filter-name>WicketFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+    
+<!-- begin public apis -->
     <servlet>
         <servlet-name>api_upload</servlet-name>
         <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.UploadServlet</servlet-class>
@@ -27,4 +36,85 @@
         <servlet-name>api_upload</servlet-name>
         <url-pattern>/api/upload</url-pattern>
     </servlet-mapping>    
+
+    <servlet>
+        <servlet-name>api_getSongIds</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.GetSongIdsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_getSongIds</servlet-name>
+        <url-pattern>/api/getSongIds</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>api_batch</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_batch</servlet-name>
+        <url-pattern>/api/batch</url-pattern>
+    </servlet-mapping>
+<!-- begin secure apis -->
+    <servlet>
+        <servlet-name>secure_reprocess</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices.ReprocessServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_reprocess</servlet-name>
+        <url-pattern>/secure/reprocess</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>secure_clean</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices.CleanServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_clean</servlet-name>
+        <url-pattern>/secure/clean</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>api_export</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.ExportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_export</servlet-name>
+        <url-pattern>/secure/export</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>secure_scrape_song_list</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices.ScrapeSongListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_scrape_song_list</servlet-name>
+        <url-pattern>/secure/scrapeSongList</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>secure_scrape_song_detail</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.DeprecatedServices.ScrapeSongDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_scrape_song_detail</servlet-name>
+        <url-pattern>/secure/scrapeSongDetail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>secure_write_song_list</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.DeprecatedServices.WriteSongListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_write_song_list</servlet-name>
+        <url-pattern>/secure/writeSongList</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>secure_batch</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>secure_batch</servlet-name>
+        <url-pattern>/secure/batch</url-pattern>
+    </servlet-mapping>
 </web-app>

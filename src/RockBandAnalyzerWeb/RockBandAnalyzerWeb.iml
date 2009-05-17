@@ -21,10 +21,6 @@
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/classes" />
           </containerElement>
-          <containerElement type="library" name="appengine-java-sdk" level="project">
-            <attribute name="method" value="1" />
-            <attribute name="URI" value="/WEB-INF/lib" />
-          </containerElement>
           <containerElement type="library" name="apache-wicket-1.4-rc2" level="project">
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
@@ -37,12 +33,30 @@
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/classes" />
           </containerElement>
-          <containerElement type="library" name="com.oreilly.servlet" level="project">
+          <containerElement type="library" name="opencsv-1.8" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="jtidy" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="AppEngine API" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="AppEngine ORM" level="project">
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>
         </packaging>
       </configuration>
+      <facet type="google-app-engine" name="Google App Engine">
+        <configuration>
+          <run-enhancer-on-make>true</run-enhancer-on-make>
+          <sdk-home-path>$MODULE_DIR$/../lib/appengine-java-sdk-1.2.0</sdk-home-path>
+        </configuration>
+      </facet>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -62,10 +76,11 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="apache-wicket-1.4-rc2" level="project" />
-    <orderEntry type="library" name="appengine-java-sdk" level="project" />
     <orderEntry type="module" module-name="RockBandAnalyzerLib" exported="" />
     <orderEntry type="library" name="slf4j" level="project" />
-    <orderEntry type="library" name="com.oreilly.servlet" level="project" />
+    <orderEntry type="library" name="opencsv-1.8" level="project" />
+    <orderEntry type="library" name="AppEngine API" level="project" />
+    <orderEntry type="library" name="AppEngine ORM" level="project" />
   </component>
 </module>
 

@@ -28,4 +28,12 @@ function WicketGViz(id) {
         chart.draw( data, options );
         return;
     }
+
+    this.drawAnnotatedTimeline = function( data, options ) {
+        var self = this;
+        var container = document.getElementById(self.id);
+        var chart = new google.visualization.AnnotatedTimeLine(container);
+        chart.draw( data, options );
+        return;
+    }
 }

@@ -151,7 +151,7 @@ public class SongTableComponent extends UIComponentBase {
     private void WriteByLocation( ResponseWriter w ) throws IOException {
 
         List<RockBandSong>  songs;
-
+/*
         songs = DataAccess.GetSongsByLocation( RockBandLocation.Downloaded );
         WriteSongGroup( w, "Downloaded", songs );
 
@@ -160,7 +160,7 @@ public class SongTableComponent extends UIComponentBase {
 
         songs = DataAccess.GetSongsByLocation( RockBandLocation.RockBandOne );
         WriteSongGroup( w, "Rock Band", songs );
-        return;
+  */      return;
     }
 
     private void WriteByDifficulty( ResponseWriter w ) throws IOException {

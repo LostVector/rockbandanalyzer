@@ -3,6 +3,8 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.SongTablePanel;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongFilter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +15,14 @@ import org.apache.wicket.model.Model;
  */
 public class IndexPage extends BasePage {
 
+    private SongTablePanel panelRecentlyReleased;
+
     public IndexPage() {
+
+        panelRecentlyReleased = new SongTablePanel("panelRecentlyReleased");
+        panelRecentlyReleased.setRenderType( "filter" );
+        panelRecentlyReleased.setFilterType( RockBandSongFilter.RecentlyReleased );
+        add( panelRecentlyReleased );
         return;
     }
 }

@@ -1,6 +1,7 @@
-package com.rkuo.RockBand.Simulators;
+package com.rkuo.RockBand.Primitives;
 
 import com.rkuo.RockBand.RockBandPath;
+import com.rkuo.RockBand.Primitives.DrumsBaselineAnalysis;
 
 /**
  * Created by IntelliJ IDEA.

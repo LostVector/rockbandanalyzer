@@ -9,16 +9,18 @@ import java.math.BigInteger;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.*;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.datastore.Blob;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
 
 
+@FetchGroup(
+        name="full",
+        members={ @Persistent(name="id"), @Persistent(name="_uploader"), @Persistent(name="_dateUploaded"),
+                @Persistent(name="_originalFileName"), @Persistent(name="_file"), @Persistent(name="_md5"),
+                @Persistent(name="needsReprocessing")
+})
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class RockBandSongRaw {
     @PrimaryKey
@@ -34,11 +36,15 @@ public class RockBandSongRaw {
     @Persistent
     private String  _originalFileName;
 
+//    @Persistent(serialized="true", defaultFetchGroup="true")     
     @Persistent
     private Blob  _file;
 
     @Persistent
     private String    _md5;
+
+    @Persistent
+    private Boolean     needsReprocessing;
 
 //    @Persistent
 //    private RockBandSongEmbedded _embedded;
@@ -58,7 +64,16 @@ public class RockBandSongRaw {
 
         setFile( file );
 
+        needsReprocessing = false;
         return;
+    }
+
+    public Boolean getNeedsReprocessing() {
+        return needsReprocessing;
+    }
+
+    public void setNeedsReprocessing(Boolean needsReprocessing) {
+        this.needsReprocessing = needsReprocessing;
     }
 
     public Long getId() {
@@ -156,7 +171,7 @@ public class RockBandSongRaw {
         _generated = generated;
     }
 
-    public RockBandSongEmbedded getEmbedded() {
+    public RockBandSongEmbedded getAssociated() {
         return _embedded;
     }
 

@@ -1,4 +1,4 @@
-package com.rkuo.RockBand.Simulators;
+package com.rkuo.RockBand.Primitives;
 
 import com.rkuo.RockBand.Primitives.Chord;
 
