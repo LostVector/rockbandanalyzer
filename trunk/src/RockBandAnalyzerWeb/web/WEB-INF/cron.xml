@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cronentries>
+<!--
+  <cron>
+    <url>/secure/scrapeSongList</url>
+    <description>Scrape rockband.com for all songs</description>
+    <schedule>every day 2:30</schedule>
+    <timezone>America/Los_Angeles</timezone>
+  </cron>
+ -->  
+  <cron>
+    <url>/api/batch?key=28cd8050-428a-11de-8a39-0800200c9a66</url>
+    <description>Run regular batch jobs</description>
+    <schedule>every 1 minutes</schedule>
+    <timezone>America/Los_Angeles</timezone>
+  </cron>
+</cronentries>

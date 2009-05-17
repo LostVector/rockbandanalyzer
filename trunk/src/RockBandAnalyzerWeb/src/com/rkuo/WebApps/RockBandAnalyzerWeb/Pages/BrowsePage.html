@@ -9,34 +9,54 @@
 </head>
 <body>
 <wicket:extend>
-    <a href="#" wicket:id="elDifficulty">[Difficulty]</a> |
+    Standard Sort - Difficulty(<a href="#" wicket:id="elDifficultyGuitar">[DifficultyGuitar]</a>,
+    <a href="#" wicket:id="elDifficultyBass">[DifficultyBass]</a>,
+    <a href="#" wicket:id="elDifficultyDrums">[DifficultyDrums]</a>,
+    <a href="#" wicket:id="elDifficultyVocals">[DifficultyVocals]</a>,
+    <a href="#" wicket:id="elDifficultyBand">[DifficultyBand]</a>) |
     <a href="#" wicket:id="elSong">[Song]</a> |
     <a href="#" wicket:id="elBand">[Band]</a> |
     <a href="#" wicket:id="elGenre">[Genre]</a> |
     <a href="#" wicket:id="elDecade">[Decade]</a> |
-    <a href="#" wicket:id="elLocation">[Location]</a> |
+    <a href="#" wicket:id="elLocation">[Location]</a>
+    <br/>
+    Advanced sort -
     <a href="#" wicket:id="elDuration">[Duration]</a> |
+    <a href="#" wicket:id="elRBReleaseDate">[RBReleaseDate]</a>
+    <br/>
+    Generic filters -
+    <a href="#" wicket:id="elBigRockEnding">[BigRockEnding]</a> |
+    <a href="#" wicket:id="elCover">[Cover]</a>
+    <br/>
+    Instrument specific sort -
     <a href="#" wicket:id="elNotes">[Notes]</a> |
     <a href="#" wicket:id="elMaxScore">[MaxScore]</a>
     <br/>
+    Instrument specific filters -
     <a href="#" wicket:id="elGlitched">[Glitched]</a> |
-    <a href="#" wicket:id="elBigRockEnding">[BigRockEnding]</a> |
     <a href="#" wicket:id="elSolos">[Solos]</a> |
+    <a href="#" wicket:id="elNormalOptimal">[NormalOptimal]</a> |
     <a href="#" wicket:id="elBreakneckOptimal">[BreakneckOptimal]</a> |
     <a href="#" wicket:id="elGoldImpossible">[GoldImpossible]</a>
+
+    <span wicket:id="panelSongs"></span>
+<!--
     <table id="box-table-a" cellspacing="0">
         <thead>
         <tr>
             <th>Title</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
 
         <tr wicket:id="rptvSongs">
             <td wicket:id="tdItem" class="item"><span wicket:id="lblCategory"></span><a href="#" wicket:id="elMidiName">[midiName]</a></td>
+            <td wicket:id="tdItemData" class="item"><span wicket:id="lblItemData"></span></td>
         </tr>
         </tbody>
     </table>
+  -->
 </wicket:extend>
 </body>
 </html>

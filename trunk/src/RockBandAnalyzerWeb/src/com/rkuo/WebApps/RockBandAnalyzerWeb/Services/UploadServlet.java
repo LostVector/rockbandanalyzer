@@ -4,27 +4,24 @@ import java.io.*;
 import java.util.logging.Logger;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.util.TimeZone;
 import javax.servlet.http.*;
 import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.rkuo.RockBand.*;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongGenerated;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.*;
+import com.rkuo.util.Base64;
+import com.rkuo.util.Misc;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -42,13 +39,17 @@ public class UploadServlet extends HttpServlet {
 
         Document doc;
         RockBandSongRaw rawSong;
-        RockBandSongEmbedded    embedded;
-        RockBandSongGenerated   generated;
+        RockBandSong   song;
+        RockBandAnalyzerParams rbap;
+        DrumsFullAnalysis dfa;
         boolean br;
+
+        rbap = new RockBandAnalyzerParams();
+        song = new RockBandSong();
 
         response.setContentType("text/plain");
 
-        doc = getXml( request );
+        doc = Misc.ToDocument( request.getInputStream() );
         if( doc == null ) {
             return;
         }
@@ -58,153 +59,108 @@ public class UploadServlet extends HttpServlet {
             return;
         }
 
-        RockBandAnalyzerParams rbap;
-        DrumsFullAnalysis dfa;
-
-        rbap = new RockBandAnalyzerParams();
         dfa = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(rawSong.getFile()), rbap);
         if( dfa == null ) {
             return;
         }
 
-        embedded = new RockBandSongEmbedded();
-        ReadEmbeddedData(doc, embedded);
-        embedded.setMidiTitle( dfa.dba.MidiTitle );
+        ReadEmbeddedData(doc, song);
 
-        generated = new RockBandSongGenerated();
-        generated.setMicroseconds( dfa.dba.Microseconds );
-        generated.setNotes( dfa.dba.Notes );
-        generated.setSolos( dfa.dba.Solos );
-        generated.setBigRockEnding( dfa.dba.BigRockEnding );
+        DataAccess.ProcessSong( song, dfa );
 
-        generated.setGlitched( false );
-        if( dfa.dba.GlitchedChords.size() > 0 ) {
-            generated.setGlitched( true );
-        }
-
-        generated.setBreakneckOptimal( false );
-        if( dfa.RB2PathOverallOptimal.FillDelay != RockBandConstants.FillDelayRB2Expert ) {
-            generated.setBreakneckOptimal( true );
-        }
-
-        generated.setGoldStarrable( true );
-        if( dfa.RB2PathOverallOptimal.Score < dfa.dba.StarCutoffGold ) {
-            generated.setGoldStarrable( false );
-        }
-
-        generated.setMaxScore( dfa.RB2PathOverallOptimal.Score );
-
-        br = DataAccess.TryWritingSong( rawSong, embedded, generated );
+        br = DataAccess.TryWritingSong( rawSong, song );
         if( br == false ) {
             response.getWriter().format("%s already exists in the database.", rawSong.getOriginalFileName());
             return;
         }
-        
+
+        RockBandSongRaw newRawSong = DataAccess.GetRawSongById( rawSong.getId() );
         response.getWriter().format("%s has been added to the database.", rawSong.getOriginalFileName());
         return;
     } // doPost
 
-    public String getStringFromDocument(Document doc) {
-        try {
-            DOMSource domSource = new DOMSource(doc);
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer transformer = tf.newTransformer();
-            transformer.transform(domSource, result);
-            return writer.toString();
-        }
-        catch( TransformerException ex ) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    protected void ReadEmbeddedData(Document doc, RockBandSongEmbedded embedded) {
+    protected void ReadEmbeddedData(Document doc, RockBandSong song) {
 
         String sValue;
 
         sValue = TryReadingEmbeddedValue(doc, "SongName");
         if( sValue != null ) {
-            embedded.setTitle(sValue);
+            song.getAssociated().setTitle(sValue);
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Artist");
         if( sValue != null ) {
-            embedded.setArtist(sValue);
+            song.getAssociated().setArtist(sValue);
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Album");
         if( sValue != null ) {
-            embedded.setAlbum(sValue);
+            song.getAssociated().setAlbum(sValue);
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Year");
         if( sValue != null ) {
-            Date dateReleased;
-            GregorianCalendar cal;
-
-            cal = new GregorianCalendar();
-            cal.set(Integer.parseInt(sValue), 1, 1);
-            dateReleased = cal.getTime();
-            embedded.setDateReleased(dateReleased);
+            Calendar cal;
+            cal = new GregorianCalendar(Integer.parseInt(sValue), 0, 1, 0, 0);
+            cal.setTimeZone( TimeZone.getTimeZone("GMT") );
+            song.getAssociated().setDateReleased(cal.getTime());
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Genre");
         if( sValue != null ) {
-            embedded.setGenre(sValue);
+            song.getAssociated().setGenre(sValue);
         }
 
         sValue = TryReadingEmbeddedValue(doc, "GuitarDifficulty");
         if( sValue != null ) {
             RockBandInstrumentDifficulty    rbid;
 
-            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
-            embedded.setGuitarDifficulty( rbid );
+            rbid = RockBandInstrumentDifficulty.ToEnum( Integer.parseInt(sValue) );
+            song.getAssociated().setGuitarDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "BassDifficulty");
         if( sValue != null ) {
             RockBandInstrumentDifficulty    rbid;
 
-            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
-            embedded.setBassDifficulty( rbid );
+            rbid = RockBandInstrumentDifficulty.ToEnum( Integer.parseInt(sValue) );
+            song.getAssociated().setBassDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "DrumsDifficulty");
         if( sValue != null ) {
             RockBandInstrumentDifficulty    rbid;
 
-            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
-            embedded.setDrumsDifficulty( rbid );
+            rbid = RockBandInstrumentDifficulty.ToEnum( Integer.parseInt(sValue) );
+            song.getAssociated().setDrumsDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "VocalsDifficulty");
         if( sValue != null ) {
             RockBandInstrumentDifficulty    rbid;
 
-            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
-            embedded.setVocalsDifficulty( rbid );
+            rbid = RockBandInstrumentDifficulty.ToEnum( Integer.parseInt(sValue) );
+            song.getAssociated().setVocalsDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "BandDifficulty");
         if( sValue != null ) {
             RockBandInstrumentDifficulty    rbid;
 
-            rbid = RockBandInstrumentDifficulty.values()[Integer.parseInt(sValue)];
-            embedded.setBandDifficulty( rbid );
+            rbid = RockBandInstrumentDifficulty.ToEnum( Integer.parseInt(sValue) );
+            song.getAssociated().setBandDifficulty( rbid );
         }
 
         sValue = TryReadingEmbeddedValue(doc, "Location");
         if( sValue != null ) {
             if( sValue.compareTo("rb1") == 0 ) {
-                embedded.setLocation(RockBandLocation.RockBandOne);
+                song.getAssociated().setLocation(RockBandLocation.RockBandOne);
             }
             else if( sValue.compareTo("rb2") == 0 ) {
-                embedded.setLocation(RockBandLocation.RockBandTwo);
+                song.getAssociated().setLocation(RockBandLocation.RockBandTwo);
             }
             else if( sValue.compareTo("rbdlc") == 0 ) {
-                embedded.setLocation(RockBandLocation.Downloaded);
+                song.getAssociated().setLocation(RockBandLocation.Downloaded);
             }
         }
 
@@ -275,7 +231,7 @@ public class UploadServlet extends HttpServlet {
         b64FileData = e.getFirstChild().getNodeValue();
 
         try {
-         fileBytes = Base64.decode(b64FileData);
+            fileBytes = Base64.decode(b64FileData);
         }
         catch( IOException ioex ) {
             return null;

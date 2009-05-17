@@ -12,6 +12,9 @@ import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.LoginHeaderPanel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.NavigationHeaderPanel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.FooterPanel;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.CacheException;
 import java.util.*;
 
 public abstract class BasePage extends WebPage {
@@ -23,10 +26,23 @@ public abstract class BasePage extends WebPage {
         add(new NavigationHeaderPanel("nhpHeader"));
         add(new FooterPanel("fpFooter"));
 
-        AddAutoComplete();
+//        AddAutoComplete();
         return;
     }
 
+    protected static Cache getCache() {
+        Cache cache;
+
+        try {
+            cache = CacheManager.getInstance().getCacheFactory().createCache(Collections.emptyMap());
+        }
+        catch( CacheException e ) {
+            return null;
+        }
+
+        return cache;
+    }
+    
     protected void AddAutoComplete() {
 
         Form<Void> form = new Form<Void>("form");
@@ -59,6 +75,7 @@ public abstract class BasePage extends WebPage {
                 return choices.iterator();
             }
         };
+
         form.add(field);
 
 //        final Label label = new Label("selectedValue", field.getDefaultModel());

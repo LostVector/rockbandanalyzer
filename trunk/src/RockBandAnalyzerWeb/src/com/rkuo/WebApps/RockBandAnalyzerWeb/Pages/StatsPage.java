@@ -1,14 +1,11 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.model.Model;
-
 import java.util.*;
 
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizLineChartPanel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizColumnChartPanel;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizAnnotatedTimelinePanel;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizDataPoint;
 import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
 import com.rkuo.RockBand.RockBandInstrumentDifficulty;
 
@@ -22,11 +19,14 @@ import com.rkuo.RockBand.RockBandInstrumentDifficulty;
 public class StatsPage extends BasePage {
 
     protected GVizColumnChartPanel ccpGenreDistribution;
+
     protected GVizColumnChartPanel ccpGuitarDifficultyDistribution;
     protected GVizColumnChartPanel ccpBassDifficultyDistribution;
     protected GVizColumnChartPanel ccpDrumsDifficultyDistribution;
     protected GVizColumnChartPanel ccpVocalsDifficultyDistribution;
     protected GVizColumnChartPanel ccpBandDifficultyDistribution;
+
+    protected GVizAnnotatedTimelinePanel gvatpRBReleaseDateTimeline;
 
     public StatsPage() {
 
@@ -45,6 +45,9 @@ public class StatsPage extends BasePage {
         ccpBandDifficultyDistribution = new GVizColumnChartPanel("gvccpBandDifficultyDistribution");
         add( ccpBandDifficultyDistribution );
 
+        gvatpRBReleaseDateTimeline = new GVizAnnotatedTimelinePanel("gvatpRBReleaseDateTimeline");
+        add(gvatpRBReleaseDateTimeline);
+
         RenderGenreDistribution( ccpGenreDistribution );
 
         RenderDifficultyDistribution( RockBandInstrumentDifficultyCategory.Guitar, ccpGuitarDifficultyDistribution );
@@ -52,6 +55,8 @@ public class StatsPage extends BasePage {
         RenderDifficultyDistribution( RockBandInstrumentDifficultyCategory.Drums, ccpDrumsDifficultyDistribution );
         RenderDifficultyDistribution( RockBandInstrumentDifficultyCategory.Vocals, ccpVocalsDifficultyDistribution );
         RenderDifficultyDistribution( RockBandInstrumentDifficultyCategory.Band, ccpBandDifficultyDistribution );
+
+        RenderRBReleaseDateTimeline(gvatpRBReleaseDateTimeline);
         return;
     }
 
@@ -79,9 +84,10 @@ public class StatsPage extends BasePage {
         ccpGenreDistribution.setColumnLabels( columnLabels );
 
         options = new HashMap<String,String>();
-        options.put( "width", "533" );
+        options.put( "width", "560" );
         options.put( "height", "300" );
         options.put( "is3D", "true" );
+        options.put( "legend", "'none'" );
         options.put( "title", "'Distribution of songs by genre'" );
 //        options.put( "title", "genreDistribution" );
         ccpGenreDistribution.setOptions( options );
@@ -97,7 +103,7 @@ public class StatsPage extends BasePage {
 
     protected static void RenderDifficultyDistribution( RockBandInstrumentDifficultyCategory rbidc, GVizColumnChartPanel ccp ) {
 
-        SortedMap<Long,Long> difficultyDistribution;
+        SortedMap<RockBandInstrumentDifficulty,Long> difficultyDistribution;
 
         difficultyDistribution = DataAccess.GetDifficultyDistribution( rbidc );
 
@@ -113,18 +119,16 @@ public class StatsPage extends BasePage {
         ccp.setLineLabels( lineLabels );
 
         columnLabels = new ArrayList<String>();
-        for( Long difficulty : difficultyDistribution.keySet() ) {
-            RockBandInstrumentDifficulty  rbid;
-
-            rbid = RockBandInstrumentDifficulty.ToEnum( difficulty );
-            columnLabels.add( rbid.name() );
+        for( RockBandInstrumentDifficulty difficulty : difficultyDistribution.keySet() ) {
+            columnLabels.add( difficulty.name() );
         }
         ccp.setColumnLabels( columnLabels );
 
         options = new HashMap<String,String>();
-        options.put( "width", "533" );
+        options.put( "width", "560" );
         options.put( "height", "300" );
         options.put( "is3D", "true" );
+        options.put( "legend", "'none'" );
         options.put( "title", String.format("'Distribution of songs by difficulty for %s'", rbidc.name()) );
 //        options.put( "title", "genreDistribution" );
         ccp.setOptions( options );
@@ -137,4 +141,52 @@ public class StatsPage extends BasePage {
 
         return;
     }
+
+    protected static void RenderRBReleaseDateTimeline( GVizAnnotatedTimelinePanel atp ) {
+
+        SortedMap<Date,Long> dateDistribution;
+
+        dateDistribution = DataAccess.GetReleaseDateDistribution();
+
+//        atp.setCategory( "Difficulty" );
+
+        List<String>    lineLabels;
+        List<Date>    columnLabels;
+        List<GVizDataPoint>      data;
+        Map<String,String> options;
+
+        atp.setWidth( 700 );
+        atp.setHeight( 300 );
+
+        lineLabels = new ArrayList<String>();
+        lineLabels.add( "released" );
+        atp.setLineLabels( lineLabels );
+
+        columnLabels = new ArrayList<Date>();
+        for( Date d : dateDistribution.keySet() ) {
+            columnLabels.add( d );
+        }
+        atp.setColumnLabels( columnLabels );
+
+        options = new HashMap<String,String>();
+        options.put( "displayAnnotations", "true" );
+        atp.setOptions( options );
+
+        data = new ArrayList<GVizDataPoint>();
+        for( Long songCount : dateDistribution.values() ) {
+            GVizDataPoint    dp;
+
+            dp = new GVizDataPoint();
+            dp.setValue( songCount );
+//            dp.setAnnotation( String.format("%d songs", songCount) );
+//            dp.setExtendedAnnotation( String.format("%d songs extended", songCount) );
+
+            data.add( dp );
+        }
+
+        atp.setData( data );
+
+        return;
+    }
+
 }

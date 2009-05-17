@@ -3,24 +3,17 @@ package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.PageParameters;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
-import com.rkuo.RockBand.RockBandAnalyzerParams;
-import com.rkuo.RockBand.RockBandAnalyzer;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandPrint;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.GVizLineChartPanel;
 
-import java.util.zip.GZIPInputStream;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,8 +27,12 @@ public class SongPage extends BasePage {
     protected Label               lblSongTitle;
 
     protected Label               lblArtist;
+    protected Label               lblCoverVersion;
     protected Label               lblAlbum;
     protected Label               lblGenre;
+
+    protected Label               lblReleaseYear;
+    protected Label               lblRBDatePublished;
 
     protected Label               lblDurationValue;
     protected Label               lblNotesValue;
@@ -68,8 +65,12 @@ public class SongPage extends BasePage {
         lblSongTitle = new Label("lblSongTitle","");
 
         lblArtist = new Label("lblArtist", "");
+        lblCoverVersion = new Label("lblCoverVersion", "");
         lblAlbum = new Label("lblAlbum", "");
         lblGenre = new Label("lblGenre", "");
+
+        lblReleaseYear = new Label("lblReleaseYear", "");
+        lblRBDatePublished = new Label("lblRBDatePublished", "");
 
         lblDurationValue = new Label("lblDurationValue", "");
         lblNotesValue = new Label("lblNotesValue", "");
@@ -91,8 +92,12 @@ public class SongPage extends BasePage {
         add( lblSongTitle );
 
         add( lblArtist );
+        add( lblCoverVersion );
         add( lblAlbum );
         add( lblGenre );
+
+        add( lblReleaseYear );
+        add( lblRBDatePublished );
 
         add( lblDurationValue );
         add( lblNotesValue );
@@ -114,19 +119,33 @@ public class SongPage extends BasePage {
         id = params.getLong( "id" );
 
         String  sValue;
-        RockBandSongRaw rawSong;
-        RockBandSongEmbedded    embedded;
+        RockBandSong    song;
 
-        embedded = DataAccess.GetEmbeddedSongById( id );
+        song = DataAccess.GetSongById( id );
 
-        sValue = embedded.getTitle();
+        sValue = song.getAssociated().getTitle();
         lblSongTitle.setDefaultModel( new Model<String>(sValue) );
-        sValue = embedded.getArtist();
+        sValue = song.getAssociated().getArtist();
         lblArtist.setDefaultModel( new Model<String>(sValue) );
-        sValue = embedded.getAlbum();
+        sValue = song.getAssociated().getCover().toString();
+        lblCoverVersion.setDefaultModel( new Model<String>(sValue) );        
+        sValue = song.getAssociated().getAlbum();
         lblAlbum.setDefaultModel( new Model<String>(sValue) );
-        sValue = embedded.getGenre();
+        sValue = song.getAssociated().getGenre();
         lblGenre.setDefaultModel( new Model<String>(sValue) );
+
+        Date d;
+//        Calendar    cal;
+
+        d = song.getAssociated().getDateReleased();
+
+        sValue = String.format( "%d", d.getYear()+1900 );
+        lblReleaseYear.setDefaultModel( new Model<String>(sValue) );
+
+        d = song.getAssociated().getRBReleaseDate();
+//        cal = new GregorianCalendar( d.getYear(), d.getMonth(), d.getDate() );
+        sValue = String.format( "%d/%02d/%02d", d.getYear()+1900, d.getMonth()+1, d.getDate() );
+        lblRBDatePublished.setDefaultModel( new Model<String>(sValue) );
 
         lcStars = new GVizLineChartPanel("gvlcpStars");
         add( lcStars );

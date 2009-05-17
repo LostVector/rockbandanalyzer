@@ -33,7 +33,11 @@
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>
-          <containerElement type="library" name="appengine-java-sdk" level="project">
+          <containerElement type="library" name="AppEngine API" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="AppEngine ORM" level="project">
             <attribute name="method" value="1" />
             <attribute name="URI" value="/WEB-INF/lib" />
           </containerElement>
@@ -61,10 +65,11 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="RockBandAnalyzerLib" exported="" />
-    <orderEntry type="library" name="appengine-java-sdk" level="project" />
     <orderEntry type="library" name="JSF 1.1" level="project" />
     <orderEntry type="library" name="com.oreilly.servlet" level="project" />
     <orderEntry type="library" name="apache-wicket-1.4-rc2" level="project" />
+    <orderEntry type="library" name="AppEngine API" level="project" />
+    <orderEntry type="library" name="AppEngine ORM" level="project" />
   </component>
 </module>
 

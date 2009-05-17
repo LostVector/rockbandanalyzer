@@ -4,7 +4,8 @@ import com.rkuo.RockBand.Primitives.DrumChart;
 import com.rkuo.RockBand.Primitives.Chord;
 import com.rkuo.RockBand.Primitives.Note;
 import com.rkuo.RockBand.Simulators.DrumsSimulatorParameters;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.Primitives.DrumsBaselineAnalysis;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
 
 import java.util.ArrayList;
 import java.util.SortedMap;

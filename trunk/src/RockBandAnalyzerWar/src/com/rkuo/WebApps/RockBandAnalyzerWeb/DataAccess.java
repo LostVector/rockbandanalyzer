@@ -86,31 +86,6 @@ public class DataAccess {
         return songs;
     }
 
-    public static List<RockBandSong> GetSongsByLocation( RockBandLocation location ) {
-
-        Query               query;
-        List<RockBandSong>  songs;
-
-        PersistenceManager pm;
-
-        songs = null;
-        pm = PMF.get().getPersistenceManager();
-
-        query = pm.newQuery(RockBandSong.class);
-        query.setOrdering("_midiTitle asc");
-        query.setFilter("_location == LocationParam");
-        query.declareParameters("String LocationParam");
-
-        try {
-            songs = (List<RockBandSong>) query.execute( location.ordinal() );
-        }
-        finally {
-            query.closeAll();
-        }
-
-        return songs;
-    }
-
     public static boolean SongExists( String md5 ) {
 
         Query query;

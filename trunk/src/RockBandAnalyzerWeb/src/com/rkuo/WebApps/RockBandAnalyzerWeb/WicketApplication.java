@@ -30,6 +30,11 @@ public class WicketApplication extends WebApplication {
         mountBookmarkablePage("/stats", StatsPage.class);
         mountBookmarkablePage("/terms", TermsPage.class);
         mountBookmarkablePage("/source", SourcePage.class);
+        mountBookmarkablePage("/export", ExportPage.class);
+        mountBookmarkablePage("/import", ImportPage.class);
+        mountBookmarkablePage("/career", CareerPage.class);
+        mountBookmarkablePage("/browsedotcom", BrowseDotComPage.class);
+        mountBookmarkablePage("/admin", AdminPage.class);
 
         getResourceSettings().setResourcePollFrequency(null);
         return;

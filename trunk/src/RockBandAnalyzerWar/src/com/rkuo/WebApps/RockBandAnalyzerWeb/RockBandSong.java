@@ -102,7 +102,7 @@ public class RockBandSong {
     }
 
     public RockBandLocation getLocation() {
-        return RockBandLocation.values()[_location];
+        return RockBandLocation.ToEnum(_location);
     }
 
     public Date getDatePublished() {
@@ -146,7 +146,7 @@ public class RockBandSong {
     }
 
     public void setLocation(RockBandLocation location) {
-        _location = location.ordinal();
+        _location = RockBandLocation.ToInteger( location );
         return;
     }
 

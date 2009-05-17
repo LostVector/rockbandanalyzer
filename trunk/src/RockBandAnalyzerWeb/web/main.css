@@ -67,7 +67,7 @@ a:hover {
 
 #logo {
 	float: left;
-	width: 900px;
+	width: 600px;
 	height: 100px;
 	margin: 0;
 	color: #FFFFFF;
@@ -108,9 +108,24 @@ a:hover {
 
 #login {
 	float: right;
-	width: 305px;
-	height: 26px;
-    vertical-align: top;
+/*    position:absolute;
+    top:20px;
+    left:20px;
+ */    
+	width: 250px;
+	height: 30px;
+    text-align: right;
+    padding-top: 25px;
+    padding-right: 20px;
+    color: #FF6B9D;
+/*    vertical-align: top; */
+}
+
+#login a {
+	border: none;
+	background: none;
+	text-decoration: none;
+	color: #ffffff;
 }
 
 /* Search */
@@ -399,8 +414,8 @@ a:hover {
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
-	margin: 45px;
-	width: 480px;
+	margin: 20px;
+	width: 580px;
 	text-align: left;
 	border-collapse: collapse;
 }

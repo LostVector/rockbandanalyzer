@@ -1,47 +1,45 @@
-package com.rkuo.WebApps.RockBandAnalyzerWeb.Services;
+package com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices;
 
 import java.io.*;
-import java.util.logging.Logger;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import javax.servlet.http.*;
 import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.rkuo.RockBand.RockBandAnalyzer;
-import com.rkuo.RockBand.RockBandAnalyzerParams;
-import com.rkuo.RockBand.Base64;
-import com.rkuo.RockBand.RockBandLocation;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.util.Base64;
+import com.rkuo.util.Misc;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongEmbedded;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongGenerated;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-public class AnalyzeServlet extends HttpServlet {
+public class ReprocessServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Document    doc;
         Long        songId;
+        RockBandSongRaw rawSong;
+        RockBandSong song;
+        RockBandAnalyzerParams rbap;
+        DrumsFullAnalysis dfa;
 
-        doc = getXml( request );
+        rbap = new RockBandAnalyzerParams();
+//        song = new RockBandSong();
+
+        doc = Misc.ToDocument( request.getInputStream() );
         if( doc == null ) {
             return;
         }
@@ -51,36 +49,19 @@ public class AnalyzeServlet extends HttpServlet {
             return;
         }
 
+        rawSong = DataAccess.GetRawSongById( songId );
+        song = DataAccess.GetSongById( songId );
+
+        dfa = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(rawSong.getFile()), rbap);
+        if( dfa == null ) {
+            return;
+        }
+
+        song.setId( rawSong.getId() );
+        DataAccess.ProcessSong( song, dfa );
+        DataAccess.WriteSong( song );
         return;
     } // doPost
-
-    protected Document getXml( HttpServletRequest req ) {
-
-        Document    doc;
-        DocumentBuilder db;
-        DocumentBuilderFactory dbf;
-
-        dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            db = dbf.newDocumentBuilder();
-        }
-        catch( ParserConfigurationException pcex ) {
-            return null;
-        }
-
-        try {
-            doc = db.parse(req.getInputStream());
-        }
-        catch( SAXException saxex ) {
-            return null;
-        }
-        catch( IOException ioex ) {
-            return null;
-        }
-
-        return doc;
-    }
 
     protected RockBandSongRaw getRawSong( Document doc ) {
 
@@ -128,7 +109,7 @@ public class AnalyzeServlet extends HttpServlet {
 
         String sValue;
 
-        nodeList = doc.getElementsByTagName("SongId");
+        nodeList = doc.getElementsByTagName("songId");
         e = (Element)nodeList.item(0);
         sValue = e.getFirstChild().getNodeValue();
         songId = Long.parseLong( sValue );

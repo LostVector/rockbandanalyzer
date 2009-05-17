@@ -11,10 +11,9 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.oreilly.servlet.multipart.MultipartParser;
 import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.Part;
-import com.rkuo.RockBand.RockBandAnalyzer;
-import com.rkuo.RockBand.RockBandAnalyzerParams;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
 
 public class UploadServlet extends HttpServlet {
 

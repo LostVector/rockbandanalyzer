@@ -1,11 +1,10 @@
 
 package com.rkuo.WebApps.RockBandAnalyzerWeb;
 
-import com.rkuo.RockBand.RockBandAnalyzer;
-import com.rkuo.RockBand.RockBandAnalyzerParams;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
 import com.rkuo.RockBand.RockBandPrint;
-import com.rkuo.RockBand.Simulators.DrumsBaselineAnalysis;
-import com.rkuo.RockBand.Simulators.DrumsFullAnalysis;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
 
 import javax.faces.component.UIComponentBase;
 import javax.faces.context.ResponseWriter;
