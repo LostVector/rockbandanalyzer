@@ -1,28 +1,27 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices;
 
-import java.io.*;
-import java.util.Date;
-import javax.servlet.http.*;
-import javax.servlet.ServletException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.rkuo.util.Base64;
-import com.rkuo.util.Misc;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
-import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
-import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
-import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
-import org.w3c.dom.NodeList;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
+import com.rkuo.util.Base64;
+import com.rkuo.util.Misc;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
+import org.w3c.dom.NodeList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Date;
 
 public class ReprocessServlet extends HttpServlet {
 
@@ -59,7 +58,8 @@ public class ReprocessServlet extends HttpServlet {
 
         song.setId( rawSong.getId() );
         DataAccess.ProcessSong( song, dfa );
-        DataAccess.WriteSong( song );
+        DataAccess.WriteSong( System.currentTimeMillis(), song );
+        DataAccess.SetLastUpdated();
         return;
     } // doPost
 

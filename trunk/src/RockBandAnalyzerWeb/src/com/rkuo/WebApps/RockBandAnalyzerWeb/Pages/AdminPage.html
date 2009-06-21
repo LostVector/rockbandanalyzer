@@ -9,7 +9,13 @@
 </head>
 <body>
 <wicket:extend>
-    <form wicket:id="formReprocess" method="get" action="">
+    <form wicket:id="formUpdateSchema" method="get" action="">
+        <fieldset>
+            <span wicket:id="lblUpdateSchemaStatus"></span>
+            <input style="float:right" type="submit" id="updateschema-submit" value="Update schema"/>
+        </fieldset>
+    </form>
+    <form wicket:id="formReprocess" method="post" action="">
         <fieldset>
             <span wicket:id="lblReprocessStatus"></span>
             <input style="float:right" type="submit" id="reprocess-submit" value="Reprocess raw songs"/>

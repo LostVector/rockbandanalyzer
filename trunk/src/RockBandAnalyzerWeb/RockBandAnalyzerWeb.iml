@@ -53,8 +53,14 @@
       </configuration>
       <facet type="google-app-engine" name="Google App Engine">
         <configuration>
+          <files-to-enhance>
+            <file path="$MODULE_DIR$/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/GProperty.java" />
+            <file path="$MODULE_DIR$/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandDotComSong.java" />
+            <file path="$MODULE_DIR$/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSong.java" />
+            <file path="$MODULE_DIR$/src/com/rkuo/WebApps/RockBandAnalyzerWeb/AppEngine/RockBandSongRaw.java" />
+          </files-to-enhance>
           <run-enhancer-on-make>true</run-enhancer-on-make>
-          <sdk-home-path>$MODULE_DIR$/../lib/appengine-java-sdk-1.2.0</sdk-home-path>
+          <sdk-home-path>$MODULE_DIR$/../lib/appengine-java-sdk-1.2.1</sdk-home-path>
         </configuration>
       </facet>
     </facet>

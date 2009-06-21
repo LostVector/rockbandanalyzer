@@ -64,10 +64,10 @@ public class BrowseDotComPage extends BasePage {
 
     protected void RenderMissingSongs( RepeatingView rptvSongs ) {
 
-        List<String> missingSongs;
+        List<RockBandDotComSong> missingSongs;
         String       sValue;
         
-        missingSongs = DataAccess.GetMissingSongs();
+        missingSongs = DataAccess.DotComGetMissingSongs();
         if( missingSongs == null ) {
             return;
         }
@@ -75,7 +75,7 @@ public class BrowseDotComPage extends BasePage {
         sValue = String.format( "%d songs", missingSongs.size() );
         lblTitleData.setDefaultModel( new Model<String>(sValue));
 
-        for( String s : missingSongs ) {
+        for( RockBandDotComSong s : missingSongs ) {
             WebMarkupContainer trItem;
             WebMarkupContainer  tdItem;
             Label lblCategory;
@@ -99,9 +99,9 @@ public class BrowseDotComPage extends BasePage {
             lblCategory.setVisible( false );
             tdItem.add( lblCategory );
 
-            songTitle = "(MIDI) - " + s;
+            songTitle = "(MIDI) - " + s.getMidiTitle();
 
-            elMidiName = new ExternalLink( "elMidiName", "/dcsong?id=" + s, songTitle );
+            elMidiName = new ExternalLink( "elMidiName", "/dcsong?id=" + s.getMidiTitle(), songTitle );
             tdItem.add( elMidiName );
 
             // tdItemData

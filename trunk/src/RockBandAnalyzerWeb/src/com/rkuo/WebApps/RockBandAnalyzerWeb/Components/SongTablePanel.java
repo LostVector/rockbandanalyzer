@@ -119,13 +119,13 @@ public class SongTablePanel extends Panel {
                 sDescription = "Decade";
                 break;
             case Location:
-                sDescription = "Location - ";
+                sDescription = "Location";
                 break;
             case Notes:
                 sDescription = "By number of notes (does not include notes hidden under Big Rock Endings)";
                 break;
             case MaxScore:
-                sDescription = "By maximum possible score (either Normal or Breakneck scrolling speeds)";
+                sDescription = "By maximum possible score (either Normal or Breakneck scrolling speeds). Does not include points from Big Rock Endings.";
                 break;
             default:
                 sDescription = "";
@@ -147,16 +147,16 @@ public class SongTablePanel extends Panel {
                 sDescription = "Songs that are Covers";
                 break;
             case Glitched:
-                sDescription = "Songs that are glitched (notes detected unusually close together)";
+                sDescription = "Songs that are glitched (notes detected unusually close together) Note: Not confident this stats is correct yet.";
                 break;
             case Solos:
                 sDescription = "Songs with solos";
                 break;
             case NormalOptimal:
-                sDescription = "Songs where the optimal path on Normal Speed produces a higher score than the optimal path on Breakneck Speed";
+                sDescription = "Songs where the optimal score for Normal Speed is higher than the optimal score for Breakneck Speed";
                 break;
             case BreakneckOptimal:
-                sDescription = "Songs where the optimal path on Breakneck Speed produces a higher score than the optimal path on Normal Speed";
+                sDescription = "Songs where the optimal score for Breakneck Speed is higher than the optimal score for Normal Speed";
                 break;
             case GoldImpossible:
                 sDescription = "Songs where it is impossible to get gold stars";
@@ -439,9 +439,6 @@ public class SongTablePanel extends Panel {
             tdItemData = new WebMarkupContainer( "tdItemData" );
             trItem.add( tdItemData );
 
-            lblCategory = new Label( "lblCategory" );
-            lblCategory.setVisible( false );
-            tdItem.add( lblCategory );
 
             if( s.getAssociated().getTitle().length() == 0 ) {
                 songTitle = "(MIDI) - " + s.getGenerated().getMidiTitle();
@@ -449,6 +446,10 @@ public class SongTablePanel extends Panel {
             else {
                 songTitle = s.getAssociated().getTitle();
             }
+
+            lblCategory = new Label( "lblCategory", " by " + s.getAssociated().getArtist());
+//            lblCategory.setVisible( false );
+            tdItem.add( lblCategory );
 
             elMidiName = new ExternalLink( "elMidiName", "/song?id=" + s.getId(), songTitle );
             tdItem.add( elMidiName );

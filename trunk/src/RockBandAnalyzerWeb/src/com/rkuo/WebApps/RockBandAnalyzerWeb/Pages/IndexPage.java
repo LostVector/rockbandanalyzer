@@ -13,7 +13,7 @@ import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongFilter;
  * Time: 10:57:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class IndexPage extends BasePage {
+public class IndexPage extends SidebarPage {
 
     private SongTablePanel panelRecentlyReleased;
 

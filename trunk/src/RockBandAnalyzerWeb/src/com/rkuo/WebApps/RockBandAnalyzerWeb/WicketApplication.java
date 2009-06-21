@@ -6,6 +6,7 @@ import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.Application;
 import org.apache.wicket.Page;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Pages.*;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.Util;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,6 +36,7 @@ public class WicketApplication extends WebApplication {
         mountBookmarkablePage("/career", CareerPage.class);
         mountBookmarkablePage("/browsedotcom", BrowseDotComPage.class);
         mountBookmarkablePage("/admin", AdminPage.class);
+        mountBookmarkablePage("/test", TestPage.class);
 
         getResourceSettings().setResourcePollFrequency(null);
         return;
@@ -47,7 +49,11 @@ public class WicketApplication extends WebApplication {
 
     @Override
     public String getConfigurationType() {
-//        return Application.DEPLOYMENT;    //To change body of overridden methods use File | Settings | File Templates.
-        return Application.DEVELOPMENT;
+
+        if( Util.IsDebug() == true ) {
+            return Application.DEVELOPMENT;
+        }
+
+        return Application.DEPLOYMENT;
     }
 }

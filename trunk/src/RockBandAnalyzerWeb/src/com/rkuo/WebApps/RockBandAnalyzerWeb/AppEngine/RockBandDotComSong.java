@@ -6,6 +6,7 @@ import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
 
 import javax.jdo.annotations.*;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +16,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class RockBandDotComSong {
+public class RockBandDotComSong implements Serializable {
 
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -73,6 +74,18 @@ public class RockBandDotComSong {
     @Persistent
     private Long lastUpdated;
 
+    public Boolean getMissing() {
+        return missing;
+    }
+
+    public void setMissing(Boolean missing) {
+        this.missing = missing;
+    }
+
+    // when the last successful attempt was to update this song
+    @Persistent
+    private Boolean missing;
+
     public RockBandDotComSong() {
         // associated ... should not change over time
         midiTitle = "";
@@ -93,6 +106,8 @@ public class RockBandDotComSong {
 
         lastAttempted = 0L;
         lastUpdated = 0L;
+
+        missing = true;
         return;
     }
 

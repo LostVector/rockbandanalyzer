@@ -1,22 +1,19 @@
 package com.rkuo.Executables;
 
+import com.rkuo.RockBand.CobraScraper;
+import com.rkuo.RockBand.JTidyDomScraper;
+import com.rkuo.util.Base64;
 import com.rkuo.util.CommandLineParser;
 import com.rkuo.util.Misc;
-import com.rkuo.util.Base64;
-import com.rkuo.RockBand.CobraScraper;
-import com.rkuo.RockBand.JTidyScraper;
-import com.rkuo.RockBand.JTidyDomScraper;
-
-import java.io.*;
-import java.util.*;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+import java.io.*;
+import java.util.*;
 
 public class RockBandAnalyzerWebExe {
 
