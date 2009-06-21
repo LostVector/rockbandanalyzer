@@ -1,19 +1,18 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.DeprecatedServices;
 
+import com.rkuo.RockBand.JTidyDomScraper;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BaseServlet;
-import com.rkuo.RockBand.JTidyDomScraper;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.SortedMap;
 import java.util.logging.Level;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
+import java.util.logging.Logger;
 
 
 public class ScrapeSongDetailServlet extends BaseServlet {
@@ -57,7 +56,8 @@ public class ScrapeSongDetailServlet extends BaseServlet {
         }
 
         DataAccess.UpdateDotComSong( midiTitle, now, properties );
-        DataAccess.MergeDotComSong( midiTitle );
+        DataAccess.MergeDotComSong( System.currentTimeMillis(), midiTitle );
+        DataAccess.SetLastUpdated();
         log.log( Level.INFO, String.format( "Updated %s", midiTitle ) );
         return;
     }

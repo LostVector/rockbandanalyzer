@@ -146,7 +146,7 @@ public class StatsPage extends BasePage {
 
         SortedMap<Date,Long> dateDistribution;
 
-        dateDistribution = DataAccess.GetReleaseDateDistribution();
+        dateDistribution = DataAccess.GetRBReleaseDateDistribution();
 
 //        atp.setCategory( "Difficulty" );
 

@@ -22,13 +22,30 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.CacheException;
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Date;
+import java.util.Collections;
 
 
 public class RBBaseUploadForm extends Form<Void> {
+
+    protected static Cache getCache() {
+        Cache cache;
+
+        try {
+            cache = CacheManager.getInstance().getCacheFactory().createCache(Collections.emptyMap());
+        }
+        catch( CacheException e ) {
+            return null;
+        }
+
+        return cache;
+    }
 
     String message;
     protected Label lblUploadMessage;
@@ -127,17 +144,17 @@ public class RBBaseUploadForm extends Form<Void> {
         return true;
     }
 
-            /**
-         * @return the message
-         */
-        public String getMessage() {
-            return message;
-        }
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
 
-        /**
-         * @param message the message to set
-         */
-        public void setMessage(String message) {
-            this.message = message;
-        }
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

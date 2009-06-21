@@ -1,18 +1,15 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices;
 
-import com.google.appengine.api.datastore.*;
-import com.rkuo.util.Misc;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.util.Misc;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
 
 
 public class CleanServlet extends HttpServlet {

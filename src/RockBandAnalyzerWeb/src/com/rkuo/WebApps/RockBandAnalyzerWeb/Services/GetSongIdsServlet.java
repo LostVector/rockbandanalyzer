@@ -1,13 +1,15 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Services;
 
-import java.io.*;
-import java.util.List;
-import javax.servlet.http.*;
-import javax.servlet.ServletException;
-
-import com.rkuo.RockBand.*;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandAdvancedSort;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 public class GetSongIdsServlet extends HttpServlet {
 
@@ -15,25 +17,48 @@ public class GetSongIdsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         StringBuilder   sb;
-        List<Long> songIds;
+        String          sLast;
+        List<RockBandSong> songs;
 
-        songIds = DataAccess.GetRawSongIds();
+        sLast = request.getParameter("last");
+        if( sLast == null ) {
+            songs = DataAccess.GetSongs( RockBandAdvancedSort.Song );
+        }
+        else {
+            Long            lastUpdatedTime;
+
+            lastUpdatedTime = Long.parseLong( sLast );
+            songs = DataAccess.GetSongsByLastUpdate( lastUpdatedTime );
+        }
 
         sb = new StringBuilder();
 
         response.setContentType( "text/xml" );
+        response.setCharacterEncoding( "UTF-8" );
 
         // Not a fan of writing my own xml, but Google hasn't whitelisted the XML serializers in Java
-        sb.append( "<?xml version=\"1.0\"?>\n");
-        sb.append( "<songIds>\n");
-        for( Long songId : songIds ) {
+        sb.append( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sb.append( "<songs>\n");
+        for( RockBandSong s : songs ) {
+            String  escapedString;
+
+            escapedString = s.getAssociated().getTitle();
+            escapedString = escapedString.replaceAll("&", "&amp;");
+            escapedString = escapedString.replaceAll("<", "&lt;");
+            escapedString = escapedString.replaceAll(">", "&gt;");
+
+            sb.append( "<song>" );
             sb.append( "<songId>" );
-            sb.append( songId.toString() );
+            sb.append( s.getId() );
             sb.append( "</songId>\n" );
+            sb.append( "<title>" );
+            sb.append( escapedString );
+            sb.append( "</title>\n" );
+            sb.append( "</song>" );
         }
-        sb.append( "</songIds>\n");
+        sb.append( "</songs>\n");
 
         response.getWriter().format( sb.toString() );
         return;
-    } // doPost
+    } // doGet
 }

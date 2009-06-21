@@ -14,10 +14,11 @@ import java.util.Date;
 
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.*;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.SongTablePanel;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.SidebarPanel;
 import com.rkuo.RockBand.*;
 
-public class BrowsePage extends BasePage {
-
+public class BrowsePage extends SidebarPage {
+/*
     ExternalLink    elDifficultyGuitar;
     ExternalLink    elDifficultyBass;
     ExternalLink    elDifficultyDrums;
@@ -43,13 +44,18 @@ public class BrowsePage extends BasePage {
     ExternalLink    elNormalOptimal;
     ExternalLink    elBreakneckOptimal;
     ExternalLink    elGoldImpossible;
-
+ */
 //    RepeatingView      rptvSongs;
     private SongTablePanel panelSongs;
 
     public BrowsePage( PageParameters params ) {
 
 //        lnkDifficulty = new Link( "lnkDifficulty", new )
+        SidebarPanel sp;
+
+        sp = new SidebarPanel();
+        AddSidebarPanel( sp );
+/*
 
         elDifficultyGuitar = new ExternalLink( "elDifficultyGuitar", "/browse?sort=difficultyguitar", "Guitar" );
         elDifficultyBass = new ExternalLink( "elDifficultyBass", "/browse?sort=difficultybass", "Bass" );
@@ -76,9 +82,11 @@ public class BrowsePage extends BasePage {
         elNormalOptimal = new ExternalLink( "elNormalOptimal", "/browse?filter=normaloptimal", "Normal Optimal" );
         elBreakneckOptimal = new ExternalLink( "elBreakneckOptimal", "/browse?filter=breakneckoptimal", "Breakneck Optimal" );
         elGoldImpossible = new ExternalLink( "elGoldImpossible", "/browse?filter=goldimpossible", "Gold Impossible" );
+*/
 
         panelSongs = new SongTablePanel("panelSongs");
 //        rptvSongs = new RepeatingView("rptvSongs");
+/*
 
         add( elDifficultyGuitar );
         add( elDifficultyBass );
@@ -105,6 +113,7 @@ public class BrowsePage extends BasePage {
         add( elNormalOptimal );
         add( elBreakneckOptimal );
         add( elGoldImpossible );
+*/
 
         add( panelSongs );
 

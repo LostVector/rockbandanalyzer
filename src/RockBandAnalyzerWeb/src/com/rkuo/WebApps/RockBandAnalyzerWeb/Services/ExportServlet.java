@@ -1,22 +1,21 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Services;
 
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandAdvancedSort;
+import au.com.bytecode.opencsv.CSVWriter;
+import com.rkuo.RockBand.RockBandInstrumentDifficulty;
 import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
 import com.rkuo.RockBand.RockBandLocation;
-import com.rkuo.RockBand.RockBandInstrumentDifficulty;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandAdvancedSort;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.List;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
-
-import au.com.bytecode.opencsv.CSVWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

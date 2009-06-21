@@ -1,19 +1,19 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Components;
 
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
-import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
-import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
-import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
-import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
+import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
 
 import java.io.*;
 import java.util.Date;
-
-import org.apache.wicket.markup.html.form.upload.FileUpload;
 
 /**
  * Created by IntelliJ IDEA.
@@ -108,13 +108,27 @@ public class RBSongUploadForm extends RBBaseUploadForm {
 
         br = DataAccess.TryWritingSong(raw, song);
         if( br == false ) {
-            printWriter.format("%s already exists in the database.", raw.getOriginalFileName());
+            printWriter.format("%s (%s) already exists in the database.", raw.getOriginalFileName(), dfa.dba.MidiTitle );
             message = sWriter.toString();
             return;
         }
 
-        printWriter.format("%s has been added to the database.", raw.getOriginalFileName());
+        DataAccess.UpdateSong( System.currentTimeMillis(), raw.getId(), dfa );
+        DataAccess.FlagRawSongAsProcessed( raw.getId() );
+        DataAccess.WriteDotComSong( dfa.dba.MidiTitle );
+
+        // Signal this song for an immediate scrape attempt
+        getCache().remove( CacheKeys.LastSongDetailScrapePass );
+
+        printWriter.format("%s has been added to the database.\n", raw.getOriginalFileName());
+        printWriter.format("The unique title for this song appears to be \"%s\".\n", dfa.dba.MidiTitle);
+        printWriter.format("Visit http://rockbandanalyzer.appspot.com/song?id=%d for the analysis we have done so far.\n", raw.getId());
+        printWriter.format("Any data about this song on rockband.com will retrieved in a few minutes.\n" );
+        printWriter.format("If there is data on rockband.com for this song, ");
+        printWriter.format("we'll be looking at http://www.rockband.com/songs/%s for it.\n", dfa.dba.MidiTitle);
         message = sWriter.toString();
+
+        DataAccess.SetLastUpdated();
         return;
     }
 

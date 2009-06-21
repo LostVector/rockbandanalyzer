@@ -1,10 +1,9 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Services;
 
-import javax.servlet.http.HttpServlet;
 import javax.cache.Cache;
-import javax.cache.CacheManager;
 import javax.cache.CacheException;
-import java.util.logging.Logger;
+import javax.cache.CacheManager;
+import javax.servlet.http.HttpServlet;
 import java.util.Collections;
 
 /**

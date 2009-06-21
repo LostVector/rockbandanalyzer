@@ -1,18 +1,21 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
-import javax.jdo.annotations.*;
-
-import com.rkuo.RockBand.RockBandLocation;
-import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
 import com.rkuo.RockBand.RockBandInstrumentDifficulty;
+import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
+import com.rkuo.RockBand.RockBandLocation;
 
+import javax.jdo.annotations.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION, detachable="true")
-public class RockBandSong {
+public class RockBandSong implements Serializable {
 
     @PrimaryKey
     private String id;
+
+    @Persistent
+    private Long    lastUpdated;
 
     @Persistent
     @Embedded
@@ -26,9 +29,18 @@ public class RockBandSong {
     public static String idPrefix = "rbs";
 
     public RockBandSong() {
+        lastUpdated = Long.MIN_VALUE;
         associated = new RBAssociated();
         generated = new RBGenerated();
-        
+        return;
+    }
+
+    public Long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Long value) {
+        lastUpdated = value;
         return;
     }
 
@@ -68,7 +80,7 @@ public class RockBandSong {
     // There should generally be no need to regenerate this data when reprocessing files.
     @PersistenceCapable
     @EmbeddedOnly
-    public static class RBAssociated {
+    public static class RBAssociated implements Serializable {
 
         @Persistent
         private String artist;
@@ -272,16 +284,21 @@ public class RockBandSong {
 
     @PersistenceCapable
     @EmbeddedOnly
-    public static class RBGenerated {
+    public static class RBGenerated implements Serializable {
 
-        // Begin embedded
+        // Begin non difficulty/instrument specific data
         @Persistent
         private String midiTitle;
 
         @Persistent
         private long microseconds;
-        // End Embedded
 
+        @Persistent
+        private boolean BigRockEnding;
+
+        // End non difficulty/instrument specific data
+
+        // begin difficulty/instrument specific data
         @Persistent
         private long Notes;
 
@@ -292,14 +309,7 @@ public class RockBandSong {
         private long Solos;
 
         @Persistent
-        private long Fills;
-
-        @Persistent
         private long OverdrivePhrases;
-
-        // Does the song contain a big rock ending?
-        @Persistent
-        private boolean BigRockEnding;
 
         // Every note in the song * the base note score (25). Notes hidden under a BRE are not counted.
         @Persistent
@@ -339,8 +349,19 @@ public class RockBandSong {
         @Persistent
         private long maxScore;
 
+        @Persistent
+        private boolean goldStarrable;
+
+        @Persistent
+        private String OptimalRB2Path;
+
+        // end diffculty/instrument specific data
 //        @NotPersistent
 //        private ArrayList<Chord> GlitchedChords;
+
+        // begin drums specific data
+        @Persistent
+        private long Fills;
 
         @Persistent
         private Integer optimalFillDelay;
@@ -349,14 +370,10 @@ public class RockBandSong {
         private boolean glitched;
 
         @Persistent
-        private boolean goldStarrable;
-
-        @Persistent
         private Long normalOptimalScore;
 
         @Persistent
         private Long breakneckOptimalScore;
-
 
         @Persistent
         private String ImmediateRB2NormalPath;
@@ -366,9 +383,7 @@ public class RockBandSong {
 
         @Persistent
         private String OptimalRB2BreakneckPath;
-
-        @Persistent
-        private String OptimalRB2Path;
+        // end drums specific data
 
         public RBGenerated() {
 
@@ -461,7 +476,7 @@ public class RockBandSong {
             MultipliedScore = multipliedScore;
         }
 
-        public long getChords() {
+        public Long getChords() {
             return Chords;
         }
 
@@ -470,7 +485,7 @@ public class RockBandSong {
         }
 
 
-        public long getMicroseconds() {
+        public Long getMicroseconds() {
             return microseconds;
         }
 
@@ -478,7 +493,7 @@ public class RockBandSong {
             this.microseconds = microseconds;
         }
 
-        public long getNotes() {
+        public Long getNotes() {
             return Notes;
         }
 
@@ -502,7 +517,7 @@ public class RockBandSong {
             BigRockEnding = bigRockEnding;
         }
 
-        public long getMaxScore() {
+        public Long getMaxScore() {
             return maxScore;
         }
 
@@ -535,7 +550,7 @@ public class RockBandSong {
             MaximumMultiplierNotReachedWarning = maximumMultiplierNotReachedWarning;
         }
 
-        public long getStarCutoffOne() {
+        public Long getStarCutoffOne() {
             return StarCutoffOne;
         }
 
@@ -543,7 +558,7 @@ public class RockBandSong {
             StarCutoffOne = starCutoffOne;
         }
 
-        public long getStarCutoffTwo() {
+        public Long getStarCutoffTwo() {
             return StarCutoffTwo;
         }
 
@@ -551,7 +566,7 @@ public class RockBandSong {
             StarCutoffTwo = starCutoffTwo;
         }
 
-        public long getStarCutoffThree() {
+        public Long getStarCutoffThree() {
             return StarCutoffThree;
         }
 
@@ -559,7 +574,7 @@ public class RockBandSong {
             StarCutoffThree = starCutoffThree;
         }
 
-        public long getStarCutoffFour() {
+        public Long getStarCutoffFour() {
             return StarCutoffFour;
         }
 
@@ -567,7 +582,7 @@ public class RockBandSong {
             StarCutoffFour = starCutoffFour;
         }
 
-        public long getStarCutoffFive() {
+        public Long getStarCutoffFive() {
             return StarCutoffFive;
         }
 
@@ -575,7 +590,7 @@ public class RockBandSong {
             StarCutoffFive = starCutoffFive;
         }
 
-        public long getStarCutoffGold() {
+        public Long getStarCutoffGold() {
             return StarCutoffGold;
         }
 
@@ -583,7 +598,7 @@ public class RockBandSong {
             StarCutoffGold = starCutoffGold;
         }
 
-        public long getStarCutoffGoldOld() {
+        public Long getStarCutoffGoldOld() {
             return StarCutoffGoldOld;
         }
 

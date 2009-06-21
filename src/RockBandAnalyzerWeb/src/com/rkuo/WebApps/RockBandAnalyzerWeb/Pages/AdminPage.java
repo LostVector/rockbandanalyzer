@@ -1,11 +1,14 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
-import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.model.PropertyModel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Tasks.ReprocessRawSongs;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Tasks.ScrapeSongList;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Tasks.UpdateSchema;
+import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.util.time.Duration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,17 +19,61 @@ import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
  */
 public class AdminPage extends BasePage {
 
+    private UpdateSchemaForm formUpdateSchema;
     private ReprocessForm formReprocess;
     private ScrapeForm formScrape;
 
     public AdminPage() {
 
+        formUpdateSchema = new UpdateSchemaForm("formUpdateSchema");
         formReprocess = new ReprocessForm("formReprocess");
         formScrape = new ScrapeForm("formScrape");
 
+        add(formUpdateSchema);
         add(formReprocess);
         add(formScrape);
         return;
+    }
+
+    public final class UpdateSchemaForm extends Form {
+
+        private Label lblUpdateSchemaStatus;
+
+        public UpdateSchemaForm(final String componentName) {
+            super(componentName);
+
+            PropertyModel<String> updateSchemaStatusModel;
+
+            updateSchemaStatusModel = new PropertyModel<String>(this, "updateSchemaStatus");
+
+            lblUpdateSchemaStatus = new Label("lblUpdateSchemaStatus", updateSchemaStatusModel);
+            add( lblUpdateSchemaStatus );
+
+            lblUpdateSchemaStatus.add( new AjaxSelfUpdatingTimerBehavior(Duration.seconds(20)) );
+            return;
+        }
+
+        public final void onSubmit() {
+            getCache().put( "AETaskList_" + UpdateSchema.class.getName(), true);
+            return;
+        }
+
+        public String getUpdateSchemaStatus() {
+
+            if( getCache().containsKey("AETask_" + UpdateSchema.UpdateSchemaTask.class.getName()) == true ) {
+                Long    processedCount;
+
+                processedCount = (Long)getCache().get(CacheKeys.UpdatedSchemaCount);
+                if( processedCount != null ) {
+                    return String.format( "Updated %d entities so far...", processedCount );
+                }
+                else {
+                    return "Beginning to update schema...";
+                }
+            }
+
+            return "No schema updates occurring at this time.";
+        }
     }
 
     public final class ReprocessForm extends Form {
@@ -48,7 +95,7 @@ public class AdminPage extends BasePage {
         }
 
         public final void onSubmit() {
-            getCache().put(CacheKeys.FlagRawSongsForReprocessing, true);
+            getCache().put("AETaskList_" + ReprocessRawSongs.class.getName(), true);
             return;
         }
 
@@ -56,11 +103,11 @@ public class AdminPage extends BasePage {
 
             Long    reprocessedCount;
 
-            if( getCache().containsKey(CacheKeys.FlagRawSongsForReprocessing) == true ) {
+            if( getCache().containsKey("AETask_" + ReprocessRawSongs.FlagRawSongsTask.class.getName()) == true ) {
                 return "Flagging songs for reprocessing...";
             }
 
-            if( getCache().containsKey(CacheKeys.ReprocessRawSongs) == true ) {
+            if( getCache().containsKey("AETask_" + ReprocessRawSongs.ReprocessRawSongsSubtask.class.getName()) == true ) {
                 if( getCache().containsKey(CacheKeys.ReprocessedSongCount) == false ) {
                     return "Beginning to reprocess raw songs...";
                 }
@@ -94,9 +141,7 @@ public class AdminPage extends BasePage {
         }
 
         public final void onSubmit() {
-            getCache().remove( CacheKeys.LastSongDetailScrapePass );
-            getCache().put( CacheKeys.ScrapeDotComSongList, true );
-
+            getCache().put( "AETaskList_" + ScrapeSongList.class.getName(), true );
             return;
         }
 
@@ -105,11 +150,11 @@ public class AdminPage extends BasePage {
             Long    scrapedCount;
             Long    lastPass;
 
-            if( getCache().containsKey(CacheKeys.ScrapeDotComSongList) == true ) {
+            if( getCache().containsKey("AETask_" + ScrapeSongList.ScrapeDotComSongListSubtask.class.getName()) == true ) {
                 return "Scraping song list from rockband.com...";
             }
 
-            if( getCache().containsKey(CacheKeys.DropMidiTitles) == true ) {
+            if( getCache().containsKey("AETask_" + ScrapeSongList.DropMidiTitlesSubtask.class.getName()) == true ) {
                 return "Dropping old DotComSong table...";
             }
 
@@ -124,12 +169,14 @@ public class AdminPage extends BasePage {
                 }
             }
 
-            scrapedCount = (Long)getCache().get(CacheKeys.ScrapedSongDetailsCount);
-            if( scrapedCount != null ) {
-                return String.format( "Scraped %d raw songs so far...", scrapedCount );
+            if( getCache().containsKey("AETask_" + ScrapeSongList.ScrapeSongDetailsSubtask.class.getName()) == true ) {
+                scrapedCount = (Long)getCache().get(CacheKeys.ScrapedSongDetailsCount);
+                if( scrapedCount != null ) {
+                    return String.format( "Scraped %d raw songs so far...", scrapedCount );
+                }
             }
 
-            lastPass = (Long)getCache().get(CacheKeys.LastSongDetailScrapePass);
+            lastPass = (Long)getCache().get("AETaskList_" + ScrapeSongList.class.getName());
             if( lastPass != null ) {
                 Long    now;
                 now = System.currentTimeMillis();

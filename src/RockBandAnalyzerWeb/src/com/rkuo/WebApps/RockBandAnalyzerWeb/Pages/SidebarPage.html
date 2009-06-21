@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+<body>
+<wicket:extend>
+    <div id="container">
+        <div id="center" class="column">
+            <wicket:child/>
+            <!--
+          <div style="clear: both;">&nbsp;</div>
+            -->
+        </div>
+        <div id="left" class="column">
+            <div id="sidebar" class="sidebar-browse">
+                <ul>
+                    <li wicket:id="repeatSidebarPanels">
+                        <span wicket:id="panelSidebar"></span>
+                    </li>
+
+                    <li>
+                        <h2>Site statistics</h2>
+
+                        <p><span wicket:id="lblSidebarData"></span></p>
+
+                        <p><span wicket:id="lblLastStatsUpdate"></span></p>
+                    </li>
+                    <!--
+                                       <li>
+                                           <h2>Categories</h2>
+                                           <ul>
+                                               <li><a href="#">Uncategorized</a> (3)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                               <li><a href="#">Lorem Ipsum</a> (42)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                               <li><a href="#">Urna Congue Rutrum</a> (28)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                               <li><a href="#">Vivamus Fermentum</a> (13)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                           </ul>
+                                       </li>
+                    -->
+                </ul>
+            </div>
+            <div id="right" class="column">
+            </div>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>

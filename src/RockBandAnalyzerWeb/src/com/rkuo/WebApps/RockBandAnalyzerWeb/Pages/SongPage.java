@@ -1,12 +1,16 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Pages;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.ExternalImage;
+import org.apache.wicket.markup.html.image.ContextImage;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.PageParameters;
 import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
 import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
 import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
 import com.rkuo.RockBand.RockBandPrint;
+import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
+import com.rkuo.RockBand.RockBandInstrumentDifficulty;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
@@ -33,6 +37,7 @@ public class SongPage extends BasePage {
 
     protected Label               lblReleaseYear;
     protected Label               lblRBDatePublished;
+    protected Label               lblMidiTitle;
 
     protected Label               lblDurationValue;
     protected Label               lblNotesValue;
@@ -46,6 +51,18 @@ public class SongPage extends BasePage {
     protected Label               lblGoldStarValue;
     protected Label               lblGoldStarOldValue;
     protected Label               lblMaxScore;
+
+    protected Label               lblBandDifficulty;
+    protected Label               lblGuitarDifficulty;
+    protected Label               lblDrumsDifficulty;
+    protected Label               lblVocalsDifficulty;
+    protected Label               lblBassDifficulty;
+
+    protected ContextImage        imgBandDifficulty;
+    protected ContextImage        imgGuitarDifficulty;
+    protected ContextImage        imgDrumsDifficulty;
+    protected ContextImage        imgVocalsDifficulty;
+    protected ContextImage        imgBassDifficulty;
 
     protected Label               lblRB2ImmediatePath;
     protected Label               lblRB2NormalOptimalPath;
@@ -71,6 +88,7 @@ public class SongPage extends BasePage {
 
         lblReleaseYear = new Label("lblReleaseYear", "");
         lblRBDatePublished = new Label("lblRBDatePublished", "");
+        lblMidiTitle = new Label("lblMidiTitle", "");
 
         lblDurationValue = new Label("lblDurationValue", "");
         lblNotesValue = new Label("lblNotesValue", "");
@@ -85,6 +103,12 @@ public class SongPage extends BasePage {
         lblGoldStarOldValue = new Label("lblGoldStarOldValue", "");
         lblMaxScore = new Label("lblMaxScore", "");
 
+        lblBandDifficulty = new Label( "lblBandDifficulty", "" );
+        lblGuitarDifficulty = new Label( "lblGuitarDifficulty", "" );
+        lblDrumsDifficulty = new Label( "lblDrumsDifficulty", "" );
+        lblVocalsDifficulty = new Label( "lblVocalsDifficulty", "" );
+        lblBassDifficulty = new Label( "lblBassDifficulty", "" );
+
         lblRB2ImmediatePath = new Label("lblRB2ImmediatePath", "");
         lblRB2NormalOptimalPath = new Label("lblRB2NormalOptimalPath", "");
         lblRB2BreakneckOptimalPath = new Label("lblRB2BreakneckOptimalPath", "");
@@ -98,6 +122,7 @@ public class SongPage extends BasePage {
 
         add( lblReleaseYear );
         add( lblRBDatePublished );
+        add( lblMidiTitle );
 
         add( lblDurationValue );
         add( lblNotesValue );
@@ -111,6 +136,12 @@ public class SongPage extends BasePage {
         add( lblGoldStarValue );
         add( lblGoldStarOldValue );
         add( lblMaxScore );
+
+        add( lblBandDifficulty );
+        add( lblGuitarDifficulty );
+        add( lblDrumsDifficulty );
+        add( lblVocalsDifficulty );
+        add( lblBassDifficulty );
 
         add( lblRB2ImmediatePath );
         add( lblRB2NormalOptimalPath );
@@ -134,6 +165,41 @@ public class SongPage extends BasePage {
         sValue = song.getAssociated().getGenre();
         lblGenre.setDefaultModel( new Model<String>(sValue) );
 
+        // I'm calling image constructors here b/c apparently set default model doesn't work for Context Image
+
+        RockBandInstrumentDifficulty    rbid;
+
+        rbid = song.getAssociated().getDifficulty( RockBandInstrumentDifficultyCategory.Band );
+        lblBandDifficulty.setDefaultModel( new Model<String>(rbid.name()) );
+        imgBandDifficulty = new ContextImage( "imgBandDifficulty", GetDifficultyImage(rbid) );
+        imgBandDifficulty.setDefaultModel( new Model<String>(GetDifficultyImage(rbid)) );
+
+        rbid = song.getAssociated().getDifficulty( RockBandInstrumentDifficultyCategory.Guitar );
+        lblGuitarDifficulty.setDefaultModel( new Model<String>(rbid.name()) );
+        imgGuitarDifficulty = new ContextImage( "imgGuitarDifficulty", GetDifficultyImage(rbid) );
+        imgGuitarDifficulty.setDefaultModel( new Model<String>(GetDifficultyImage(rbid)) );
+
+        rbid = song.getAssociated().getDifficulty( RockBandInstrumentDifficultyCategory.Drums );
+        lblDrumsDifficulty.setDefaultModel( new Model<String>(rbid.name()) );
+        imgDrumsDifficulty = new ContextImage( "imgDrumsDifficulty", GetDifficultyImage(rbid) );
+        imgDrumsDifficulty.setDefaultModel( new Model<String>(GetDifficultyImage(rbid)) );
+
+        rbid = song.getAssociated().getDifficulty( RockBandInstrumentDifficultyCategory.Vocals );
+        lblVocalsDifficulty.setDefaultModel( new Model<String>(rbid.name()) );
+        imgVocalsDifficulty = new ContextImage( "imgVocalsDifficulty", GetDifficultyImage(rbid) );
+        imgVocalsDifficulty.setDefaultModel( new Model<String>(GetDifficultyImage(rbid)) );
+
+        rbid = song.getAssociated().getDifficulty( RockBandInstrumentDifficultyCategory.Bass );
+        lblBassDifficulty.setDefaultModel( new Model<String>(rbid.name()) );
+        imgBassDifficulty = new ContextImage( "imgBassDifficulty", GetDifficultyImage(rbid) );
+        imgBassDifficulty.setDefaultModel( new Model<String>(GetDifficultyImage(rbid)) );
+
+        add( imgBandDifficulty );
+        add( imgGuitarDifficulty );
+        add( imgDrumsDifficulty );
+        add( imgVocalsDifficulty );
+        add( imgBassDifficulty );
+
         Date d;
 //        Calendar    cal;
 
@@ -146,6 +212,9 @@ public class SongPage extends BasePage {
 //        cal = new GregorianCalendar( d.getYear(), d.getMonth(), d.getDate() );
         sValue = String.format( "%d/%02d/%02d", d.getYear()+1900, d.getMonth()+1, d.getDate() );
         lblRBDatePublished.setDefaultModel( new Model<String>(sValue) );
+
+        sValue = song.getGenerated().getMidiTitle();
+        lblMidiTitle.setDefaultModel( new Model<String>(sValue) );
 
         lcStars = new GVizLineChartPanel("gvlcpStars");
         add( lcStars );
@@ -246,5 +315,31 @@ public class SongPage extends BasePage {
         dfa = RockBandAnalyzer.AnalyzeStream( null, new ByteArrayInputStream(rbSong.getFile()), rbap );
 
         return dfa;
+    }
+
+    protected String GetDifficultyImage( RockBandInstrumentDifficulty rbid ) {
+        
+        switch( rbid ) {
+            case Warmup:
+                return "/images/dots-zero.png";
+            case Apprentice:
+                return "/images/dots-one.png";
+            case Solid:
+                return "/images/dots-two.png";
+            case Moderate:
+                return "/images/dots-three.png";
+            case Challenging:
+                return "/images/dots-four.png";
+            case Nightmare:
+                return "/images/dots-five.png";
+            case Impossible:
+                return "/images/dots-devils.png";
+            case NoPart:
+                return "";
+            case Unknown:
+                return "";
+        }
+
+        return "";
     }
 }

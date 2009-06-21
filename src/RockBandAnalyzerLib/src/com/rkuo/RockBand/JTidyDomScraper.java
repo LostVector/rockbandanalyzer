@@ -3,14 +3,10 @@ package com.rkuo.RockBand;
 import com.rkuo.util.Misc;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.tidy.Tidy;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -534,7 +530,7 @@ public class JTidyDomScraper {
 
         SimpleQuery( doc.getDocumentElement(), 0, names, classes, matches );
         if( matches.size() < 4 ) {
-            return "";
+            return "0";
         }
 
         sValue = matches.get(3).getFirstChild().getNodeValue().trim();

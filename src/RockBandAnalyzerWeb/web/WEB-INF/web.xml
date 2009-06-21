@@ -47,12 +47,39 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>api_getSongDetail</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.GetSongDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_getSongDetail</servlet-name>
+        <url-pattern>/api/getSongDetail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>api_batch</servlet-name>
         <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BatchServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>api_batch</servlet-name>
         <url-pattern>/api/batch</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>api_lastUpdated</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.GetLastUpdatedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_lastUpdated</servlet-name>
+        <url-pattern>/api/lastUpdated</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>api_serverTime</servlet-name>
+        <servlet-class>com.rkuo.WebApps.RockBandAnalyzerWeb.Services.GetServerTimeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api_serverTime</servlet-name>
+        <url-pattern>/api/serverTime</url-pattern>
     </servlet-mapping>
 <!-- begin secure apis -->
     <servlet>

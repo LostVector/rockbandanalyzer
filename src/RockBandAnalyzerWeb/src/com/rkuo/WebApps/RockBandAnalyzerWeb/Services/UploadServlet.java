@@ -1,31 +1,38 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.Services;
 
-import java.io.*;
-import java.util.logging.Logger;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
-import java.util.TimeZone;
-import javax.servlet.http.*;
-import javax.servlet.ServletException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.rkuo.RockBand.*;
 import com.rkuo.RockBand.ExeHelper.RockBandAnalyzer;
 import com.rkuo.RockBand.ExeHelper.RockBandAnalyzerParams;
 import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.*;
+import com.rkuo.RockBand.RockBandInstrumentDifficulty;
+import com.rkuo.RockBand.RockBandLocation;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSong;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
 import com.rkuo.util.Base64;
 import com.rkuo.util.Misc;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UploadServlet extends HttpServlet {
 
@@ -61,6 +68,7 @@ public class UploadServlet extends HttpServlet {
 
         dfa = RockBandAnalyzer.AnalyzeStream(null, new ByteArrayInputStream(rawSong.getFile()), rbap);
         if( dfa == null ) {
+            log.log( Level.INFO, String.format("AnalyzeStream returned null. %s.",rawSong.getOriginalFileName()) );
             return;
         }
 
@@ -75,6 +83,7 @@ public class UploadServlet extends HttpServlet {
         }
 
         RockBandSongRaw newRawSong = DataAccess.GetRawSongById( rawSong.getId() );
+        DataAccess.SetLastUpdated();
         response.getWriter().format("%s has been added to the database.", rawSong.getOriginalFileName());
         return;
     } // doPost

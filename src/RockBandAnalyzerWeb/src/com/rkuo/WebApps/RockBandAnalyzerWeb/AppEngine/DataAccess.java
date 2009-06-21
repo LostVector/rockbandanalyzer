@@ -1,16 +1,16 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
-import com.rkuo.RockBand.*;
-import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.RockBandSongRaw;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.PMF;
 import com.google.appengine.api.datastore.*;
+import com.rkuo.RockBand.Primitives.DrumsFullAnalysis;
+import com.rkuo.RockBand.RockBandInstrumentDifficulty;
+import com.rkuo.RockBand.RockBandInstrumentDifficultyCategory;
+import com.rkuo.RockBand.RockBandLocation;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import java.util.*;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,6 +20,78 @@ import java.text.ParseException;
  * To change this template use File | Settings | File Templates.
  */
 public class DataAccess {
+
+    public static void SetLastUpdated() {
+        SetProperty( "LastUpdated", Long.valueOf(System.currentTimeMillis()).toString() );
+        return;
+    }
+
+    public static Boolean GetPropertyAsBoolean(String id) {
+        String  sValue;
+
+        sValue = GetProperty(id);
+        if( sValue == null ) {
+            return null;
+        }
+
+        return Boolean.parseBoolean( sValue );
+    }
+
+    public static Long GetPropertyAsLong(String id) {
+        String  sValue;
+
+        sValue = GetProperty(id);
+        if( sValue == null ) {
+            return null;
+        }
+
+        return Long.parseLong( sValue );
+    }
+
+    public static String GetProperty(String id) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        GProperty gp;
+        Query query;
+
+        query = pm.newQuery(GProperty.class);
+        query.setFilter("id == idParam");
+        query.declareParameters("String idParam");
+        query.setUnique(true);
+
+        try {
+            gp = (GProperty)query.execute(id);
+        }
+        finally {
+            query.closeAll();
+            pm.close();
+        }
+
+        if( gp == null ) {
+            return null;
+        }
+
+        return gp.getValue();
+    }
+
+    public static void SetProperty(String id, String value) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        GProperty gp;
+
+        gp = new GProperty();
+        gp.setId( id );
+        gp.setValue( value );
+
+        try {
+            pm.makePersistent( gp );
+        }
+        finally {
+            pm.close();
+        }
+
+        return;
+    }
 
     public static RockBandDotComSong GetDotComSongForScraping(Long currentTime) {
 
@@ -59,7 +131,7 @@ public class DataAccess {
         return rbdcSong;
     }
 
-    public static void FlagDotComSongAsAttempted( Long id, Long currentTime ) {
+    public static void DotComSongSetAttempted( Long id, Long currentTime ) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
         RockBandDotComSong dcSong;
@@ -69,6 +141,23 @@ public class DataAccess {
         try {
             dcSong = (RockBandDotComSong)pm.getObjectById(RockBandDotComSong.class, id);
             dcSong.setLastAttempted(currentTime);
+            pm.makePersistent(dcSong);
+        }
+        finally {
+            pm.close();
+        }
+
+        return;
+    }
+
+    public static void DotComSongSetMissing( Long id, Boolean missing ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        RockBandDotComSong dcSong;
+
+        try {
+            dcSong = (RockBandDotComSong)pm.getObjectById(RockBandDotComSong.class, id);
+            dcSong.setMissing(missing);
             pm.makePersistent(dcSong);
         }
         finally {
@@ -136,7 +225,14 @@ public class DataAccess {
             rbdcSong.setAlbum(props.get("album"));
 
             sValue = props.get("release_year");
-            nValue = Integer.parseInt(sValue);
+            try {
+                nValue = Integer.parseInt(sValue);
+            }
+            catch( Exception ex ) {
+                System.err.format( "parseInt exceptioned on %s", sValue );
+                return false;
+            }
+
             nValue -= 1900;
 
             Calendar cal;
@@ -194,7 +290,16 @@ public class DataAccess {
             rbdcSong.setBandDifficulty(rbid);
 
             sValue = props.get("cover");
-            rbdcSong.setCover(Boolean.parseBoolean(sValue));
+
+            try {
+                Boolean bCover;
+                bCover = Boolean.parseBoolean(sValue);
+                rbdcSong.setCover(bCover);
+            }
+            catch( Exception ex ) {
+                System.err.format( "parseBoolean exceptioned on %s", sValue );
+                return false;
+            }
 
             rbdcSong.setLastUpdated(now);
 
@@ -396,6 +501,29 @@ public class DataAccess {
     }
 
     @SuppressWarnings("unchecked")
+    public static List<RockBandSong> GetSongsByLastUpdate( Long lastUpdatedTime ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+
+        Query query;
+        List<RockBandSong> songs;
+
+        query = pm.newQuery(RockBandSong.class);
+        query.setFilter("lastUpdated >= lastUpdatedParam");
+        query.declareParameters("Long lastUpdatedParam");
+
+        try {
+            songs = (List<RockBandSong>)query.execute(lastUpdatedTime);
+        }
+        finally {
+            query.closeAll();
+            pm.close();
+        }
+
+        return songs;
+    }
+
+    @SuppressWarnings("unchecked")
     public static List<RockBandSongRaw> GetSongsByDecade(int decade) {
 
         Query query;
@@ -583,10 +711,11 @@ public class DataAccess {
         return rbSong.getId();
     }
 
-    public static Long WriteSong(RockBandSong rbSong) {
+    public static Long WriteSong( Long now, RockBandSong rbSong) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
 
+        rbSong.setLastUpdated( now );
         try {
             pm.makePersistent(rbSong);
         }
@@ -825,12 +954,19 @@ public class DataAccess {
             midiTitle = midiTitle.substring(0, midiTitle.length() - 1);
         }
 
+        // The Jack (Live) has this problem
+        if( midiTitle.endsWith("360") == true ) {
+            midiTitle = midiTitle.substring(0, midiTitle.length() - 3);
+            midiTitle = midiTitle.trim();
+        }
+
         g = song.getGenerated();
 
         g.setMidiTitle(midiTitle);
 
         g.setMicroseconds(dfa.dba.Microseconds);
         g.setNotes(dfa.dba.Notes);
+        g.setChords(dfa.dba.Chords);
         g.setSolos(dfa.dba.Solos);
         g.setBigRockEnding(dfa.dba.BigRockEnding);
 
@@ -998,6 +1134,8 @@ public class DataAccess {
             }
 
             if( rbdcSong != null ) {
+                rbdcSong.setLastAttempted(0L);
+                pm.makePersistent(rbdcSong);
                 return false;
             }
 
@@ -1044,7 +1182,7 @@ public class DataAccess {
         return true;
     }
 
-    public static void UpdateSong( Long id, DrumsFullAnalysis dfa ) {
+    public static void UpdateSong( Long now, Long id, DrumsFullAnalysis dfa ) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
 
@@ -1070,6 +1208,7 @@ public class DataAccess {
             }
 
             DataAccess.ProcessSong( song, dfa );
+            song.setLastUpdated( now );
             pm.makePersistent( song );
         }
         finally {
@@ -1079,7 +1218,7 @@ public class DataAccess {
         return;
     }
 
-    public static boolean MergeDotComSong(String midiTitle) {
+    public static boolean MergeDotComSong( Long now, String midiTitle) {
 
         PersistenceManager pm = PMF.get().getPersistenceManager();
 
@@ -1114,22 +1253,31 @@ public class DataAccess {
             }
 
             if( dcSong != null && song != null ) {
-                song.getAssociated().setArtist(dcSong.getArtist());
-                song.getAssociated().setAlbum(dcSong.getAlbum());
-                song.getAssociated().setTitle(dcSong.getTitle());
-                song.getAssociated().setGenre(dcSong.getGenre());
-                song.getAssociated().setLocation(dcSong.getLocation());
-                song.getAssociated().setDateReleased(dcSong.getDateReleased());
-                song.getAssociated().setRBReleaseDate(dcSong.getDatePublished());
-                song.getAssociated().setCover(dcSong.getCover());
 
-                song.getAssociated().setGuitarDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Guitar));
-                song.getAssociated().setDrumsDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Drums));
-                song.getAssociated().setVocalsDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Vocals));
-                song.getAssociated().setBassDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Bass));
-                song.getAssociated().setBandDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Band));
+                // compare all fields and only write if something really changed.
+                // If we don't do this, then every night every entry will look like it's changed
+                // to the client app, which will then download everything
+                if( HasDotComDataChanged( song, dcSong ) == true ) {
+                    System.out.format( "DataAccess:MergeDotComSong - %s changed.", midiTitle );
 
-                pm.makePersistent(song);
+                    song.getAssociated().setArtist(dcSong.getArtist());
+                    song.getAssociated().setAlbum(dcSong.getAlbum());
+                    song.getAssociated().setTitle(dcSong.getTitle());
+                    song.getAssociated().setGenre(dcSong.getGenre());
+                    song.getAssociated().setLocation(dcSong.getLocation());
+                    song.getAssociated().setDateReleased(dcSong.getDateReleased());
+                    song.getAssociated().setRBReleaseDate(dcSong.getDatePublished());
+                    song.getAssociated().setCover(dcSong.getCover());
+
+                    song.getAssociated().setGuitarDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Guitar));
+                    song.getAssociated().setDrumsDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Drums));
+                    song.getAssociated().setVocalsDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Vocals));
+                    song.getAssociated().setBassDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Bass));
+                    song.getAssociated().setBandDifficulty(dcSong.getDifficulty(RockBandInstrumentDifficultyCategory.Band));
+
+                    song.setLastUpdated( now );
+                    pm.makePersistent(song);
+                }
             }
         }
         finally {
@@ -1139,6 +1287,69 @@ public class DataAccess {
         return true;
     }
 
+    protected static boolean HasDotComDataChanged( RockBandSong s, RockBandDotComSong dcs ) {
+        if( s.getAssociated().getArtist().compareTo( dcs.getArtist() ) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getAlbum().compareTo( dcs.getAlbum() ) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getTitle().compareTo( dcs.getTitle() ) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getGenre().compareTo( dcs.getGenre() ) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getLocation() != dcs.getLocation() ) {
+            return true;
+        }
+
+        if( s.getAssociated().getDateReleased().compareTo(dcs.getDateReleased()) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getRBReleaseDate().compareTo(dcs.getDatePublished()) != 0 ) {
+            return true;
+        }
+
+        if( s.getAssociated().getCover() != dcs.getCover() ) {
+            return true;
+        }
+
+        RockBandInstrumentDifficultyCategory    rbidc;
+
+        rbidc = RockBandInstrumentDifficultyCategory.Band;
+        if( s.getAssociated().getDifficulty(rbidc) != dcs.getDifficulty(rbidc) ) {
+            return true;
+        }
+
+        rbidc = RockBandInstrumentDifficultyCategory.Guitar;
+        if( s.getAssociated().getDifficulty(rbidc) != dcs.getDifficulty(rbidc) ) {
+            return true;
+        }
+
+        rbidc = RockBandInstrumentDifficultyCategory.Drums;
+        if( s.getAssociated().getDifficulty(rbidc) != dcs.getDifficulty(rbidc) ) {
+            return true;
+        }
+
+        rbidc = RockBandInstrumentDifficultyCategory.Vocals;
+        if( s.getAssociated().getDifficulty(rbidc) != dcs.getDifficulty(rbidc) ) {
+            return true;
+        }
+
+        rbidc = RockBandInstrumentDifficultyCategory.Bass;
+        if( s.getAssociated().getDifficulty(rbidc) != dcs.getDifficulty(rbidc) ) {
+            return true;
+        }
+
+        return false;
+    }
+/*
     @SuppressWarnings("unchecked")
     public static List<String> GetMissingSongs() {
 
@@ -1188,7 +1399,7 @@ public class DataAccess {
 
         return missingSongs;
     }
-
+ */
     @SuppressWarnings("unchecked")
     public static List<RockBandDotComSong> GetDotComSongs() {
 
@@ -1210,8 +1421,30 @@ public class DataAccess {
         return songs;
     }
 
+    @SuppressWarnings("unchecked")
+    public static List<RockBandDotComSong> DotComGetMissingSongs() {
 
-    public static SortedMap<Date, Long> GetReleaseDateDistribution() {
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query query;
+        List<RockBandDotComSong> songs;
+
+        query = pm.newQuery(RockBandDotComSong.class);
+        query.setOrdering("id asc");
+        query.setFilter("missing == missingParam");
+        query.declareParameters("Boolean missingParam");
+
+        try {
+            songs = (List<RockBandDotComSong>)query.execute(true);
+        }
+        finally {
+            query.closeAll();
+            pm.close();
+        }
+
+        return songs;
+    }
+
+    public static SortedMap<Date, Long> GetRBReleaseDateDistribution() {
 
         SortedMap<Date, Long> dateDistribution;
         List<RockBandSong> songs;
@@ -1225,6 +1458,9 @@ public class DataAccess {
             Long dateCount;
 
             songDate = s.getAssociated().getRBReleaseDate();
+            if( songDate.getTime() == 0 ) {
+                continue;
+            }
 
             if( dateDistribution.containsKey(songDate) == true ) {
                 dateCount = dateDistribution.get(songDate);
@@ -1238,6 +1474,65 @@ public class DataAccess {
         return dateDistribution;
     }
 
+    // return
+    public static Long UpdateSchema( Long id ) {
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Long    returnId;
+
+        returnId = null;
+
+        try {
+            List<RockBandSong> rawSongs;
+            Query query;
+
+            query = pm.newQuery(RockBandSong.class);
+            if( id == null ) {
+                // do nothing
+            }
+            else {
+                query.setFilter("id >= idParam");
+            }
+
+            query.setOrdering("id asc");
+            query.declareParameters("Long idParam");
+            query.setRange( 0, 2 );
+
+            try {
+                rawSongs = (List<RockBandSong>)query.execute("rbs" + id);
+            }
+            finally {
+                query.closeAll();
+            }
+
+            if( rawSongs.size() == 0 ) {
+                // Done!  but we really shouldn't get here
+            }
+
+            // The default value in the constructor will "fix" the songs when persisted without us
+            // having to do anything
+            // Update: turns out that's wrong and i have to force the value here to save properly.
+            // I'm pretty sure this is a bug in App Engine.
+            if( rawSongs.size() >= 1 ) {
+                RockBandSong rawSong;
+                rawSong = rawSongs.get(0);
+                rawSong.setLastUpdated( Long.MIN_VALUE );
+                pm.makePersistent( rawSong );
+                // also done!
+            }
+
+            if( rawSongs.size() >= 2 ) {
+                RockBandSong nextSong;
+                nextSong = rawSongs.get(1);
+                returnId = nextSong.getId();
+            }
+        }
+        finally {
+            pm.close();
+        }
+
+        return returnId;
+    }
 /*
     @SuppressWarnings("unchecked")
     public static List<RockBandDotComSong> GetDotComSongs() {

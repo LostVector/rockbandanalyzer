@@ -1,18 +1,18 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine;
 
-import java.util.Date;
-import java.util.zip.GZIPOutputStream;
-import java.util.zip.GZIPInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.math.BigInteger;
+import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.users.User;
+
+import javax.jdo.annotations.*;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ByteArrayInputStream;
-import javax.jdo.annotations.*;
-
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.datastore.Blob;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 
 @FetchGroup(

@@ -11,6 +11,9 @@ import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTe
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.LoginHeaderPanel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.NavigationHeaderPanel;
 import com.rkuo.WebApps.RockBandAnalyzerWeb.Components.FooterPanel;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.DataAccess;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.PropertyKeys;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;
@@ -18,6 +21,7 @@ import javax.cache.CacheException;
 import java.util.*;
 
 public abstract class BasePage extends WebPage {
+
     public BasePage() {
 //		add(new BookmarkablePageLink("page1", Page1.class));
 //		add(new BookmarkablePageLink("page2", Page2.class));

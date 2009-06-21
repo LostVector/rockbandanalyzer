@@ -1,20 +1,19 @@
 package com.rkuo.WebApps.RockBandAnalyzerWeb.SecureServices;
 
-import com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BaseServlet;
-import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
 import com.rkuo.RockBand.JTidyDomScraper;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.AppEngine.CacheKeys;
+import com.rkuo.WebApps.RockBandAnalyzerWeb.Services.BaseServlet;
 import com.rkuo.util.RKTimer;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.logging.Level;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
+import java.util.logging.Logger;
 
 
 public class ScrapeSongListServlet extends BaseServlet {
