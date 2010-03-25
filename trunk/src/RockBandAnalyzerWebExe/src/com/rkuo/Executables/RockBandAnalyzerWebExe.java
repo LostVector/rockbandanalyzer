@@ -15,6 +15,9 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.*;
 import java.util.*;
 
+/*
+This is a helper exe for posting a bunch of songs to the web applications.
+ */
 public class RockBandAnalyzerWebExe {
 
     protected static String _uploadServiceUrl = "http://rockbandanalyzer.appspot.com/api/upload";
