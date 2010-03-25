@@ -4,7 +4,7 @@ Include instructions on adding jdk/bin to path so that appengine can run properl
 Include script or debug instructions for running the app server locally.
 Include only the lib and lib/user directories.  Not sure what the lib/shared and lib/tools dirs are for, but
  including them made my debug webserver take 3 minutes to load a new page.
-
+Copy                                                                        
 RockBandAnalyzerExe - A command line executable wrapping the functionality of RockBandAnalyzerLib.
 RockBandAnalyzerLib - The core library containing functionality for parsing MIDI's, analyzing the
 resulting Rock Band data, etc.

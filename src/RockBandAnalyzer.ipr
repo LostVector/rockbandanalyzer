@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="true" version="4">
+<project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/rockbandanalyzer.xml">
@@ -9,9 +9,47 @@
       <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties />
-      <executeOn event="beforeRun" target="datanucleusenhance" runConfigurationType="Remote" runConfigurationName="DebugWebRemote" />
-      <executeOn event="beforeRun" target="runserver" />
     </buildFile>
+  </component>
+  <component name="ArtifactManager">
+    <artifact type="exploded-war" name="RockBandAnalyzerWeb:Web exploded">
+      <output-path>$PROJECT_DIR$/out/exploded/RockBandAnalyzerWeb</output-path>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="RockBandAnalyzerWeb/web/Web" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="RockBandAnalyzerWeb" />
+            <element id="module-output" name="RockBandAnalyzerLib" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="apache-wicket-1.4.7" />
+            <element id="library" level="project" name="slf4j" />
+            <element id="library" level="project" name="opencsv-1.8" />
+            <element id="library" level="project" name="jtidy" />
+            <element id="library" level="project" name="AppEngine API" />
+            <element id="library" level="project" name="AppEngine ORM" />
+          </element>
+        </element>
+      </root>
+    </artifact>
+    <artifact type="exploded-war" name="RockBandAnalyzerWar:Web exploded">
+      <output-path>$PROJECT_DIR$/out/exploded/RockBandAnalyzerWar</output-path>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="RockBandAnalyzerWar/web/Web" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="RockBandAnalyzerWar" />
+            <element id="module-output" name="RockBandAnalyzerLib" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="JSF 1.1" />
+            <element id="library" level="project" name="com.oreilly.servlet" />
+            <element id="library" level="project" name="AppEngine API" />
+            <element id="library" level="project" name="AppEngine ORM" />
+          </element>
+        </element>
+      </root>
+    </artifact>
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="true" />
@@ -52,11 +90,9 @@
         </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="false" />
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -72,6 +108,7 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
     </wildcardResourcePatterns>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -83,11 +120,8 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCompilerSettings">
-    <option name="DEBUGGING_INFO" value="true" />
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EclipseEmbeddedCompilerSettings">
     <option name="DEBUGGING_INFO" value="true" />
@@ -134,31 +168,32 @@
           </module>
         </modules>
       </facet-type>
+      <facet-type id="javaeeApplication">
+        <modules>
+          <module name="RockBandAnalyzerWeb">
+            <files>
+              <file url="file://$PROJECT_DIR$/RockBandAnalyzerWeb/META-INF/application.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
     </autodetection-disabled>
   </component>
   <component name="IdProvider" IDEtalkID="3A4FC432D286428338BBEB2E2E1328F5" />
   <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
-        <inspection_tool class="UnnecessaryReturn" level="WARNING" enabled="false" />
-        <inspection_tool class="PointlessBooleanExpression" level="WARNING" enabled="false">
+        <inspection_tool class="PointlessBooleanExpression" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="m_ignoreExpressionsContainingConstants" value="false" />
         </inspection_tool>
+        <inspection_tool class="UnnecessaryReturn" enabled="false" level="WARNING" enabled_by_default="false" />
       </profile>
     </profiles>
-    <list size="0" />
-  </component>
-  <component name="JavacSettings">
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="DEPRECATION" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -176,14 +211,6 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
-  </component>
-  <component name="JikesSettings">
-    <option name="JIKES_PATH" value="" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="DEPRECATION" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="IS_EMACS_ERRORS_MODE" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -309,7 +336,6 @@
   <component name="ProjectDetails">
     <option name="projectName" value="RockBandAnalyzer" />
   </component>
-  <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
     <option name="state" value="project://C:\Users\rkuo\dev\trunk\src\RockBandAnalyzer.ipr" />
   </component>
@@ -322,7 +348,7 @@
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
@@ -331,13 +357,6 @@
         <list size="0" />
       </value>
     </option>
-  </component>
-  <component name="RmicSettings">
-    <option name="IS_EANABLED" value="false" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="GENERATE_IIOP_STUBS" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
@@ -366,10 +385,10 @@
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="apache-wicket-1.4-rc2">
+    <library name="apache-wicket-1.4.7">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-1.4-rc2.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4-rc2/lib/wicket-extensions-1.4-rc2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4.7/lib/wicket-1.4.7.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4.7/lib/wicket-extensions-1.4.7.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -430,18 +449,26 @@
     </library>
     <library name="AppEngine API">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/appengine-api-1.0-sdk-1.2.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/appengine-api-1.0-sdk-1.3.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="AppEngine ORM">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/orm" />
+        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/orm" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.2.1/lib/user/orm" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/orm" recursive="false" />
+    </library>
+    <library name="Java EE 6">
+      <CLASSES>
+        <root url="file://C:/glassfishv3/glassfish/modules" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://C:/glassfishv3/glassfish/modules" recursive="false" />
     </library>
   </component>
 </project>
