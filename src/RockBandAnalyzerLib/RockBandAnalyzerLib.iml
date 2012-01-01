@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="cobra-0.98.4" level="project" />
+    <orderEntry type="library" name="cobra" level="project" />
     <orderEntry type="library" exported="" name="jtidy" level="project" />
   </component>
 </module>

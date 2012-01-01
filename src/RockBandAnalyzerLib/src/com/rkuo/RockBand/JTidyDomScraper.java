@@ -644,7 +644,7 @@ public class JTidyDomScraper {
             tidy.setQuiet(true);
             tidy.setShowWarnings(false);
             tidy.setXHTML( true );
-            tidy.setCharEncoding(3);
+            tidy.setInputEncoding("UTF-8");
             doc = tidy.parseDOM(new ByteArrayInputStream(response.getBytes("UTF-8")), null);
         }
         catch( IOException ioex ) {

@@ -22,9 +22,9 @@
             <element id="module-output" name="RockBandAnalyzerLib" />
           </element>
           <element id="directory" name="lib">
-            <element id="library" level="project" name="apache-wicket-1.4.7" />
+            <element id="library" level="project" name="apache-wicket" />
             <element id="library" level="project" name="slf4j" />
-            <element id="library" level="project" name="opencsv-1.8" />
+            <element id="library" level="project" name="opencsv" />
             <element id="library" level="project" name="jtidy" />
             <element id="library" level="project" name="AppEngine API" />
             <element id="library" level="project" name="AppEngine ORM" />
@@ -69,6 +69,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="jsp">
           <option name="INDENT_SIZE" value="4" />
@@ -78,6 +79,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="xml">
           <option name="INDENT_SIZE" value="4" />
@@ -87,6 +89,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
@@ -136,29 +139,6 @@
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
-      <facet-type id="web">
-        <modules>
-          <module name="junk">
-            <files>
-              <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/web.xml" />
-            </files>
-          </module>
-          <module name="GAETest">
-            <files>
-              <file url="file://$PROJECT_DIR$/GAETest/web/WEB-INF/web.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
-      <facet-type id="jsf">
-        <modules>
-          <module name="junk">
-            <files>
-              <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/faces-config.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
       <facet-type id="google-app-engine">
         <modules>
           <module name="GAETest">
@@ -173,6 +153,29 @@
           <module name="RockBandAnalyzerWeb">
             <files>
               <file url="file://$PROJECT_DIR$/RockBandAnalyzerWeb/META-INF/application.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="jsf">
+        <modules>
+          <module name="junk">
+            <files>
+              <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/faces-config.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="web">
+        <modules>
+          <module name="GAETest">
+            <files>
+              <file url="file://$PROJECT_DIR$/GAETest/web/WEB-INF/web.xml" />
+            </files>
+          </module>
+          <module name="junk">
+            <files>
+              <file url="file://$PROJECT_DIR$/junk/web/WEB-INF/web.xml" />
             </files>
           </module>
         </modules>
@@ -348,7 +351,10 @@
       <module fileurl="file://$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" filepath="$PROJECT_DIR$/RockBandAnalyzerWebExe/RockBandAnalyzerWebExe.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 (local)" project-jdk-type="JavaSDK">
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
@@ -358,6 +364,9 @@
       </value>
     </option>
   </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
   </component>
@@ -365,6 +374,75 @@
     <context />
   </component>
   <component name="libraryTable">
+    <library name="apache-wicket">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket/apache-wicket-1.4.17/wicket-extensions-1.4.17.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket/apache-wicket-1.4.17/wicket-1.4.17.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/apache-wicket/apache-wicket-1.4.17/wicket-datetime-1.4.17.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="AppEngine API">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/appengine-api-1.0-sdk-1.6.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/shared/servlet-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/shared/jsp-api.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="AppEngine ORM">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/datanucleus-appengine-1.0.10.final.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/jdo2-api-2.3-eb.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/geronimo-jpa_3.0_spec-1.1.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/datanucleus-core-1.1.5.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/geronimo-jta_1.1_spec-1.1.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk/appengine-java-sdk-1.6.1/lib/user/orm/datanucleus-jpa-1.1.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="cobra">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/cobra/cobra-0.98.4/cobra.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="com.oreilly.servlet">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/com.oreilly.servlet/cos.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="htmlcleaner">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/htmlcleaner/htmlcleaner-2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Java EE 6">
+      <CLASSES>
+        <root url="file://C:/glassfishv3/glassfish/modules" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://C:/glassfishv3/glassfish/modules" recursive="false" />
+    </library>
+    <library name="jax-ws">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxws-rt.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxb-impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/streambuffer.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jax-ws/stax-ex.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="JSF 1.1">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/jsf-api.jar!/" />
@@ -378,17 +456,16 @@
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="com.oreilly.servlet">
+    <library name="jtidy">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/com.oreilly.servlet/cos.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jtidy/jtidy-r938.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="apache-wicket-1.4.7">
+    <library name="opencsv">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4.7/lib/wicket-1.4.7.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/apache-wicket-1.4.7/lib/wicket-extensions-1.4.7.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/opencsv/opencsv-2.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -402,73 +479,12 @@
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="jax-ws">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxws-rt.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jax-ws/jaxb-impl.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jax-ws/streambuffer.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jax-ws/stax-ex.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="opencsv-1.8">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/opencsv-1.8/opencsv-1.8.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="cobra-0.98.4">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/cobra-0.98.4/cobra.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="htmlcleaner">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/htmlcleaner/htmlcleaner2_1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
     <library name="tagsoup">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/tagsoup/tagsoup-1.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-    </library>
-    <library name="jtidy">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/jtidy/Tidy.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="AppEngine API">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/appengine-api-1.0-sdk-1.3.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="AppEngine ORM">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/orm" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/appengine-java-sdk-1.3.1/lib/user/orm" recursive="false" />
-    </library>
-    <library name="Java EE 6">
-      <CLASSES>
-        <root url="file://C:/glassfishv3/glassfish/modules" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://C:/glassfishv3/glassfish/modules" recursive="false" />
     </library>
   </component>
 </project>
