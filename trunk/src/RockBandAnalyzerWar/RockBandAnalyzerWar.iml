@@ -9,7 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
-        <context-artifact name="RockBandAnalyzerWar:Web exploded" />
       </configuration>
       <facet type="jsf" name="JSF">
         <configuration />
@@ -35,7 +34,7 @@
     <orderEntry type="module" module-name="RockBandAnalyzerLib" exported="" />
     <orderEntry type="library" name="JSF 1.1" level="project" />
     <orderEntry type="library" name="com.oreilly.servlet" level="project" />
-    <orderEntry type="library" name="apache-wicket-1.4.7" level="project" />
+    <orderEntry type="library" name="apache-wicket" level="project" />
     <orderEntry type="library" name="AppEngine API" level="project" />
     <orderEntry type="library" name="AppEngine ORM" level="project" />
     <orderEntry type="library" name="Java EE 6" level="project" />
