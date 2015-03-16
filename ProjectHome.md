@@ -1,0 +1,1 @@
+A tool to analyze Rock Band .mid files and generate useful statistics, optimal paths, and spot potential glitches or errors.
